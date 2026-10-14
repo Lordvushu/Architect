@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- FIX: Prevent CDN hotlinking blocks by stripping referrers -->
+  <!-- Strips referrer header so Unsplash CDN does not block image hotlinks -->
   <meta name="referrer" content="no-referrer">
   <title>STUDIO LUMEN — Architecture & Spatial Design | Maseru, Lesotho</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Fonts -->
+  <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -39,7 +39,6 @@
 
   <style>
     ::selection { background-color: #C27D56; color: #FFFFFF; }
-    .writing-vertical { writing-mode: vertical-rl; }
     .aspect-16-10 { aspect-ratio: 16 / 10; }
   </style>
 </head>
@@ -86,7 +85,7 @@
       <a href="#anatomy" class="mobile-link py-2 border-b border-white/10">The Anatomy of Space</a>
       <a href="#philosophy" class="mobile-link py-2 border-b border-white/10">Our Philosophy</a>
       <a href="#materials" class="mobile-link py-2 border-b border-white/10">Material Studies</a>
-      <a href="#services" class="mobile-link py-2 border-b border-white/10">Services</a>
+      <a href="#services" class="mobile-link py-2 border-b border-white/10">Services &amp; Practice</a>
       <a href="#contact" class="mobile-link py-2 border-b border-white/10">Contact Us</a>
     </div>
     <div class="font-mono text-[10px] tracking-[0.25em] text-mineral uppercase">
@@ -130,6 +129,64 @@
   </section>
 
   <!-- ==================================================== -->
+  <!-- PHILOSOPHY SECTION -->
+  <!-- ==================================================== -->
+  <section id="philosophy" class="py-24 md:py-32 bg-chalk border-b border-borderline">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <div class="lg:col-span-7 space-y-6">
+          <div class="font-mono text-xs uppercase tracking-[0.3em] text-mineral">
+            01 / Our Philosophy
+          </div>
+          <blockquote class="font-serif text-3xl sm:text-5xl md:text-6xl text-basalt font-light leading-[1.15] tracking-tight">
+            “Good architecture doesn't compete with its surroundings. It gives them meaning.”
+          </blockquote>
+          <div class="space-y-4 text-[#6E6D68] text-base md:text-lg font-light leading-relaxed max-w-xl">
+            <p>
+              We believe a building should feel natural in its setting. In Lesotho, that means designing for clear mountain light, winter frost, and sweeping valley horizons.
+            </p>
+            <p>
+              Rather than forcing complicated shapes onto a site, we focus on genuine comfort: thick stone walls that retain heat, quiet courtyards sheltered from mountain winds, and rooms that connect seamlessly to the outdoors.
+            </p>
+          </div>
+
+          <div class="pt-6 border-t border-borderline grid grid-cols-3 gap-6 font-mono text-[11px] text-mineral uppercase tracking-wider">
+            <div>
+              <span class="block text-basalt text-sm font-sans mb-1">Local Basalt</span>
+              Natural Thermal Mass
+            </div>
+            <div>
+              <span class="block text-basalt text-sm font-sans mb-1">Passive Sun</span>
+              Winter Heat Harvesting
+            </div>
+            <div>
+              <span class="block text-basalt text-sm font-sans mb-1">Built to Last</span>
+              Durable Mountain Materials
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="aspect-[4/5] overflow-hidden bg-stone-200 border border-borderline">
+            <img 
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" 
+              alt="Light and shadow study" 
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              onerror="imgFallback(this)"
+            >
+          </div>
+          <div class="mt-3 flex justify-between items-center font-mono text-[10px] text-mineral uppercase tracking-wider">
+            <span>Study // Natural Morning Light</span>
+            <span>Maseru Studio</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== -->
   <!-- SELECTED WORKS -->
   <!-- ==================================================== -->
   <section id="works" class="py-24 md:py-32 bg-chalk border-b border-borderline">
@@ -144,7 +201,6 @@
         </p>
       </div>
 
-      <!-- Project Cards -->
       <div class="space-y-28">
         
         <!-- Project 1 -->
@@ -162,7 +218,7 @@
               <div class="font-mono text-xs uppercase tracking-[0.25em] text-mineral">Project 01 — <span class="text-sandstone">Private Residence</span></div>
               <h3 class="font-serif text-3xl sm:text-4xl font-light group-hover:text-sandstone transition-colors">The Still House</h3>
               <p class="text-[#6E6D68] text-sm md:text-base font-light leading-relaxed">
-                A serene private home structured around a sheltered courtyard, using local basalt, glass, and warm timber.
+                A serene private home structured around a sheltered courtyard, using local basalt stone, glass, and warm timber.
               </p>
               <div class="pt-4 border-t border-borderline space-y-2 font-mono text-[11px] text-mineral">
                 <div class="flex justify-between"><span>Location:</span><span class="text-basalt">Maseru West, Lesotho</span></div>
@@ -293,7 +349,7 @@
               <span id="hotspot-tag">SOLAR ORIENTATION</span>
               <span id="hotspot-id" class="text-white/50">SECTION 01</span>
             </div>
-            <h3 id="hotspot-title" class="font-serif text-3xl font-light text-white">Natural Daylight & High Windows</h3>
+            <h3 id="hotspot-title" class="font-serif text-3xl font-light text-white">Natural Daylight & Zenith Apertures</h3>
             <p id="hotspot-desc" class="text-white/80 text-sm font-light leading-relaxed">
               We position main living rooms to catch warm morning sun while calculated roof overhangs block intense summer heat.
             </p>
@@ -410,6 +466,56 @@
   </section>
 
   <!-- ==================================================== -->
+  <!-- ARCHITECTURE IN DETAIL -->
+  <!-- ==================================================== -->
+  <section class="py-24 md:py-32 bg-chalk border-b border-borderline">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="mb-16 space-y-3">
+        <span class="font-mono text-xs uppercase tracking-[0.3em] text-mineral">Tectonic Craft</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-light text-basalt tracking-tight">Architecture in detail.</h2>
+        <p class="text-[#6E6D68] text-base font-light max-w-xl">
+          A building's true quality shows in the fine details. We design every corner and connection with great care to create a quiet, lasting beauty rooted in the African context.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="space-y-4">
+          <div class="aspect-[4/5] overflow-hidden bg-stone-200 border border-borderline">
+            <img src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80" alt="Stair detail" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" onerror="imgFallback(this)">
+          </div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-mineral">DETAIL 01 // CANTILEVER</div>
+          <h4 class="font-serif text-xl">Floating Limestone &amp; Stone Treads</h4>
+          <p class="text-[#6E6D68] text-xs font-light leading-relaxed">
+            Stairs anchored invisibly into load-bearing masonry, creating clean shadow gaps and effortless circulation through vertical voids.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="aspect-[4/5] overflow-hidden bg-stone-200 border border-borderline">
+            <img src="https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=800&q=80" alt="Timber joinery detail" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" onerror="imgFallback(this)">
+          </div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-mineral">DETAIL 02 // REVEAL</div>
+          <h4 class="font-serif text-xl">Continuous Shadow Gaps</h4>
+          <p class="text-[#6E6D68] text-xs font-light leading-relaxed">
+            Carefully crafted recessed reveals along floors and ceilings allow wood paneling and concrete decks to breathe naturally over decades.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="aspect-[4/5] overflow-hidden bg-stone-200 border border-borderline">
+            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80" alt="Steel fenestration detail" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" onerror="imgFallback(this)">
+          </div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-mineral">DETAIL 03 // GLAZING</div>
+          <h4 class="font-serif text-xl">Recessed Steel Framing</h4>
+          <p class="text-[#6E6D68] text-xs font-light leading-relaxed">
+            Window surrounds recessed into stone jambs and soffits, leaving uninterrupted expanses of glass opening toward the Maluti mountain horizon.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== -->
   <!-- SERVICES ACCORDION -->
   <!-- ==================================================== -->
   <section id="services" class="py-24 md:py-32 bg-chalk border-b border-borderline">
@@ -423,25 +529,25 @@
         <!-- 01 -->
         <div class="border border-basalt bg-stone-100 p-8">
           <div class="font-mono text-xs uppercase tracking-widest text-sandstone mb-2">01 / Residential</div>
-          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Custom Homes & Private Residences</h3>
+          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Custom Homes &amp; Private Residences</h3>
           <p class="text-[#6E6D68] text-sm md:text-base font-light max-w-3xl leading-relaxed">
-            Tailor-made contemporary homes crafted around your lifestyle, the site's natural breezes, and views. From hillside villas to quiet urban sanctuaries.
+            Tailor-made contemporary homes crafted around your lifestyle, the site's natural breezes, and views. From hillside villas to quiet urban sanctuaries in Maseru and the surrounding districts.
           </p>
         </div>
         <!-- 02 -->
         <div class="border border-borderline p-8 hover:border-basalt transition-colors">
           <div class="font-mono text-xs uppercase tracking-widest text-mineral mb-2">02 / Hospitality</div>
-          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Mountain Lodges, Retreats & Boutique Hotels</h3>
+          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Mountain Lodges, Retreats &amp; Boutique Hotels</h3>
           <p class="text-[#6E6D68] text-sm md:text-base font-light max-w-3xl leading-relaxed">
-            Immersive tourism and retreat destinations that celebrate local culture, regional stone architecture, and natural settings.
+            Immersive tourism and retreat destinations that celebrate local culture, regional stone architecture, and natural settings across Southern Africa.
           </p>
         </div>
         <!-- 03 -->
         <div class="border border-borderline p-8 hover:border-basalt transition-colors">
           <div class="font-mono text-xs uppercase tracking-widest text-mineral mb-2">03 / Commercial</div>
-          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Workplaces & Institutional Facilities</h3>
+          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Workplaces &amp; Institutional Facilities</h3>
           <p class="text-[#6E6D68] text-sm md:text-base font-light max-w-3xl leading-relaxed">
-            Modern corporate headquarters and creative studios designed for daylight, focus, and collaboration.
+            Modern corporate headquarters, cultural facilities, and creative studios designed for daylight, focus, and collaboration.
           </p>
         </div>
       </div>
@@ -518,11 +624,12 @@
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-white/10 pb-12">
       <div>
         <span class="font-serif text-2xl text-white tracking-widest block uppercase">STUDIO LUMEN</span>
-        <span class="text-[10px] uppercase tracking-widest text-white/50">Architecture & Space — Maseru, Lesotho</span>
+        <span class="text-[10px] uppercase tracking-widest text-white/50">Architecture &amp; Space — Maseru, Lesotho</span>
       </div>
       <div class="flex space-x-6 text-[11px] text-white/70">
         <a href="#works" class="hover:text-white">Works</a>
         <a href="#anatomy" class="hover:text-white">Anatomy</a>
+        <a href="#philosophy" class="hover:text-white">Philosophy</a>
         <a href="#materials" class="hover:text-white">Materials</a>
         <a href="#contact" class="hover:text-white">Contact</a>
       </div>
@@ -577,7 +684,7 @@
       img.src = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
     }
 
-    // Modal Projects Data with Verified Working Image URLs
+    // Modal Projects Data
     const PROJECTS = {
       'project-1': {
         title: 'The Still House',
@@ -608,8 +715,8 @@
         hero: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80',
         gallery: [
           'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
         ]
       },
       'project-4': {
@@ -648,6 +755,11 @@
       document.getElementById('project-modal').classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
     }
+
+    // Close modal on Escape key press
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProject();
+    });
 
     // Material Switcher Logic
     const MATERIALS = {
@@ -699,7 +811,7 @@
       { img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 01 Deliverable: Sun path, wind corridor, and topography site assessment.' },
       { img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 02 Deliverable: Volumetric models and spatial circulation flowcharts.' },
       { img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 03 Deliverable: 1:5 scale structural junctions, finishes, and engineering drawings.' },
-      { img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 04 Deliverable: Rigorous on-site coordination and artisan stone supervision.' }
+      { img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 04 Deliverable: Rigorous on-site coordination and artisan stone supervision.' }
     ];
 
     function setProcess(idx) {
