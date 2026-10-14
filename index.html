@@ -1,1199 +1,790 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STUDIO LUMEN | Contemporary Architecture | Maseru, Lesotho</title>
-    
-    <!-- Google Fonts: Elegant Serif + Precise Mono & Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FIX: Prevent CDN hotlinking blocks by stripping referrers -->
+  <meta name="referrer" content="no-referrer">
+  <title>STUDIO LUMEN — Architecture & Spatial Design | Maseru, Lesotho</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            chalk: '#FBFBF9',
+            sandstone: '#C27D56',
+            basalt: '#141413',
+            'basalt-light': '#1E1E1C',
+            mineral: '#8A8880',
+            borderline: '#E7E5DD',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Space Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
 
-    <!-- Tailwind CSS Engine -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        lumen: {
-                            white: '#F4F4F0',      // Mountain mist white
-                            black: '#1A1A1A',      // Deep basalt
-                            dark: '#111111',       // Pure dark variant
-                            accent: '#B85D3F',     // Sandstone/copper
-                            gray: '#D5D0C5',       // Muted mineral
-                            text: '#5E5A54',       // Legible body text
-                            meta: '#8A8476'        // Small technical text
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['"Space Mono"', 'monospace'],
-                    },
-                    transitionDuration: {
-                        '700': '700ms',
-                        '1000': '1000ms',
-                        '1500': '1500ms',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        /* =========================================
-           CUSTOM CSS & CINEMATIC EFFECTS
-           ========================================= */
-        body {
-            background-color: #F4F4F0;
-            color: #1A1A1A;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        ::selection {
-            background-color: #B85D3F;
-            color: #ffffff;
-        }
-
-        /* Architectural Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #111111; }
-        ::-webkit-scrollbar-thumb { background: #333; }
-        ::-webkit-scrollbar-thumb:hover { background: #B85D3F; }
-
-        /* Cinematic Scroll Reveals */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .reveal-delay-1 { transition-delay: 150ms; }
-        .reveal-delay-2 { transition-delay: 300ms; }
-        .reveal-delay-3 { transition-delay: 450ms; }
-
-        /* Ambient Image Pan for Hero (Cinematic Movement) */
-        @keyframes ambient-pan {
-            0% { transform: scale(1.05) translate(0, 0); }
-            50% { transform: scale(1.1) translate(-1%, 1%); }
-            100% { transform: scale(1.05) translate(0, 0); }
-        }
-        .animate-ambient {
-            animation: ambient-pan 40s ease-in-out infinite;
-        }
-
-        /* Pulse Ring for Technical Hotspots */
-        @keyframes ping-slow {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(2.5); opacity: 0; }
-        }
-        .animate-ping-slow {
-            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        /* Fade/Scale Utility for Interactivity */
-        .fade-in-scale {
-            animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Image Parallax Container */
-        .parallax-wrapper {
-            overflow: hidden;
-            position: relative;
-        }
-        .parallax-img {
-            height: 120%;
-            width: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: -10%;
-            left: 0;
-            will-change: transform;
-        }
-
-        .writing-vertical-rl {
-            writing-mode: vertical-rl;
-        }
-
-        /* Lock scroll when modal is open */
-        body.modal-open {
-            overflow: hidden;
-        }
-
-        /* Smooth Image Masking Hover */
-        .img-mask-hover {
-            clip-path: inset(0 0 0 0);
-            transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s ease;
-        }
-        .group:hover .img-mask-hover {
-            clip-path: inset(3% 3% 3% 3%);
-            transform: scale(1.03);
-        }
-    </style>
+  <style>
+    ::selection { background-color: #C27D56; color: #FFFFFF; }
+    .writing-vertical { writing-mode: vertical-rl; }
+    .aspect-16-10 { aspect-ratio: 16 / 10; }
+  </style>
 </head>
-<body class="font-sans selection:bg-lumen-accent selection:text-white relative">
 
-    <!-- =========================================
-         GLOBAL NAVIGATION
-         ========================================= -->
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 bg-gradient-to-b from-lumen-black/90 via-lumen-black/50 to-transparent py-6 text-white border-b border-transparent">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-            
-            <!-- Logo / Wordmark -->
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="group flex flex-col items-start text-left focus:outline-none">
-                <span class="font-serif text-2xl md:text-3xl tracking-[0.2em] font-light uppercase transition-transform duration-500 group-hover:translate-x-1">
-                    STUDIO LUMEN
-                </span>
-                <span id="header-subtitle" class="text-[9px] uppercase tracking-[0.3em] font-mono text-white/80 transition-colors duration-500 mt-1">
-                    Maseru, Lesotho
-                </span>
-            </button>
+<body class="bg-chalk text-basalt font-sans antialiased selection:bg-sandstone selection:text-white">
 
-            <!-- Desktop Nav -->
-            <nav class="hidden lg:flex items-center space-x-10 text-[10px] tracking-[0.25em] uppercase font-mono">
-                <a href="#works" class="hover:text-lumen-accent transition-colors duration-300">Selected Work</a>
-                <a href="#anatomy" class="hover:text-lumen-accent transition-colors duration-300">The Anatomy</a>
-                <a href="#philosophy" class="hover:text-lumen-accent transition-colors duration-300">Practice</a>
-                <a href="#materials" class="hover:text-lumen-accent transition-colors duration-300">Materiality</a>
-            </nav>
+  <!-- ==================================================== -->
+  <!-- NAVIGATION -->
+  <!-- ==================================================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6 px-6 md:px-12 text-white bg-gradient-to-b from-black/80 via-black/40 to-transparent">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#" class="group flex flex-col">
+        <span class="font-serif text-2xl md:text-3xl tracking-[0.18em] uppercase font-light">STUDIO LUMEN</span>
+        <span class="text-[9px] uppercase tracking-[0.3em] font-mono text-sandstone">Maseru, Lesotho</span>
+      </a>
 
-            <!-- Desktop CTA -->
-            <div class="hidden sm:flex items-center">
-                <a href="#contact" id="header-cta" class="text-[10px] uppercase tracking-[0.25em] font-mono px-6 py-3 transition-all duration-500 border border-white/50 text-white hover:bg-white hover:text-lumen-black">
-                    Initiate Project ↗
-                </a>
-            </div>
+      <nav class="hidden lg:flex items-center space-x-10 text-xs tracking-[0.2em] uppercase font-mono text-white/80">
+        <a href="#works" class="hover:text-sandstone transition-colors">Selected Work</a>
+        <a href="#anatomy" class="hover:text-sandstone transition-colors">The Anatomy</a>
+        <a href="#philosophy" class="hover:text-sandstone transition-colors">Philosophy</a>
+        <a href="#materials" class="hover:text-sandstone transition-colors">Materials</a>
+        <a href="#services" class="hover:text-sandstone transition-colors">Expertise</a>
+        <a href="#contact" class="hover:text-sandstone transition-colors">Contact</a>
+      </nav>
 
-            <!-- Mobile Menu Toggle -->
-            <button id="mobile-menu-btn" class="lg:hidden p-2 focus:outline-none z-50">
-                <div class="w-7 h-5 flex flex-col justify-between relative">
-                    <span class="block h-[1px] w-full bg-current transition-all duration-500 origin-left" id="bar1"></span>
-                    <span class="block h-[1px] w-full bg-current transition-all duration-500" id="bar2"></span>
-                    <span class="block h-[1px] w-full bg-current transition-all duration-500 origin-left" id="bar3"></span>
-                </div>
-            </button>
-        </div>
-    </header>
+      <div class="hidden sm:flex items-center space-x-6">
+        <a href="#contact" class="text-xs uppercase tracking-[0.2em] font-mono px-5 py-2.5 border border-white/60 text-white hover:bg-white hover:text-basalt transition-all">
+          Enquire ↗
+        </a>
+      </div>
 
-    <!-- MOBILE OVERLAY -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 bg-lumen-dark text-lumen-white flex flex-col justify-between p-8 pt-32 hidden opacity-0 transition-opacity duration-700">
-        <div class="space-y-6 flex flex-col font-serif text-3xl tracking-wide font-light">
-            <a href="#works" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Selected Work</a>
-            <a href="#anatomy" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">The Anatomy of Space</a>
-            <a href="#philosophy" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Design Philosophy</a>
-            <a href="#materials" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Material Study</a>
-            <a href="#services" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Studio Expertise</a>
-            <a href="#contact" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Initiate Project</a>
-        </div>
-        <div class="font-mono text-[9px] tracking-[0.3em] text-lumen-meta uppercase">
-            STUDIO LUMEN / MASERU, LESOTHO
-        </div>
+      <button id="mobile-toggle" class="lg:hidden p-2 text-white focus:outline-none" aria-label="Toggle Navigation">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-drawer" class="fixed inset-0 z-40 bg-basalt text-chalk hidden flex-col justify-between p-8 pt-28">
+    <div class="space-y-6 flex flex-col font-serif text-2xl">
+      <a href="#works" class="mobile-link py-2 border-b border-white/10">Selected Work</a>
+      <a href="#anatomy" class="mobile-link py-2 border-b border-white/10">The Anatomy of Space</a>
+      <a href="#philosophy" class="mobile-link py-2 border-b border-white/10">Our Philosophy</a>
+      <a href="#materials" class="mobile-link py-2 border-b border-white/10">Material Studies</a>
+      <a href="#services" class="mobile-link py-2 border-b border-white/10">Services</a>
+      <a href="#contact" class="mobile-link py-2 border-b border-white/10">Contact Us</a>
+    </div>
+    <div class="font-mono text-[10px] tracking-[0.25em] text-mineral uppercase">
+      STUDIO LUMEN // MASERU, LESOTHO
+    </div>
+  </div>
+
+  <!-- ==================================================== -->
+  <!-- HERO SECTION -->
+  <!-- ==================================================== -->
+  <section class="relative min-h-screen w-full flex items-end overflow-hidden bg-basalt pt-44 pb-16 md:pb-24">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80');">
+      <div class="absolute inset-0 bg-gradient-to-t from-basalt via-black/55 to-black/35"></div>
     </div>
 
-    <!-- =========================================
-         HERO SECTION (FLEXBOX FIXED SPACING)
-         ========================================= -->
-    <section class="relative min-h-screen w-full flex flex-col justify-end bg-lumen-dark pt-48 pb-20 md:pb-28 overflow-hidden">
-        <!-- Cinematic Background Image -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1613490908677-4976a47a1c9c?auto=format&fit=crop&w=2200&q=80" alt="Mountain Architecture" class="w-full h-full object-cover animate-ambient filter brightness-[0.75]">
-            <!-- Gradients for contrast -->
-            <div class="absolute inset-0 bg-gradient-to-t from-lumen-dark via-lumen-dark/60 to-transparent mix-blend-multiply"></div>
-            <div class="absolute inset-0 bg-black/30"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
+      <div class="max-w-4xl space-y-6">
+        <div class="inline-flex items-center space-x-3 px-3 py-1 bg-black/40 border border-white/15 backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-sandstone animate-pulse"></span>
+          <span class="font-mono text-[10px] uppercase tracking-[0.25em] text-white">Contemporary Architecture in Lesotho</span>
         </div>
 
-        <!-- Hero Content Container (Using Flex-Col and Gap for pristine layout) -->
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col gap-12 md:gap-16">
-            
-            <!-- Technical Metadata Top Block -->
-            <div class="flex justify-between items-start text-white/90 font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] reveal w-full">
-                <div class="flex items-center space-x-3">
-                    <span class="w-2 h-2 rounded-full bg-lumen-accent inline-block animate-pulse shadow-[0_0_8px_rgba(184,93,63,0.8)]"></span>
-                    <span class="font-semibold text-white drop-shadow-md">DESIGN CONCEPT / 01</span>
-                </div>
-                <div class="hidden md:block text-white/80 drop-shadow-md">
-                    <span>LAT 29°19'S // LNG 27°29'E // MASERU</span>
-                </div>
-            </div>
+        <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-light tracking-tight leading-[1.05]">
+          Architecture for the way we live.
+        </h1>
 
-            <!-- Hero Main Typography -->
-            <div class="max-w-4xl flex flex-col gap-6 md:gap-8 reveal reveal-delay-1">
-                <div class="flex flex-col gap-4">
-                    <span class="inline-block font-mono text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-lumen-accent drop-shadow-md">
-                        Contemporary Architecture in the Mountain Kingdom
-                    </span>
-                    <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] text-white font-light tracking-tight leading-[1.05] drop-shadow-lg">
-                        Architecture for the way we want to live.
-                    </h1>
-                </div>
-                <p class="text-white/90 text-lg md:text-2xl font-light max-w-2xl leading-relaxed drop-shadow-md">
-                    We create enduring homes and spaces inspired by people, the landscape, and the beauty of the African context.
-                </p>
-                
-                <div class="pt-4 flex flex-wrap gap-6 reveal reveal-delay-2">
-                    <a href="#works" class="group inline-flex items-center space-x-4 px-8 py-4 bg-lumen-white text-lumen-black text-[10px] md:text-xs font-mono font-semibold uppercase tracking-[0.25em] transition-all duration-500 hover:bg-lumen-accent hover:text-white shadow-xl">
-                        <span>Explore our work</span>
-                        <span class="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
-                    </a>
-                </div>
-            </div>
+        <p class="text-white/85 text-base md:text-xl font-light max-w-2xl leading-relaxed">
+          We design distinctive homes, mountain lodges, and commercial spaces tailored to the light, climate, and topography of Southern Africa.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-5 pt-4">
+          <a href="#works" class="px-7 py-3.5 bg-chalk text-basalt text-xs font-mono uppercase tracking-[0.2em] hover:bg-sandstone hover:text-white transition-all">
+            Explore Selected Work ↗
+          </a>
+          <a href="#contact" class="px-7 py-3.5 border border-white/60 text-white text-xs font-mono uppercase tracking-[0.2em] hover:border-white hover:bg-white/10 backdrop-blur-sm transition-all">
+            Start a Conversation
+          </a>
         </div>
-
-        <!-- Scroll Indicator (Absolute relative to the section) -->
-        <div class="absolute right-6 md:right-12 bottom-12 hidden sm:flex flex-col items-center space-y-4 text-white/70 font-mono text-[10px] tracking-[0.4em] uppercase reveal reveal-delay-3 drop-shadow-md z-10">
-            <span class="writing-vertical-rl">Scroll to explore</span>
-            <div class="w-[1px] h-12 bg-white/30 relative overflow-hidden">
-                <div class="w-full h-1/2 bg-white absolute top-0 animate-[bounce_2s_infinite]"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 1: DESIGN PHILOSOPHY
-         ========================================= -->
-    <section id="philosophy" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray relative z-20">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
-                <!-- Text Content -->
-                <div class="lg:col-span-7 space-y-10 reveal">
-                    <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta flex items-center space-x-4">
-                        <span class="w-8 h-[1px] bg-lumen-meta"></span>
-                        <span>01 / Our Philosophy</span>
-                    </div>
-                    <blockquote class="font-serif text-4xl sm:text-5xl md:text-[4rem] text-lumen-black font-light leading-[1.1] tracking-tight">
-                        “Good architecture doesn't compete with its surroundings. It gives them meaning.”
-                    </blockquote>
-                    <div class="space-y-6 text-lumen-text text-base md:text-lg font-light leading-relaxed max-w-xl">
-                        <p>At STUDIO LUMEN, we believe in thoughtful, understated design. We create buildings that feel naturally rooted in their environment, carefully balancing strong local materials with the rugged landscape of the Mountain Kingdom.</p>
-                        <p>Every space is designed around how the morning sun warms the rooms, how fresh air flows through open courtyards in the afternoon, and how natural materials age gracefully over the decades.</p>
-                    </div>
-                    <div class="pt-8 border-t border-lumen-gray grid grid-cols-3 gap-6 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
-                        <div><span class="block text-lumen-black text-base font-sans mb-1">1,600m</span>Elevation</div>
-                        <div><span class="block text-lumen-black text-base font-sans mb-1">100%</span>Local Materiality</div>
-                        <div><span class="block text-lumen-black text-base font-sans mb-1">50+ Yrs</span>Built to Last</div>
-                    </div>
-                </div>
-                
-                <!-- Asymmetrical Parallax Image -->
-                <div class="lg:col-span-5 relative reveal reveal-delay-1">
-                    <div class="relative aspect-[3/4] parallax-wrapper bg-lumen-gray">
-                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1200&q=80" alt="Design Context" class="parallax-img js-parallax" data-speed="0.1" loading="lazy">
-                    </div>
-                    <div class="absolute -bottom-6 -left-10 bg-lumen-white p-4 hidden md:block shadow-lg">
-                        <div class="border border-lumen-gray p-4 font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta text-center">
-                            FIG 01.3 <br> BUILDING FORM
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 2: INTERACTIVE ANATOMY (BLUEPRINT)
-         ========================================= -->
-    <section id="anatomy" class="py-32 md:py-40 bg-lumen-dark text-lumen-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <!-- Header -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 reveal">
-                <div class="space-y-4">
-                    <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent">Interactive Blueprint</span>
-                    <h2 class="font-serif text-4xl sm:text-6xl font-light tracking-tight text-white">The anatomy of space.</h2>
-                </div>
-                <p class="text-white/60 text-sm md:text-base max-w-md font-light leading-relaxed">
-                    Explore the thoughtful design choices, natural lighting strategies, and local materials that bring our Lesotho highland projects to life. Select an annotation below to learn more.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal reveal-delay-1">
-                <!-- Interactive Blueprint Image -->
-                <div class="lg:col-span-8 relative aspect-[16/10] bg-[#111] border border-white/10 overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80" alt="Architectural section" class="w-full h-full object-cover opacity-50 filter contrast-[1.2] grayscale-[70%] mix-blend-luminosity transition-all duration-1000 group-hover:scale-[1.02]">
-                    
-                    <!-- Tech Overlays -->
-                    <div class="absolute inset-0 pointer-events-none border border-white/5">
-                        <div class="absolute inset-x-0 top-1/2 border-b border-white/10 border-dashed"></div>
-                        <div class="absolute inset-y-0 left-1/2 border-r border-white/10 border-dashed"></div>
-                        <div class="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">SECTION AA // HIGHLAND STUDY / SCALE 1:50</div>
-                        <div id="anatomy-coord" class="absolute bottom-6 right-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">ZONE A-01 // ROOF VOID</div>
-                    </div>
-
-                    <!-- JS Injected Hotspots -->
-                    <div id="hotspot-container"></div>
-                </div>
-
-                <!-- Inspector Data Panel -->
-                <div class="lg:col-span-4 space-y-8 bg-[#161615] border border-white/10 p-10 flex flex-col justify-between min-h-[460px]">
-                    <div class="space-y-6 fade-in-scale" id="anatomy-content">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-5 font-mono text-[9px] tracking-[0.3em] text-lumen-accent uppercase">
-                            <span id="anatomy-category">Solar Geometry</span>
-                        </div>
-                        <h3 id="anatomy-title" class="font-serif text-3xl md:text-4xl font-light text-white leading-snug">Natural Light & Zenith Apertures</h3>
-                        <p id="anatomy-summary" class="text-white/80 text-sm font-sans font-light leading-relaxed">
-                            Sculpted ceiling scoops direct changing daylight deep into living cores.
-                        </p>
-                        <div class="pt-4 text-white/60 text-sm font-light leading-relaxed border-t border-white/5">
-                            <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-white/30 block mb-2">Design Rationale:</span>
-                            <span id="anatomy-rationale">Rather than relying exclusively on perimeter glazing which can generate glare, continuous overhead lanterns harvest diffuse illumination throughout the diurnal cycle.</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pt-8 border-t border-white/10 space-y-3">
-                        <span class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta block">Measured Performance Metric</span>
-                        <span id="anatomy-metric" class="font-mono text-xs text-white block bg-black/50 px-4 py-3 border border-white/10">
-                            380 LUX AVG AMBIENT DAYLIGHT FACTOR
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 3: SELECTED WORKS (PORTFOLIO)
-         ========================================= -->
-    <section id="works" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <!-- Header -->
-            <div class="mb-24 pb-8 border-b border-lumen-gray reveal">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
-                    <div>
-                        <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-meta block mb-4">Portfolio Archive</span>
-                        <h2 class="font-serif text-5xl sm:text-7xl text-lumen-black font-light tracking-tight">Selected works.</h2>
-                    </div>
-                    <p class="text-lumen-text text-lg font-light max-w-md">
-                        Different places. Different lives. One thoughtful approach to building in the African landscape.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Projects Grid (Injected by JS) -->
-            <div id="projects-container" class="space-y-32 md:space-y-48"></div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 4: SCROLL-DRIVEN PROCESS
-         ========================================= -->
-    <section class="py-32 md:py-40 bg-[#E8E7E1] border-b border-lumen-gray">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="max-w-3xl mb-20 space-y-5 reveal">
-                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">02 / Our Process</span>
-                <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">From idea to place.</h2>
-                <p class="text-lumen-text text-lg font-light leading-relaxed">
-                    Great design takes time. It is a careful journey from understanding the wind and sun of the site, to building with beautiful, lasting materials in challenging landscapes.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center reveal reveal-delay-1">
-                <!-- Process Steps Interactive List -->
-                <div class="lg:col-span-5 space-y-4" id="process-steps-container"></div>
-                
-                <!-- Process Visual Container -->
-                <div class="lg:col-span-7 space-y-5">
-                    <div class="relative aspect-[16/11] parallax-wrapper bg-lumen-gray border border-lumen-gray">
-                        <img id="process-image" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" alt="Process Phase" class="parallax-img fade-in-scale">
-                        <div id="process-phase-badge" class="absolute top-6 left-6 bg-lumen-black/90 text-white font-mono text-[9px] uppercase tracking-[0.3em] px-4 py-2 backdrop-blur-md border border-white/10">
-                            PHASE 01 ARTIFACT
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta px-2">
-                        <span>Studio Deliverable:</span>
-                        <span id="process-deliverable" class="text-lumen-black">Topographic Sun & Wind Acoustic Mapping</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 5: MATERIAL STUDY
-         ========================================= -->
-    <section id="materials" class="py-32 md:py-40 bg-lumen-dark text-lumen-white">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 pb-8 border-b border-white/10 gap-8 reveal">
-                <div class="space-y-4">
-                    <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent">Material Study</span>
-                    <h2 class="font-serif text-4xl sm:text-6xl font-light tracking-tight text-white">Material study.</h2>
-                </div>
-                <p class="text-white/60 text-sm md:text-base max-w-md font-light leading-relaxed">
-                    We choose natural materials that age beautifully in the harsh Lesotho climate. Select a material below to learn about its texture, how it insulates, and how we use it.
-                </p>
-            </div>
-
-            <!-- Material Tabs (Injected via JS) -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 reveal reveal-delay-1" id="material-tabs"></div>
-
-            <!-- Material Display Panel -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center bg-[#141414] border border-white/10 p-8 md:p-16 reveal reveal-delay-2" id="material-display">
-                
-                <div class="lg:col-span-6 relative aspect-square overflow-hidden bg-black/60 border border-white/10 group">
-                    <img id="mat-image" src="" alt="Material Specimen" class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-[1.08] fade-in-scale">
-                    <div class="absolute bottom-6 left-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/80 bg-black/80 px-4 py-2 backdrop-blur-md border border-white/10">
-                        SPECIMEN STUDY // 1:1 MACRO CROP
-                    </div>
-                </div>
-                
-                <div class="lg:col-span-6 space-y-8 fade-in-scale">
-                    <div class="space-y-3">
-                        <span class="font-mono text-[9px] uppercase tracking-[0.4em] text-lumen-accent">Material Specification</span>
-                        <h3 id="mat-name" class="font-serif text-4xl md:text-5xl font-light text-white tracking-tight"></h3>
-                        <p id="mat-tagline" class="font-serif text-xl text-white/70 italic font-light"></p>
-                    </div>
-                    
-                    <p id="mat-desc" class="text-white/70 text-base font-light leading-relaxed"></p>
-                    
-                    <div class="space-y-5 pt-6 border-t border-white/10 font-mono text-xs">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4 border-b border-white/5">
-                            <span class="text-lumen-meta text-[9px] uppercase tracking-[0.2em]">Tactile Surface:</span>
-                            <span id="mat-tactile" class="text-white/90 md:col-span-2 text-[11px] tracking-wide"></span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4 border-b border-white/5">
-                            <span class="text-lumen-meta text-[9px] uppercase tracking-[0.2em]">Thermal Behavior:</span>
-                            <span id="mat-thermal" class="text-white/90 md:col-span-2 text-[11px] tracking-wide"></span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <span class="text-lumen-meta text-[9px] uppercase tracking-[0.2em]">Protective Finish:</span>
-                            <span id="mat-finish" class="text-white/90 md:col-span-2 text-[11px] tracking-wide"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 6: ARCHITECTURE IN DETAIL
-         ========================================= -->
-    <section class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="mb-20 space-y-5 reveal">
-                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">03 / The Details</span>
-                <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">Architecture in detail.</h2>
-                <p class="text-lumen-text text-lg font-light max-w-2xl leading-relaxed">
-                    A building's true quality shows in the fine details. We design every corner and connection with great care to create a quiet, lasting beauty rooted in the African context.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 reveal reveal-delay-1">
-                <!-- Detail 1 -->
-                <div class="space-y-6 group cursor-pointer">
-                    <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
-                        <img src="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&w=800&q=80" alt="Detail 1" class="w-full h-full object-cover img-mask-hover" loading="lazy">
-                    </div>
-                    <div>
-                        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 01 // CANTILEVER</div>
-                        <h4 class="font-serif text-2xl text-lumen-black">Floating Treads</h4>
-                    </div>
-                </div>
-                <!-- Detail 2 -->
-                <div class="space-y-6 group cursor-pointer md:mt-12">
-                    <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Detail 2" class="w-full h-full object-cover img-mask-hover" loading="lazy">
-                    </div>
-                    <div>
-                        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 02 // REVEAL</div>
-                        <h4 class="font-serif text-2xl text-lumen-black">Continuous Shadow Gaps</h4>
-                    </div>
-                </div>
-                <!-- Detail 3 -->
-                <div class="space-y-6 group cursor-pointer">
-                    <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Detail 3" class="w-full h-full object-cover img-mask-hover" loading="lazy">
-                    </div>
-                    <div>
-                        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 03 // GLAZING</div>
-                        <h4 class="font-serif text-2xl text-lumen-black">Submerged Steel Frames</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 7: SERVICES (ACCORDION)
-         ========================================= -->
-    <section id="services" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="max-w-3xl mb-20 space-y-4 reveal">
-                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">04 / Studio Expertise</span>
-                <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">Four realms of practice.</h2>
-            </div>
-            
-            <div class="space-y-4 reveal reveal-delay-1" id="services-accordion">
-                <!-- Injected via JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 8: STUDIO PROFILE
-         ========================================= -->
-    <section class="py-32 md:py-48 bg-[#E8E7E1] border-b border-lumen-gray">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-                <div class="lg:col-span-5 relative reveal">
-                    <div class="aspect-[3/4] parallax-wrapper bg-lumen-gray">
-                        <img src="https://images.unsplash.com/photo-1497215848147-ff2b618bd3bd?auto=format&fit=crop&w=1200&q=80" alt="Studio profile view" class="parallax-img js-parallax" data-speed="0.08">
-                    </div>
-                    <div class="absolute -bottom-8 -right-8 hidden md:block p-8 bg-lumen-dark text-lumen-white font-mono text-[10px] uppercase tracking-[0.3em] max-w-[240px] leading-relaxed border border-white/10 shadow-2xl">
-                        DISCIPLINE OVER TREND. LONGEVITY OVER NOVELTY.
-                    </div>
-                </div>
-                <div class="lg:col-span-7 space-y-10 lg:pl-10 reveal reveal-delay-1">
-                    <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">05 / Studio Profile</div>
-                    <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black leading-tight tracking-tight">A studio with a definitive point of view.</h2>
-                    <div class="space-y-6 text-lumen-text text-lg font-light leading-relaxed">
-                        <p>STUDIO LUMEN was founded in Maseru on the conviction that modern living needs spaces of quiet and calm. We avoid short-lived design trends, focusing instead on buildings that last, beautiful craftsmanship, and a deep respect for the Lesotho environment.</p>
-                        <p>We undertake a strictly limited number of commissions each year, guaranteeing direct principal involvement from initial sketches through to final handover, ensuring every project receives the rigorous attention it demands.</p>
-                    </div>
-                    <div class="pt-8 border-t border-lumen-gray grid grid-cols-2 gap-8 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
-                        <div><span class="block text-lumen-black text-sm font-sans mb-1">LOCAL EXPERTISE</span>Lesotho & SADC</div>
-                        <div><span class="block text-lumen-black text-sm font-sans mb-1">CAPACITY</span>Limited Intake</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         SECTION 9: CONTACT / ENQUIRY
-         ========================================= -->
-    <section id="contact" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 reveal">
-                
-                <div class="lg:col-span-5 space-y-8">
-                    <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-accent">Initiate Dialogue</span>
-                    <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight leading-tight">Every remarkable space begins with a conversation.</h2>
-                    <p class="text-lumen-text text-lg font-light leading-relaxed">Tell us what you're imagining. We'll help you explore what it could become.</p>
-                    
-                    <div class="pt-8 space-y-6 font-mono text-[11px] text-lumen-meta border-t border-lumen-gray">
-                        <div>
-                            <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Studio Inquiries</span>
-                            studio@studiolumen.co.ls
-                        </div>
-                        <div>
-                            <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Studio Telephone</span>
-                            +266 2231 4599
-                        </div>
-                        <div>
-                            <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Location</span>
-                            120 Kingsway Road, Maseru 100, Lesotho
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-7 bg-[#E8E7E1] p-8 md:p-14 border border-lumen-gray shadow-sm" id="form-container">
-                    <form id="contact-form" class="space-y-8 fade-in-scale">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                            <div class="space-y-3">
-                                <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Full Name *</label>
-                                <input type="text" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="e.g. Neo Leteka">
-                            </div>
-                            <div class="space-y-3">
-                                <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Email Address *</label>
-                                <input type="email" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="neo@example.com">
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Describe Your Architectural Vision</label>
-                            <textarea rows="5" class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="Tell us about the site conditions, lifestyle objectives, or spatial aspirations in Lesotho..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-5 bg-lumen-black text-lumen-white font-mono text-[10px] uppercase tracking-[0.3em] flex items-center justify-center space-x-3 transition-all hover:bg-lumen-accent">
-                            <span>Discuss your project</span><span>↗</span>
-                        </button>
-                    </form>
-                    
-                    <!-- Success State -->
-                    <div id="form-success" class="hidden space-y-8 py-16 text-center fade-in-scale">
-                        <div class="w-16 h-16 bg-lumen-accent text-white rounded-full flex items-center justify-center mx-auto text-2xl font-mono shadow-lg">✓</div>
-                        <h3 class="font-serif text-4xl text-lumen-black font-light">Enquiry Received</h3>
-                        <p class="text-lumen-text text-base max-w-md mx-auto font-light leading-relaxed">Thank you. The studio principals in Maseru have been notified and will reach out shortly to arrange an initial feasibility consultation.</p>
-                        <button id="reset-form" class="mt-6 px-8 py-3 border border-lumen-black text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-lumen-black hover:text-lumen-white transition-colors">Submit Another Query</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================================
-         FOOTER
-         ========================================= -->
-    <footer class="bg-lumen-dark text-lumen-meta py-24 font-mono text-xs border-t border-black">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start gap-12">
-            <div class="space-y-6 max-w-sm reveal">
-                <span class="font-serif text-3xl text-white font-light tracking-[0.2em] block uppercase">STUDIO LUMEN</span>
-                <p class="text-white/60 text-[11px] font-sans font-light leading-relaxed">
-                    Architecture, spatial research, and landscape integration in the Mountain Kingdom. Shaping enduring places around people and the profound possibilities of space.
-                </p>
-            </div>
-            <div class="space-y-4 reveal reveal-delay-1">
-                <span class="text-[9px] uppercase tracking-[0.3em] text-white block mb-4">Location & Legal</span>
-                <p class="text-[11px] leading-relaxed text-white/50 font-sans max-w-xs">
-                    Maseru, Lesotho<br>
-                    All project data and images represent architectural capabilities.
-                </p>
-                <div class="pt-4 text-[9px] text-lumen-accent tracking-[0.2em] uppercase">© 2026 Studio Lumen — Maseru, Lesotho</div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- =========================================
-         PROJECT DOSSIER (FULL SCREEN MODAL)
-         ========================================= -->
-    <div id="project-modal" class="fixed inset-0 z-[60] bg-lumen-dark/95 backdrop-blur-lg hidden overflow-y-auto flex items-start justify-center p-0 md:p-6 opacity-0 transition-opacity duration-500">
-        <div class="relative w-full max-w-6xl bg-lumen-white text-lumen-black shadow-2xl md:border border-lumen-gray min-h-screen md:min-h-0 md:my-auto scale-[0.98] transition-transform duration-500" id="modal-content-panel">
-            
-            <!-- Modal Header -->
-            <div class="sticky top-0 z-30 bg-lumen-white/95 backdrop-blur-md border-b border-lumen-gray px-6 md:px-10 py-5 flex items-center justify-between shadow-sm">
-                <div class="flex items-center space-x-4 font-mono text-[10px] uppercase tracking-[0.3em]">
-                    <span class="text-lumen-accent font-bold" id="modal-dossier">DOSSIER #01</span>
-                    <span class="hidden sm:inline text-lumen-gray">|</span>
-                    <span class="font-serif text-sm font-semibold hidden sm:inline" id="modal-header-title">Title</span>
-                </div>
-                <button id="close-modal" class="w-10 h-10 rounded-full border border-lumen-black/20 flex items-center justify-center text-sm font-mono hover:bg-lumen-black hover:text-white transition-all group">
-                    <span class="group-hover:rotate-90 transition-transform duration-300">✕</span>
-                </button>
-            </div>
-
-            <!-- Modal Content -->
-            <div class="p-6 md:p-12 lg:p-16 space-y-16">
-                
-                <!-- Hero Image inside Modal -->
-                <div class="aspect-[16/7] w-full overflow-hidden bg-lumen-gray relative">
-                    <img id="modal-hero" src="" alt="Hero" class="w-full h-full object-cover">
-                </div>
-                
-                <!-- Narrative & Stats -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                    <div class="lg:col-span-8 space-y-6">
-                        <div id="modal-meta" class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta"></div>
-                        <h2 id="modal-title" class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight"></h2>
-                        <p id="modal-tagline" class="text-lumen-black text-xl font-serif italic font-light"></p>
-                        <p id="modal-narrative" class="text-lumen-text text-base md:text-lg font-light leading-relaxed"></p>
-                    </div>
-                    
-                    <div class="lg:col-span-4 bg-[#E8E7E1] p-8 border border-lumen-gray space-y-5 font-mono text-[10px]">
-                        <span class="text-[9px] uppercase tracking-[0.3em] text-lumen-accent block border-b border-lumen-gray pb-3">Project Metadata</span>
-                        <div class="space-y-4 pt-2">
-                            <div>
-                                <span class="text-lumen-meta text-[9px] uppercase tracking-wider block mb-1">Gross Footprint:</span>
-                                <span id="modal-area" class="text-lumen-black text-sm"></span>
-                            </div>
-                            <div>
-                                <span class="text-lumen-meta text-[9px] uppercase tracking-wider block mb-1">Structural System:</span>
-                                <span id="modal-structure" class="text-lumen-black text-xs leading-relaxed block"></span>
-                            </div>
-                            <div>
-                                <span class="text-lumen-meta text-[9px] uppercase tracking-wider block mb-1">Climate Context:</span>
-                                <span id="modal-climate" class="text-lumen-black text-xs block"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gallery -->
-                <div class="space-y-8 pt-10 border-t border-lumen-gray">
-                    <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">Architectural Perspectives</div>
-                    <div id="modal-gallery" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- =========================================
-         VANILLA JAVASCRIPT ENGINE
-         ========================================= -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- DATA MODELS (LESOTHO SPECIFIC) ---
-            // ALL IMAGE URLs ARE STRICTLY BOUND TO THE PROVIDED WORKING URLS
+  <!-- ==================================================== -->
+  <!-- SELECTED WORKS -->
+  <!-- ==================================================== -->
+  <section id="works" class="py-24 md:py-32 bg-chalk border-b border-borderline">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="mb-20 pb-8 border-b border-borderline flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-[0.3em] text-mineral block mb-3">Portfolio</span>
+          <h2 class="font-serif text-4xl sm:text-6xl text-basalt font-light tracking-tight">Selected works.</h2>
+        </div>
+        <p class="text-[#6E6D68] text-base md:text-lg font-light max-w-md">
+          Carefully considered spaces shaped by landscape, natural materials, and everyday life.
+        </p>
+      </div>
 
-            const PROJECTS = [
-                {
-                    id: 'maluti-pavilion', number: '01', title: 'Maluti Convention Centre', typology: 'Public Building', location: 'Maluti Mountains',
-                    heroImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
-                    tagline: 'A welcoming public space built naturally into the ancient basalt rock.',
-                    narrative: 'Situated at 2,800 meters above sea level, this convention centre is designed to withstand harsh alpine winters while capturing the stark, expansive beauty of the Lesotho highlands. The building uses local stone and large, open meeting halls with wide roofs for shelter.',
-                    stats: { area: '4,500 m²', structure: 'Local Basalt & Solid Timber', climate: 'Highland Alpine' },
-                    gallery: [
-                        { url: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Floating basalt steps blended into the landscape.' },
-                        { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', type: 'Interior', caption: 'High windows bring sunlight into the vast convention interior.' },
-                        { url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', type: 'Material', caption: 'Warm earth walls framing the main hall.' }
-                    ]
-                },
-                {
-                    id: 'thaba-bosiu', number: '02', title: 'Thaba Bosiu Retreat', typology: 'Luxury Retreat', location: 'Roma Valley',
-                    heroImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
-                    tagline: 'Layered spaces that step gently down the historic hillside.',
-                    narrative: 'Embedded directly into a hillside near the historic Thaba Bosiu stronghold, this retreat follows the natural shape of the land. The building steps down the slope, using the earth itself to shelter the rooms and keep them warm against the valley winds.',
-                    stats: { area: '820 m²', structure: 'Local Sandstone Masonry', climate: 'Temperate Sub-alpine' },
-                    gallery: [
-                        { url: 'https://images.unsplash.com/photo-1558098329-a11cff621064?auto=format&fit=crop&w=800&q=80', type: 'Woodwork', caption: 'Beautiful timber framing against raw stone walls.' },
-                        { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', type: 'Hall', caption: 'Communal gathering areas with large, framed views.' },
-                        { url: 'https://images.unsplash.com/photo-1620288820465-9856f6ea317c?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Dark steel window frames built for the climate.' }
-                    ]
-                },
-                {
-                    id: 'maseru-heights', number: '03', title: 'Maseru Heights Residence', typology: 'Private Residence', location: 'Maseru',
-                    heroImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
-                    tagline: 'A clever use of space that transforms city living.',
-                    narrative: 'An open, flowing home that brings soft daylight deep into the living spaces, using local timber, smooth floors, and large clear windows to frame the vast Maseru horizon.',
-                    stats: { area: '650 m²', structure: 'Concrete Frame & Basalt Stone', climate: 'Urban Temperate' },
-                    gallery: [
-                        { url: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=800&q=80', type: 'Layout', caption: 'Open levels around the bright central lightwell.' },
-                        { url: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&w=800&q=80', type: 'Stair', caption: 'A beautiful, seamless stone staircase.' },
-                        { url: 'https://images.unsplash.com/photo-1558098329-a11cff621064?auto=format&fit=crop&w=800&q=80', type: 'Cabinets', caption: 'Custom woodwork with clean, precise details.' }
-                    ]
-                },
-                {
-                    id: 'katse-lodge', number: '04', title: 'Katse Dam Eco-Lodge', typology: 'Eco-Tourism', location: 'Katse Dam',
-                    heroImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80',
-                    tagline: 'Low earth buildings resting peacefully along the water\'s edge.',
-                    narrative: 'Designed as a quiet eco-retreat overlooking the immense Katse Dam, the lodge carefully places private suites and viewing decks along the steep banks. Thick earth walls keep the rooms cool during hot days and warm during cold mountain nights.',
-                    stats: { area: '1,420 m²', structure: 'Natural rammed earth from the site', climate: 'Alpine' },
-                    gallery: [
-                        { url: 'https://images.unsplash.com/photo-1596489370773-10d48f725357?auto=format&fit=crop&w=800&q=80', type: 'Materials', caption: 'Beautiful natural layers in the thick earth walls.' },
-                        { url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', type: 'Exterior', caption: 'Guest rooms stepping naturally down towards the water.' },
-                        { url: 'https://images.unsplash.com/photo-1620288820465-9856f6ea317c?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Weathered steel details inspired by the dam infrastructure.' }
-                    ]
-                }
-            ];
+      <!-- Project Cards -->
+      <div class="space-y-28">
+        
+        <!-- Project 1 -->
+        <article class="cursor-pointer group" onclick="openProject('project-1')">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+            <div class="lg:col-span-8">
+              <div class="relative aspect-16-10 overflow-hidden bg-stone-200">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" alt="The Still House" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="imgFallback(this)">
+                <div class="absolute bottom-4 right-4 bg-chalk text-basalt font-mono text-[10px] uppercase tracking-[0.2em] px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  View Project Dossier ↗
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-4 space-y-4">
+              <div class="font-mono text-xs uppercase tracking-[0.25em] text-mineral">Project 01 — <span class="text-sandstone">Private Residence</span></div>
+              <h3 class="font-serif text-3xl sm:text-4xl font-light group-hover:text-sandstone transition-colors">The Still House</h3>
+              <p class="text-[#6E6D68] text-sm md:text-base font-light leading-relaxed">
+                A serene private home structured around a sheltered courtyard, using local basalt, glass, and warm timber.
+              </p>
+              <div class="pt-4 border-t border-borderline space-y-2 font-mono text-[11px] text-mineral">
+                <div class="flex justify-between"><span>Location:</span><span class="text-basalt">Maseru West, Lesotho</span></div>
+                <div class="flex justify-between"><span>Area:</span><span class="text-basalt">580 m²</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-            const HOTSPOTS = [
-                { id: 'light', top: 24, left: 52, label: 'ZONE A-01', category: 'Natural Light', title: 'Bringing Light Indoors', summary: 'Carefully angled ceilings bring soft, natural light deep into the home.', rationale: 'Skylights capture gentle overhead light, avoiding the harsh glare of the bright African sun and keeping indoor spaces comfortable.', metric: 'CONSISTENT DAYLIGHT' },
-                { id: 'mass', top: 62, left: 32, label: 'ZONE B-04', category: 'Crafting with Material', title: 'Textured Walls & Warm Wood', summary: 'Textured concrete walls meet warm, carefully crafted woodwork.', rationale: 'Strong, exposed building materials are balanced by smooth, hand-finished wooden screens and clean shadow lines.', metric: 'THICK THERMAL WALLS' },
-                { id: 'flow', top: 78, left: 68, label: 'ZONE C-02', category: 'Indoor-Outdoor Flow', title: 'Opening Up The Space', summary: 'Sliding glass doors disappear into the walls to open up the room.', rationale: 'The flooring continues smoothly from the inside rooms straight out to the courtyard, blurring the line between indoors and outdoors.', metric: 'SEAMLESS THRESHOLD' },
-                { id: 'site', top: 82, left: 18, label: 'ZONE D-07', category: 'Building on the Land', title: 'Resting on the Rock', summary: 'The building rests firmly on the natural rock below.', rationale: 'By gently lifting the structure, we allow natural water runoff to continue and protect the fragile mountain ecosystem beneath it.', metric: 'MINIMAL LAND IMPACT' }
-            ];
+        <!-- Project 2 -->
+        <article class="cursor-pointer group" onclick="openProject('project-2')">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+            <div class="lg:col-span-8 lg:order-2">
+              <div class="relative aspect-16-10 overflow-hidden bg-stone-200">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80" alt="The Maluti Ridge Retreat" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="imgFallback(this)">
+                <div class="absolute bottom-4 right-4 bg-chalk text-basalt font-mono text-[10px] uppercase tracking-[0.2em] px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  View Project Dossier ↗
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-4 lg:order-1 space-y-4">
+              <div class="font-mono text-xs uppercase tracking-[0.25em] text-mineral">Project 02 — <span class="text-sandstone">Alpine Lodge</span></div>
+              <h3 class="font-serif text-3xl sm:text-4xl font-light group-hover:text-sandstone transition-colors">The Maluti Ridge Retreat</h3>
+              <p class="text-[#6E6D68] text-sm md:text-base font-light leading-relaxed">
+                Terraced into high-altitude mountain terrain with panoramic valley vistas and calculated passive solar heating.
+              </p>
+              <div class="pt-4 border-t border-borderline space-y-2 font-mono text-[11px] text-mineral">
+                <div class="flex justify-between"><span>Location:</span><span class="text-basalt">Semonkong, Lesotho</span></div>
+                <div class="flex justify-between"><span>Area:</span><span class="text-basalt">720 m²</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-            const PROCESS = [
-                { num: '01', title: 'Listen', sub: 'The terrain, the light, the silence.', tag: 'SITE STUDY', deliv: 'Understanding Sun, Wind & Sound', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80' },
-                { num: '02', title: 'Imagine', sub: 'Shaping the space and experience.', tag: 'CONCEPT DESIGN', deliv: 'Detailed Scale Models', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80' },
-                { num: '03', title: 'Develop', sub: 'Refining details and materials.', tag: 'CAREFUL DETAILING', deliv: 'Material Testing & Planning', img: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&w=1200&q=80' },
-                { num: '04', title: 'Realise', sub: 'Working with master craftspeople.', tag: 'EXPERT CONSTRUCTION', deliv: 'Hands-on Site Management', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80' }
-            ];
+        <!-- Project 3 -->
+        <article class="cursor-pointer group" onclick="openProject('project-3')">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+            <div class="lg:col-span-8">
+              <div class="relative aspect-16-10 overflow-hidden bg-stone-200">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80" alt="House of Light" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="imgFallback(this)">
+                <div class="absolute bottom-4 right-4 bg-chalk text-basalt font-mono text-[10px] uppercase tracking-[0.2em] px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  View Project Dossier ↗
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-4 space-y-4">
+              <div class="font-mono text-xs uppercase tracking-[0.25em] text-mineral">Project 03 — <span class="text-sandstone">Modern Renovation</span></div>
+              <h3 class="font-serif text-3xl sm:text-4xl font-light group-hover:text-sandstone transition-colors">House of Light</h3>
+              <p class="text-[#6E6D68] text-sm md:text-base font-light leading-relaxed">
+                A transformational renovation introducing daylight wells and open-plan continuity to an existing residential structure.
+              </p>
+              <div class="pt-4 border-t border-borderline space-y-2 font-mono text-[11px] text-mineral">
+                <div class="flex justify-between"><span>Location:</span><span class="text-basalt">Hillsview, Maseru</span></div>
+                <div class="flex justify-between"><span>Area:</span><span class="text-basalt">430 m²</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-            const MATERIALS = [
-                { id: 'basalt', name: 'Maluti Basalt', tag: 'Solid strength, rich texture.', desc: 'Quarried directly from the Lesotho highlands, this dark volcanic rock adds beautiful natural texture while helping to keep indoor temperatures comfortable all year round.', tact: 'Matte, rough texture', therm: 'Excellent natural insulation', fin: 'Protective natural sealant', img: 'https://images.unsplash.com/photo-1522049293475-6e9a6659c23b?auto=format&fit=crop&w=1200&q=80' },
-                { id: 'timber', name: 'Crafted Timber', tag: 'Warmth, quiet, and sustainability.', desc: 'We combine strong exterior wood for weather resistance with warm interior woods that make spaces feel cozy and absorb sound.', tact: 'Smooth, natural wood grain', therm: 'Natural temperature barrier', fin: 'Eco-friendly natural oils', img: 'https://images.unsplash.com/photo-1558098329-a11cff621064?auto=format&fit=crop&w=1200&q=80' },
-                { id: 'sandstone', name: 'Lesotho Sandstone', tag: 'Natural warmth and local character.', desc: 'Hand-cut local sandstone used in our masonry work. It brings a warm, earthy tone that blends perfectly with the surrounding landscapes.', tact: 'Rough, earthy and layered', therm: 'Great thermal mass', fin: 'Natural breathable seal', img: 'https://images.unsplash.com/photo-1596489370773-10d48f725357?auto=format&fit=crop&w=1200&q=80' },
-                { id: 'steel', name: 'Weathered Steel', tag: 'Sharp, clean details.', desc: 'Steel that naturally changes color with the harsh highland weather, blending beautifully with the earthy tones of the Lesotho landscape.', tact: 'Textured, rusted finish', therm: 'Highly insulated core', fin: 'Beautiful weathered finish', img: 'https://images.unsplash.com/photo-1620288820465-9856f6ea317c?auto=format&fit=crop&w=1200&q=80' }
-            ];
+        <!-- Project 4 -->
+        <article class="cursor-pointer group" onclick="openProject('project-4')">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+            <div class="lg:col-span-8 lg:order-2">
+              <div class="relative aspect-16-10 overflow-hidden bg-stone-200">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80" alt="The Gathering Pavilion" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="imgFallback(this)">
+                <div class="absolute bottom-4 right-4 bg-chalk text-basalt font-mono text-[10px] uppercase tracking-[0.2em] px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  View Project Dossier ↗
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-4 lg:order-1 space-y-4">
+              <div class="font-mono text-xs uppercase tracking-[0.25em] text-mineral">Project 04 — <span class="text-sandstone">Hospitality</span></div>
+              <h3 class="font-serif text-3xl sm:text-4xl font-light group-hover:text-sandstone transition-colors">The Gathering Pavilion</h3>
+              <p class="text-[#6E6D68] text-sm md:text-base font-light leading-relaxed">
+                Boutique hospitality suites and event pavilion celebrating outdoor fire pits, local stonework, and dramatic sunsets.
+              </p>
+              <div class="pt-4 border-t border-borderline space-y-2 font-mono text-[11px] text-mineral">
+                <div class="flex justify-between"><span>Location:</span><span class="text-basalt">Morija, Lesotho</span></div>
+                <div class="flex justify-between"><span>Area:</span><span class="text-basalt">1,250 m²</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-            const SERVICES = [
-                { id: '01', name: 'Residential Architecture', sum: 'Beautiful homes designed around you, your land, and the local climate.', det: 'Complete home design, from mountain retreats to quiet townhouses in Maseru. We guide you from early ideas and planning, right through to the finishing touches and final construction.' },
-                { id: '02', name: 'Hospitality & Eco-Lodges', sum: 'Welcoming guesthouses, boutique hotels, and relaxing lodge environments.', det: 'Spaces designed for rest and relaxation in the beautiful African landscape. We carefully plan the layout, guest experience, and local character to create unforgettable connections to nature.' },
-                { id: '03', name: 'Commercial & Cultural', sum: 'Inspiring spaces for modern businesses and local communities.', det: 'Workplaces designed for natural light and quiet focus. We replace generic office layouts with warm materials, comfortable workspaces, and peaceful courtyards full of plants.' },
-                { id: '04', name: 'Renovation & Updates', sum: 'Breathing new life into existing buildings with thoughtful, modern design.', det: 'Careful and creative updates to older or heritage buildings. We celebrate their original charm while opening up bright modern spaces, improving layout, and adding modern insulation.' }
-            ];
+      </div>
+    </div>
+  </section>
 
-            // --- HEADER SCROLL EFFECT ---
-            const header = document.getElementById('main-header');
-            const cta = document.getElementById('header-cta');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 80) {
-                    header.classList.remove('bg-gradient-to-b', 'from-lumen-black/90', 'via-lumen-black/50', 'text-white');
-                    header.classList.add('bg-lumen-white/95', 'backdrop-blur-md', 'text-lumen-black', 'border-lumen-gray');
-                    
-                    cta.classList.remove('border-white/50', 'text-white', 'hover:bg-white', 'hover:text-lumen-black');
-                    cta.classList.add('border-lumen-black', 'text-lumen-black', 'hover:bg-lumen-black', 'hover:text-lumen-white');
-                } else {
-                    header.classList.add('bg-gradient-to-b', 'from-lumen-black/90', 'via-lumen-black/50', 'text-white');
-                    header.classList.remove('bg-lumen-white/95', 'backdrop-blur-md', 'text-lumen-black', 'border-lumen-gray');
-                    
-                    cta.classList.add('border-white/50', 'text-white', 'hover:bg-white', 'hover:text-lumen-black');
-                    cta.classList.remove('border-lumen-black', 'text-lumen-black', 'hover:bg-lumen-black', 'hover:text-lumen-white');
-                }
-            });
+  <!-- ==================================================== -->
+  <!-- INTERACTIVE ARCHITECTURAL ANATOMY -->
+  <!-- ==================================================== -->
+  <section id="anatomy" class="py-24 md:py-32 bg-basalt text-chalk">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-white/10 gap-6">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-[0.3em] text-sandstone block mb-3">Interactive Exploration</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-light tracking-tight text-white">The anatomy of a space.</h2>
+        </div>
+        <p class="text-white/70 text-sm md:text-base max-w-md font-light">
+          Tap the technical markers to explore how deliberate architectural choices create comfort, beauty, and energy efficiency.
+        </p>
+      </div>
 
-            // --- MOBILE MENU ---
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3')];
-            let menuOpen = false;
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Interactive Diagram Box -->
+        <div class="lg:col-span-8 relative aspect-16-10 bg-black/60 border border-white/15 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" alt="Architectural Blueprint Analysis" class="w-full h-full object-cover opacity-65" onerror="imgFallback(this)">
+          
+          <!-- Hotspots -->
+          <button onclick="setHotspot('light')" id="btn-light" class="hotspot-btn absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-sandstone text-white font-mono text-xs flex items-center justify-center border-2 border-white shadow-lg focus:outline-none transition-transform hover:scale-125">
+            +
+          </button>
+          <button onclick="setHotspot('stone')" id="btn-stone" class="hotspot-btn absolute top-2/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-basalt text-white font-mono text-xs flex items-center justify-center border border-white/60 focus:outline-none transition-transform hover:scale-125">
+            +
+          </button>
+          <button onclick="setHotspot('passive')" id="btn-passive" class="hotspot-btn absolute top-1/3 right-1/4 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-basalt text-white font-mono text-xs flex items-center justify-center border border-white/60 focus:outline-none transition-transform hover:scale-125">
+            +
+          </button>
+          <button onclick="setHotspot('flow')" id="btn-flow" class="hotspot-btn absolute bottom-1/5 right-1/3 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-basalt text-white font-mono text-xs flex items-center justify-center border border-white/60 focus:outline-none transition-transform hover:scale-125">
+            +
+          </button>
+        </div>
 
-            menuBtn.addEventListener('click', () => {
-                menuOpen = !menuOpen;
-                if(menuOpen) {
-                    mobileMenu.classList.remove('hidden');
-                    setTimeout(() => mobileMenu.classList.remove('opacity-0'), 10);
-                    bars[0].classList.add('rotate-45', 'translate-y-2');
-                    bars[1].classList.add('opacity-0');
-                    bars[2].classList.add('-rotate-45', '-translate-y-2');
-                    document.body.classList.add('modal-open');
-                } else {
-                    mobileMenu.classList.add('opacity-0');
-                    setTimeout(() => mobileMenu.classList.add('hidden'), 700);
-                    bars[0].classList.remove('rotate-45', 'translate-y-2');
-                    bars[1].classList.remove('opacity-0');
-                    bars[2].classList.remove('-rotate-45', '-translate-y-2');
-                    document.body.classList.remove('modal-open');
-                }
-            });
+        <!-- Dynamic Hotspot Card -->
+        <div class="lg:col-span-4 bg-basalt-light border border-white/10 p-8 flex flex-col justify-between min-h-[360px]">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3 font-mono text-[10px] tracking-widest text-sandstone uppercase">
+              <span id="hotspot-tag">SOLAR ORIENTATION</span>
+              <span id="hotspot-id" class="text-white/50">SECTION 01</span>
+            </div>
+            <h3 id="hotspot-title" class="font-serif text-3xl font-light text-white">Natural Daylight & High Windows</h3>
+            <p id="hotspot-desc" class="text-white/80 text-sm font-light leading-relaxed">
+              We position main living rooms to catch warm morning sun while calculated roof overhangs block intense summer heat.
+            </p>
+          </div>
+          <div class="pt-6 border-t border-white/10 font-mono text-xs text-white/60">
+            <span class="block text-[9px] uppercase tracking-wider text-sandstone mb-1">Key Performance Target:</span>
+            <span id="hotspot-metric" class="text-white">Comfortable natural warmth year-round</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            document.querySelectorAll('.mobile-link').forEach(link => {
-                link.addEventListener('click', () => menuBtn.click());
-            });
+  <!-- ==================================================== -->
+  <!-- MATERIAL STUDY -->
+  <!-- ==================================================== -->
+  <section id="materials" class="py-24 md:py-32 bg-chalk border-b border-borderline">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-borderline gap-6">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-[0.3em] text-mineral block mb-3">Materiality</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-light text-basalt tracking-tight">Material study.</h2>
+        </div>
+        <p class="text-[#6E6D68] text-base max-w-md font-light">
+          We select timeless, natural materials that grow more attractive as they weather in our high-altitude sun and rain.
+        </p>
+      </div>
 
-            // --- PORTFOLIO RENDERING ---
-            const projContainer = document.getElementById('projects-container');
-            PROJECTS.forEach((proj, idx) => {
-                const isEven = idx % 2 === 0;
-                projContainer.innerHTML += `
-                    <article class="group cursor-pointer reveal proj-card" data-id="${proj.id}">
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${isEven ? '' : 'lg:flex-row-reverse'}">
-                            <div class="lg:col-span-8 ${isEven ? '' : 'lg:order-2'} relative aspect-[16/10] overflow-hidden bg-lumen-gray">
-                                <img src="${proj.heroImage}" alt="${proj.title}" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" loading="lazy">
-                                <div class="absolute inset-0 bg-black/10 transition-opacity duration-700 group-hover:opacity-0"></div>
-                                <div class="absolute top-6 left-6 bg-lumen-dark/90 text-white font-mono text-[9px] uppercase tracking-[0.3em] px-4 py-2 backdrop-blur-md">
-                                    PROJECT #${proj.number}
-                                </div>
-                                <div class="absolute bottom-6 right-6 bg-lumen-white text-lumen-black font-mono text-[9px] uppercase tracking-[0.3em] px-5 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-2 group-hover:translate-y-0">
-                                    View Dossier ↗
-                                </div>
-                            </div>
-                            <div class="lg:col-span-4 space-y-8 ${isEven ? '' : 'lg:order-1'}">
-                                <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta flex items-center space-x-3">
-                                    <span class="text-lumen-accent">${proj.typology}</span>
-                                </div>
-                                <h3 class="font-serif text-4xl sm:text-5xl text-lumen-black font-light leading-snug group-hover:text-lumen-accent transition-colors duration-500">${proj.title}</h3>
-                                <p class="text-lumen-text text-base font-light leading-relaxed">${proj.tagline}</p>
-                                <div class="pt-6 border-t border-lumen-gray space-y-3 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
-                                    <div class="flex justify-between"><span>Location:</span><span class="text-lumen-black">${proj.location}</span></div>
-                                    <div class="flex justify-between"><span>Scale:</span><span class="text-lumen-black">${proj.stats.area}</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                `;
-            });
+      <!-- Material Selectors -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <button onclick="setMaterial('basalt')" id="mat-btn-basalt" class="mat-tab p-5 text-left border border-basalt bg-basalt text-white font-mono text-xs uppercase transition-all">
+          <span class="text-[9px] text-sandstone block mb-1">01 / STONE</span>
+          <span class="font-serif text-base normal-case tracking-normal">Local Basalt</span>
+        </button>
+        <button onclick="setMaterial('sandstone')" id="mat-btn-sandstone" class="mat-tab p-5 text-left border border-borderline bg-transparent text-basalt font-mono text-xs uppercase transition-all hover:border-basalt">
+          <span class="text-[9px] text-sandstone block mb-1">02 / EARTH</span>
+          <span class="font-serif text-base normal-case tracking-normal">Golden Sandstone</span>
+        </button>
+        <button onclick="setMaterial('timber')" id="mat-btn-timber" class="mat-tab p-5 text-left border border-borderline bg-transparent text-basalt font-mono text-xs uppercase transition-all hover:border-basalt">
+          <span class="text-[9px] text-sandstone block mb-1">03 / TIMBER</span>
+          <span class="font-serif text-base normal-case tracking-normal">Warm Cedar & Oak</span>
+        </button>
+        <button onclick="setMaterial('steel')" id="mat-btn-steel" class="mat-tab p-5 text-left border border-borderline bg-transparent text-basalt font-mono text-xs uppercase transition-all hover:border-basalt">
+          <span class="text-[9px] text-sandstone block mb-1">04 / METAL</span>
+          <span class="font-serif text-base normal-case tracking-normal">Dark Steel</span>
+        </button>
+      </div>
 
-            // --- PROJECT DOSSIER MODAL ---
-            const modal = document.getElementById('project-modal');
-            const modalContentPanel = document.getElementById('modal-content-panel');
-            const closeModalBtn = document.getElementById('close-modal');
+      <!-- Active Material Card -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-stone-100 p-8 md:p-12 border border-borderline">
+        <div class="lg:col-span-6 aspect-square overflow-hidden bg-stone-200">
+          <img id="mat-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Material Texture" class="w-full h-full object-cover transition-opacity duration-300" onerror="imgFallback(this)">
+        </div>
+        <div class="lg:col-span-6 space-y-6">
+          <h3 id="mat-title" class="font-serif text-3xl sm:text-4xl font-light">Dark Mountain Basalt</h3>
+          <p id="mat-tagline" class="font-serif text-lg italic text-[#6E6D68]">Permanent, grounded, and naturally insulating.</p>
+          <p id="mat-desc" class="text-[#6E6D68] text-sm md:text-base font-light leading-relaxed">
+            Sourced directly across Lesotho, rough-hewn basalt stone walls provide massive thermal mass—absorbing solar heat during winter afternoons and releasing it gently overnight.
+          </p>
+          <div class="pt-4 border-t border-borderline space-y-2 font-mono text-xs text-mineral">
+            <div><span class="text-basalt">Surface Character:</span> Textured stone relief with mineral seams</div>
+            <div><span class="text-basalt">Best Applied:</span> Heavy thermal spine walls and external plinths</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            document.querySelectorAll('.proj-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const proj = PROJECTS.find(p => p.id === card.dataset.id);
-                    if(proj) {
-                        document.getElementById('modal-dossier').textContent = `DOSSIER #${proj.number}`;
-                        document.getElementById('modal-header-title').textContent = proj.title;
-                        document.getElementById('modal-hero').src = proj.heroImage;
-                        document.getElementById('modal-meta').textContent = `${proj.typology} // ${proj.location}`;
-                        document.getElementById('modal-title').textContent = proj.title;
-                        document.getElementById('modal-tagline').textContent = proj.tagline;
-                        document.getElementById('modal-narrative').textContent = proj.narrative;
-                        document.getElementById('modal-area').textContent = proj.stats.area;
-                        document.getElementById('modal-structure').textContent = proj.stats.structure;
-                        document.getElementById('modal-climate').textContent = proj.stats.climate;
-                        
-                        const galleryHtml = proj.gallery.map(img => `
-                            <div class="space-y-4 group">
-                                <div class="aspect-[4/3] overflow-hidden bg-lumen-gray relative">
-                                    <img src="${img.url}" class="w-full h-full object-cover img-mask-hover">
-                                </div>
-                                <div>
-                                    <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-accent mb-1">${img.type}</div>
-                                    <p class="text-lumen-text text-xs font-light">${img.caption}</p>
-                                </div>
-                            </div>
-                        `).join('');
-                        document.getElementById('modal-gallery').innerHTML = galleryHtml;
+  <!-- ==================================================== -->
+  <!-- PROCESS: 01 LISTEN TO 04 REALISE -->
+  <!-- ==================================================== -->
+  <section class="py-24 md:py-32 bg-stone-100 border-b border-borderline">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="max-w-2xl mb-16 space-y-3">
+        <span class="font-mono text-xs uppercase tracking-[0.3em] text-mineral">Our Method</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-light text-basalt tracking-tight">From idea to place.</h2>
+        <p class="text-[#6E6D68] text-base font-light">
+          A disciplined, collaborative process guiding your vision from raw site analysis to built permanence.
+        </p>
+      </div>
 
-                        modal.classList.remove('hidden');
-                        document.body.classList.add('modal-open');
-                        
-                        // Force reflow for transition
-                        void modal.offsetWidth; 
-                        
-                        modal.classList.remove('opacity-0');
-                        modalContentPanel.classList.remove('scale-[0.98]');
-                        modalContentPanel.classList.add('scale-100');
-                    }
-                });
-            });
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Steps Navigation -->
+        <div class="lg:col-span-5 space-y-3">
+          <button onclick="setProcess(0)" class="proc-btn w-full text-left p-6 border border-basalt bg-chalk shadow-sm flex flex-col space-y-1">
+            <span class="font-mono text-xs text-sandstone uppercase tracking-wider">01 / Listen</span>
+            <span class="font-serif text-xl font-light">Site, Sunlight & Way of Living</span>
+          </button>
+          <button onclick="setProcess(1)" class="proc-btn w-full text-left p-6 border border-borderline bg-transparent flex flex-col space-y-1 hover:border-basalt transition-colors">
+            <span class="font-mono text-xs text-mineral uppercase tracking-wider">02 / Imagine</span>
+            <span class="font-serif text-xl font-light">Spatial Flow & 3D Concepts</span>
+          </button>
+          <button onclick="setProcess(2)" class="proc-btn w-full text-left p-6 border border-borderline bg-transparent flex flex-col space-y-1 hover:border-basalt transition-colors">
+            <span class="font-mono text-xs text-mineral uppercase tracking-wider">03 / Develop</span>
+            <span class="font-serif text-xl font-light">Engineering & Exact Detailing</span>
+          </button>
+          <button onclick="setProcess(3)" class="proc-btn w-full text-left p-6 border border-borderline bg-transparent flex flex-col space-y-1 hover:border-basalt transition-colors">
+            <span class="font-mono text-xs text-mineral uppercase tracking-wider">04 / Realise</span>
+            <span class="font-serif text-xl font-light">On-Site Craft & Execution</span>
+          </button>
+        </div>
 
-            const closeModal = () => {
-                modal.classList.add('opacity-0');
-                modalContentPanel.classList.remove('scale-100');
-                modalContentPanel.classList.add('scale-[0.98]');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    document.body.classList.remove('modal-open');
-                }, 500);
-            };
+        <!-- Step Visuals -->
+        <div class="lg:col-span-7">
+          <div class="aspect-16-10 overflow-hidden bg-stone-200 border border-borderline">
+            <img id="proc-img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" alt="Process visualization" class="w-full h-full object-cover transition-opacity duration-300" onerror="imgFallback(this)">
+          </div>
+          <div id="proc-caption" class="pt-3 font-mono text-[11px] text-mineral uppercase tracking-wider">
+            Phase Deliverable: Comprehensive sun, wind, and terrain site study.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            closeModalBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-            document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+  <!-- ==================================================== -->
+  <!-- SERVICES ACCORDION -->
+  <!-- ==================================================== -->
+  <section id="services" class="py-24 md:py-32 bg-chalk border-b border-borderline">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="max-w-2xl mb-16 space-y-3">
+        <span class="font-mono text-xs uppercase tracking-[0.3em] text-mineral">Expertise</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-light text-basalt tracking-tight">Our practice areas.</h2>
+      </div>
 
-            // --- ANATOMY INTERACTIVE ---
-            const hotspotContainer = document.getElementById('hotspot-container');
-            const aTitle = document.getElementById('anatomy-title');
-            const aCat = document.getElementById('anatomy-category');
-            const aSum = document.getElementById('anatomy-summary');
-            const aRat = document.getElementById('anatomy-rationale');
-            const aMet = document.getElementById('anatomy-metric');
-            const aCoord = document.getElementById('anatomy-coord');
-            const aContent = document.getElementById('anatomy-content');
+      <div class="space-y-4">
+        <!-- 01 -->
+        <div class="border border-basalt bg-stone-100 p-8">
+          <div class="font-mono text-xs uppercase tracking-widest text-sandstone mb-2">01 / Residential</div>
+          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Custom Homes & Private Residences</h3>
+          <p class="text-[#6E6D68] text-sm md:text-base font-light max-w-3xl leading-relaxed">
+            Tailor-made contemporary homes crafted around your lifestyle, the site's natural breezes, and views. From hillside villas to quiet urban sanctuaries.
+          </p>
+        </div>
+        <!-- 02 -->
+        <div class="border border-borderline p-8 hover:border-basalt transition-colors">
+          <div class="font-mono text-xs uppercase tracking-widest text-mineral mb-2">02 / Hospitality</div>
+          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Mountain Lodges, Retreats & Boutique Hotels</h3>
+          <p class="text-[#6E6D68] text-sm md:text-base font-light max-w-3xl leading-relaxed">
+            Immersive tourism and retreat destinations that celebrate local culture, regional stone architecture, and natural settings.
+          </p>
+        </div>
+        <!-- 03 -->
+        <div class="border border-borderline p-8 hover:border-basalt transition-colors">
+          <div class="font-mono text-xs uppercase tracking-widest text-mineral mb-2">03 / Commercial</div>
+          <h3 class="font-serif text-2xl sm:text-3xl font-light mb-3">Workplaces & Institutional Facilities</h3>
+          <p class="text-[#6E6D68] text-sm md:text-base font-light max-w-3xl leading-relaxed">
+            Modern corporate headquarters and creative studios designed for daylight, focus, and collaboration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            let activeHotspotId = HOTSPOTS[0].id;
+  <!-- ==================================================== -->
+  <!-- CONTACT FORM -->
+  <!-- ==================================================== -->
+  <section id="contact" class="py-24 md:py-32 bg-chalk border-b border-borderline">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-5 space-y-6">
+          <span class="font-mono text-xs uppercase tracking-[0.3em] text-sandstone">Get in Touch</span>
+          <h2 class="font-serif text-3xl sm:text-5xl font-light text-basalt tracking-tight leading-tight">
+            Every remarkable space begins with a conversation.
+          </h2>
+          <p class="text-[#6E6D68] text-base font-light leading-relaxed">
+            Tell us about your proposed site, your ideas, and what you are hoping to build.
+          </p>
+          <div class="pt-6 space-y-3 font-mono text-xs text-mineral border-t border-borderline">
+            <div><span class="text-basalt block uppercase text-[10px] tracking-wider">Studio:</span> Kingsway Road, Maseru West, Lesotho</div>
+            <div><span class="text-basalt block uppercase text-[10px] tracking-wider">Direct Phone / WhatsApp:</span> +266 5231 0000</div>
+            <div><span class="text-basalt block uppercase text-[10px] tracking-wider">Email:</span> studio@lumen-architecture.co.ls</div>
+          </div>
+        </div>
 
-            const renderHotspots = () => {
-                hotspotContainer.innerHTML = HOTSPOTS.map(h => {
-                    const isActive = h.id === activeHotspotId;
-                    return `
-                        <button class="hotspot-btn absolute -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none" style="top: ${h.top}%; left: ${h.left}%;" data-id="${h.id}">
-                            <div class="relative flex items-center justify-center group/btn">
-                                ${isActive ? '<span class="absolute w-10 h-10 rounded-full border border-lumen-accent animate-ping-slow"></span>' : ''}
-                                <div class="w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] transition-all duration-500 ${isActive ? 'bg-lumen-accent text-white scale-125 shadow-lg shadow-lumen-accent/50' : 'bg-black/90 text-white/80 border border-white/40 group-hover/btn:scale-125 group-hover/btn:border-white'}">
-                                    +
-                                </div>
-                            </div>
-                        </button>
-                    `;
-                }).join('');
+        <div class="lg:col-span-7 bg-stone-100 p-8 md:p-12 border border-borderline">
+          <form onsubmit="handleForm(event)" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block font-mono text-[10px] uppercase tracking-wider text-basalt mb-2">Your Name *</label>
+                <input type="text" required placeholder="e.g. Lerato Mohale" class="w-full bg-chalk border border-borderline p-3 text-sm focus:outline-none focus:border-basalt">
+              </div>
+              <div>
+                <label class="block font-mono text-[10px] uppercase tracking-wider text-basalt mb-2">Phone or WhatsApp *</label>
+                <input type="text" required placeholder="+266 5..." class="w-full bg-chalk border border-borderline p-3 text-sm focus:outline-none focus:border-basalt">
+              </div>
+            </div>
 
-                document.querySelectorAll('.hotspot-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        if(activeHotspotId === btn.dataset.id) return;
-                        activeHotspotId = btn.dataset.id;
-                        renderHotspots();
-                        
-                        const data = HOTSPOTS.find(h => h.id === activeHotspotId);
-                        
-                        aContent.classList.remove('fade-in-scale');
-                        void aContent.offsetWidth; 
-                        aContent.classList.add('fade-in-scale');
+            <div>
+              <label class="block font-mono text-[10px] uppercase tracking-wider text-basalt mb-2">Project Typology</label>
+              <select class="w-full bg-chalk border border-borderline p-3 text-sm focus:outline-none focus:border-basalt">
+                <option>Custom Private Residence</option>
+                <option>Mountain Lodge or Hospitality</option>
+                <option>Renovation or Extension</option>
+                <option>Commercial / Workplace</option>
+              </select>
+            </div>
 
-                        aTitle.textContent = data.title;
-                        aCat.textContent = data.category;
-                        aSum.textContent = data.summary;
-                        aRat.textContent = data.rationale;
-                        aMet.textContent = data.metric;
-                        aCoord.textContent = data.label;
-                    });
-                });
-            };
-            renderHotspots();
+            <div>
+              <label class="block font-mono text-[10px] uppercase tracking-wider text-basalt mb-2">Site Location</label>
+              <input type="text" placeholder="e.g. Maseru West, Masowe, Semonkong" class="w-full bg-chalk border border-borderline p-3 text-sm focus:outline-none focus:border-basalt">
+            </div>
 
-            // --- PROCESS SEQUENCE ---
-            const processContainer = document.getElementById('process-steps-container');
-            const processImg = document.getElementById('process-image');
-            const processBadge = document.getElementById('process-phase-badge');
-            const processDeliv = document.getElementById('process-deliverable');
-            let activeProcess = 0;
+            <div>
+              <label class="block font-mono text-[10px] uppercase tracking-wider text-basalt mb-2">Project Notes</label>
+              <textarea rows="4" placeholder="Tell us about the site conditions and your timeline..." class="w-full bg-chalk border border-borderline p-3 text-sm focus:outline-none focus:border-basalt"></textarea>
+            </div>
 
-            const renderProcess = () => {
-                processContainer.innerHTML = PROCESS.map((p, i) => {
-                    const isActive = i === activeProcess;
-                    return `
-                        <button class="process-btn w-full text-left p-6 lg:p-8 transition-all duration-500 border flex flex-col space-y-3 ${isActive ? 'bg-lumen-white border-lumen-black shadow-sm scale-[1.02]' : 'border-lumen-gray hover:border-lumen-meta bg-transparent scale-100'}" data-idx="${i}">
-                            <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] w-full">
-                                <span class="${isActive ? 'text-lumen-accent font-bold' : 'text-lumen-meta'}">${p.num} / ${p.title}</span>
-                                <span class="text-[9px] text-lumen-meta hidden sm:inline">${p.tag}</span>
-                            </div>
-                            <div class="font-serif text-xl sm:text-2xl text-lumen-black font-light transition-colors ${isActive ? '' : 'text-lumen-text'}">${p.sub}</div>
-                        </button>
-                    `;
-                }).join('');
+            <button type="submit" class="w-full py-4 bg-basalt text-chalk font-mono text-xs uppercase tracking-[0.2em] hover:bg-sandstone transition-colors">
+              Discuss Your Project ↗
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                document.querySelectorAll('.process-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const newIdx = parseInt(btn.dataset.idx);
-                        if(activeProcess === newIdx) return;
-                        activeProcess = newIdx;
-                        renderProcess();
-                        
-                        const data = PROCESS[activeProcess];
-                        processImg.classList.remove('fade-in-scale');
-                        void processImg.offsetWidth;
-                        processImg.classList.add('fade-in-scale');
-                        
-                        processImg.src = data.img;
-                        processBadge.textContent = `PHASE ${data.num} ARTIFACT`;
-                        processDeliv.textContent = data.deliv;
-                    });
-                });
-            };
-            renderProcess();
+  <!-- ==================================================== -->
+  <!-- FOOTER -->
+  <!-- ==================================================== -->
+  <footer class="bg-basalt text-mineral py-16 px-6 md:px-12 font-mono text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-white/10 pb-12">
+      <div>
+        <span class="font-serif text-2xl text-white tracking-widest block uppercase">STUDIO LUMEN</span>
+        <span class="text-[10px] uppercase tracking-widest text-white/50">Architecture & Space — Maseru, Lesotho</span>
+      </div>
+      <div class="flex space-x-6 text-[11px] text-white/70">
+        <a href="#works" class="hover:text-white">Works</a>
+        <a href="#anatomy" class="hover:text-white">Anatomy</a>
+        <a href="#materials" class="hover:text-white">Materials</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto pt-8 flex justify-between text-[10px] text-white/40">
+      <span>© 2026 STUDIO LUMEN. All Rights Reserved.</span>
+      <span>Kingdom of Lesotho</span>
+    </div>
+  </footer>
 
-            // --- MATERIAL STUDY ---
-            const matTabs = document.getElementById('material-tabs');
-            const mImg = document.getElementById('mat-image');
-            const mName = document.getElementById('mat-name');
-            const mTag = document.getElementById('mat-tagline');
-            const mDesc = document.getElementById('mat-desc');
-            const mTact = document.getElementById('mat-tactile');
-            const mTherm = document.getElementById('mat-thermal');
-            const mFin = document.getElementById('mat-finish');
-            const mDisplay = document.getElementById('material-display');
-            let activeMatId = MATERIALS[0].id;
+  <!-- ==================================================== -->
+  <!-- PROJECT DETAIL MODAL -->
+  <!-- ==================================================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden overflow-y-auto p-4 sm:p-6 md:p-10 flex items-center justify-center">
+    <div class="relative w-full max-w-4xl bg-chalk text-basalt border border-borderline my-auto p-6 md:p-10 shadow-2xl">
+      <div class="flex justify-between items-center pb-6 border-b border-borderline mb-6">
+        <div>
+          <span id="modal-typology" class="font-mono text-xs text-sandstone uppercase tracking-wider block">RESIDENTIAL</span>
+          <h3 id="modal-title" class="font-serif text-3xl sm:text-4xl font-light">The Still House</h3>
+        </div>
+        <button onclick="closeProject()" class="w-10 h-10 rounded-full border border-borderline flex items-center justify-center font-mono text-sm hover:bg-basalt hover:text-white transition-colors" aria-label="Close Modal">
+          ✕
+        </button>
+      </div>
 
-            const renderMaterials = () => {
-                matTabs.innerHTML = MATERIALS.map((m, i) => {
-                    const isActive = m.id === activeMatId;
-                    return `
-                        <button class="mat-btn p-5 lg:p-6 text-left border transition-all duration-500 font-mono text-[10px] tracking-[0.2em] uppercase flex flex-col justify-between h-32 ${isActive ? 'border-lumen-accent bg-white/10 text-white' : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white'}" data-id="${m.id}">
-                            <span class="text-[9px] text-lumen-accent">MAT 0${i+1}</span>
-                            <span class="font-serif text-lg md:text-xl normal-case tracking-normal text-white mt-auto">${m.name}</span>
-                        </button>
-                    `;
-                }).join('');
+      <!-- Modal Main Hero Image -->
+      <div class="aspect-16-10 overflow-hidden bg-stone-200 mb-6">
+        <img id="modal-hero-img" src="" alt="Project detail view" class="w-full h-full object-cover" onerror="imgFallback(this)">
+      </div>
 
-                document.querySelectorAll('.mat-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        if(activeMatId === btn.dataset.id) return;
-                        activeMatId = btn.dataset.id;
-                        renderMaterials();
-                        
-                        const data = MATERIALS.find(m => m.id === activeMatId);
-                        
-                        // Retrigger animations
-                        mImg.classList.remove('fade-in-scale');
-                        const textElements = [mName, mTag, mDesc, mTact, mTherm, mFin];
-                        textElements.forEach(el => el.style.opacity = '0');
-                        
-                        void mDisplay.offsetWidth;
-                        
-                        mImg.classList.add('fade-in-scale');
-                        mImg.src = data.img;
-                        
-                        setTimeout(() => {
-                            mName.textContent = data.name;
-                            mTag.textContent = data.tag;
-                            mDesc.textContent = data.desc;
-                            mTact.textContent = data.tact;
-                            mTherm.textContent = data.therm;
-                            mFin.textContent = data.fin;
-                            textElements.forEach(el => {
-                                el.style.transition = 'opacity 0.6s ease';
-                                el.style.opacity = '1';
-                            });
-                        }, 100);
-                    });
-                });
-            };
-            
-            // Init Mat
-            const initMat = MATERIALS[0];
-            mImg.src = initMat.img;
-            mName.textContent = initMat.name;
-            mTag.textContent = initMat.tag;
-            mDesc.textContent = initMat.desc;
-            mTact.textContent = initMat.tact;
-            mTherm.textContent = initMat.therm;
-            mFin.textContent = initMat.fin;
-            renderMaterials();
+      <p id="modal-narrative" class="text-[#6E6D68] text-sm md:text-base font-light leading-relaxed mb-8">
+        Detailed narrative goes here...
+      </p>
 
-            // --- SERVICES ACCORDION ---
-            const accContainer = document.getElementById('services-accordion');
-            let activeAcc = '01';
+      <!-- 3 Gallery Photos -->
+      <div class="border-t border-borderline pt-6">
+        <span class="font-mono text-xs uppercase tracking-widest text-mineral block mb-4">Architectural Perspectives</span>
+        <div id="modal-gallery" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
 
-            const renderAccordion = () => {
-                accContainer.innerHTML = SERVICES.map(s => {
-                    const isActive = s.id === activeAcc;
-                    return `
-                        <div class="border transition-all duration-500 overflow-hidden ${isActive ? 'border-lumen-black bg-[#E8E7E1]' : 'border-lumen-gray bg-transparent hover:border-lumen-meta'}">
-                            <button class="acc-btn w-full p-8 lg:p-10 text-left flex items-center justify-between focus:outline-none group" data-id="${s.id}">
-                                <div class="space-y-3 max-w-2xl">
-                                    <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-accent transition-colors">AREA ${s.id}</div>
-                                    <h3 class="font-serif text-3xl sm:text-4xl text-lumen-black font-light">${s.name}</h3>
-                                </div>
-                                <div class="w-10 h-10 rounded-full border border-lumen-black/20 flex items-center justify-center font-mono text-sm transition-transform duration-500 ${isActive ? 'rotate-180 bg-lumen-black text-white' : 'group-hover:bg-lumen-gray'}">
-                                    ${isActive ? '—' : '+'}
-                                </div>
-                            </button>
-                            <div class="transition-all duration-700 ease-in-out ${isActive ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}">
-                                <div class="px-8 lg:px-10 pb-10 pt-0">
-                                    <div class="pt-6 border-t border-lumen-gray text-lumen-text text-base leading-relaxed font-light">
-                                        <p class="mb-4 text-lumen-black font-medium">${s.sum}</p>
-                                        <p>${s.det}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
+  <!-- ==================================================== -->
+  <!-- JAVASCRIPT LOGIC & RESILIENT IMAGE FALLBACKS -->
+  <!-- ==================================================== -->
+  <script>
+    // Global fallback for any failed remote image
+    function imgFallback(img) {
+      img.onerror = null;
+      img.src = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
+    }
 
-                document.querySelectorAll('.acc-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const id = btn.dataset.id;
-                        activeAcc = activeAcc === id ? null : id;
-                        renderAccordion();
-                    });
-                });
-            };
-            renderAccordion();
+    // Modal Projects Data with Verified Working Image URLs
+    const PROJECTS = {
+      'project-1': {
+        title: 'The Still House',
+        typology: 'Private Residence // Maseru West',
+        narrative: 'A private sanctuary structured around a sheltered garden courtyard. Natural basalt stone and warm cedar create a deep sense of enclosure, while floor-to-ceiling glass reveals changing sky patterns across the mountains.',
+        hero: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      'project-2': {
+        title: 'The Maluti Ridge Retreat',
+        typology: 'Alpine Hospitality // Semonkong',
+        narrative: 'Embedded along a high-altitude mountain slope, this eco-retreat steps down with the natural contours. Deep roof overhangs guard against alpine frost and summer sun, while framed windows capture the Maluti peaks.',
+        hero: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      'project-3': {
+        title: 'House of Light',
+        typology: 'Urban Renovation // Hillsview',
+        narrative: 'A transformation of a dated home into an airy, light-filled residence. A double-height skylight well brings natural morning light down into the main living spaces, linking indoors directly to a private garden.',
+        hero: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
+        ]
+      },
+      'project-4': {
+        title: 'The Gathering Pavilion',
+        typology: 'Boutique Lodge // Morija',
+        narrative: 'A contemporary hospitality pavilion configured around outdoor fire courts and shaded colonnades. Constructed with regionally sourced sandstone and dark steel frames, celebrating panoramic sunsets.',
+        hero: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80',
+        gallery: [
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+        ]
+      }
+    };
 
-            // --- FORM SIMULATION ---
-            const form = document.getElementById('contact-form');
-            const successMsg = document.getElementById('form-success');
-            const resetBtn = document.getElementById('reset-form');
+    function openProject(id) {
+      const p = PROJECTS[id];
+      if (!p) return;
+      document.getElementById('modal-title').textContent = p.title;
+      document.getElementById('modal-typology').textContent = p.typology;
+      document.getElementById('modal-narrative').textContent = p.narrative;
+      document.getElementById('modal-hero-img').src = p.hero;
 
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = form.querySelector('button');
-                btn.innerHTML = '<span class="animate-pulse">Transmitting Protocol...</span>';
-                
-                setTimeout(() => {
-                    form.classList.add('hidden');
-                    successMsg.classList.remove('hidden');
-                    btn.innerHTML = '<span>Discuss your project</span><span>↗</span>';
-                    form.reset();
-                }, 1500);
-            });
+      const galleryBox = document.getElementById('modal-gallery');
+      galleryBox.innerHTML = p.gallery.map(imgUrl => `
+        <div class="aspect-square bg-stone-200 overflow-hidden">
+          <img src="${imgUrl}" alt="Architectural perspective" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="imgFallback(this)">
+        </div>
+      `).join('');
 
-            resetBtn.addEventListener('click', () => {
-                successMsg.classList.add('hidden');
-                form.classList.remove('hidden');
-            });
+      document.getElementById('project-modal').classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
 
-            // --- INTERSECTION OBSERVER FOR REVEALS ---
-            const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // Reveal only once for cinematic feel
-                    }
-                });
-            }, observerOptions);
+    function closeProject() {
+      document.getElementById('project-modal').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
 
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Material Switcher Logic
+    const MATERIALS = {
+      basalt: {
+        title: 'Dark Mountain Basalt',
+        tagline: 'Permanent, grounded, and naturally insulating.',
+        desc: 'Sourced directly across Lesotho, rough-hewn basalt stone walls provide massive thermal mass—absorbing solar heat during winter afternoons and releasing it gently overnight.',
+        img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
+      },
+      sandstone: {
+        title: 'Golden Regional Sandstone',
+        tagline: 'Warm earthy hues with subtle mineral stratification.',
+        desc: 'Traditional regional sandstone brings natural warmth to facades and courtyards, echoing the escarpments and riverbeds of the lowlands.',
+        img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80'
+      },
+      timber: {
+        title: 'Warm Cedar & Oak',
+        tagline: 'Tactile acoustic warmth and natural texture.',
+        desc: 'Oiled timber battens and ceiling linings soften concrete surfaces, providing acoustic comfort and warmth inside bedrooms and living areas.',
+        img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80'
+      },
+      steel: {
+        title: 'Patinated Dark Steel',
+        tagline: 'Clean structural lines and crisp shadow profiles.',
+        desc: 'Thermally isolated blackened steel frames define expansive window openings, framing mountain vistas with razor-thin borders.',
+        img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80'
+      }
+    };
 
-            // --- SUBTLE JS PARALLAX ---
-            const parallaxElements = document.querySelectorAll('.js-parallax');
-            
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                parallaxElements.forEach(el => {
-                    const speed = el.dataset.speed || 0.1;
-                    // Simple parallax calc based on scroll position
-                    el.style.transform = `translateY(${scrolled * speed}px)`;
-                });
-            }, { passive: true });
+    function setMaterial(key) {
+      const m = MATERIALS[key];
+      if (!m) return;
+      document.getElementById('mat-title').textContent = m.title;
+      document.getElementById('mat-tagline').textContent = m.tagline;
+      document.getElementById('mat-desc').textContent = m.desc;
+      document.getElementById('mat-img').src = m.img;
 
-        });
-    </script>
+      document.querySelectorAll('.mat-tab').forEach(btn => {
+        btn.classList.remove('bg-basalt', 'text-white', 'border-basalt');
+        btn.classList.add('bg-transparent', 'text-basalt', 'border-borderline');
+      });
+      const activeBtn = document.getElementById('mat-btn-' + key);
+      activeBtn.classList.remove('bg-transparent', 'text-basalt', 'border-borderline');
+      activeBtn.classList.add('bg-basalt', 'text-white', 'border-basalt');
+    }
+
+    // Process Switcher Logic
+    const PROCESS_IMAGES = [
+      { img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 01 Deliverable: Sun path, wind corridor, and topography site assessment.' },
+      { img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 02 Deliverable: Volumetric models and spatial circulation flowcharts.' },
+      { img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 03 Deliverable: 1:5 scale structural junctions, finishes, and engineering drawings.' },
+      { img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80', caption: 'Phase 04 Deliverable: Rigorous on-site coordination and artisan stone supervision.' }
+    ];
+
+    function setProcess(idx) {
+      document.getElementById('proc-img').src = PROCESS_IMAGES[idx].img;
+      document.getElementById('proc-caption').textContent = PROCESS_IMAGES[idx].caption;
+      const btns = document.querySelectorAll('.proc-btn');
+      btns.forEach((btn, i) => {
+        if (i === idx) {
+          btn.classList.add('border-basalt', 'bg-chalk', 'shadow-sm');
+          btn.classList.remove('border-borderline', 'bg-transparent');
+        } else {
+          btn.classList.remove('border-basalt', 'bg-chalk', 'shadow-sm');
+          btn.classList.add('border-borderline', 'bg-transparent');
+        }
+      });
+    }
+
+    // Hotspot Anatomy Data
+    const HOTSPOTS = {
+      light: {
+        title: 'Natural Daylight & Zenith Apertures',
+        desc: 'Calculated window heights capture early eastern sunlight to warm living zones while deep eaves protect against midday glare.',
+        tag: 'SOLAR ORIENTATION',
+        id: 'SECTION 01',
+        metric: 'Zero glare / Year-round ambient warmth'
+      },
+      stone: {
+        title: 'Heavy Basalt Thermal Mass',
+        desc: 'Exposed stone walls absorb excess solar heat during peak daylight hours and radiate warmth inward through cold mountain nights.',
+        tag: 'PASSIVE HEATING',
+        id: 'SECTION 02',
+        metric: '8.5 hour thermal lag efficiency'
+      },
+      passive: {
+        title: 'Natural Air Ventilation',
+        desc: 'Operable clerestory vents generate a natural cooling stack effect during hot summer afternoons without mechanical air conditioning.',
+        tag: 'AIRFLOW & CLIMATE',
+        id: 'SECTION 03',
+        metric: 'Passive convective cooling cross-breeze'
+      },
+      flow: {
+        title: 'Flush Sill Thresholds',
+        desc: 'Living room floors run flush into protected stone terraces, erasing the division between indoor comfort and mountain nature.',
+        tag: 'SPATIAL FLOW',
+        id: 'SECTION 04',
+        metric: '0mm step threshold transition'
+      }
+    };
+
+    function setHotspot(key) {
+      const h = HOTSPOTS[key];
+      if (!h) return;
+      document.getElementById('hotspot-title').textContent = h.title;
+      document.getElementById('hotspot-desc').textContent = h.desc;
+      document.getElementById('hotspot-tag').textContent = h.tag;
+      document.getElementById('hotspot-id').textContent = h.id;
+      document.getElementById('hotspot-metric').textContent = h.metric;
+
+      document.querySelectorAll('.hotspot-btn').forEach(btn => {
+        btn.classList.remove('bg-sandstone');
+        btn.classList.add('bg-basalt');
+      });
+      document.getElementById('btn-' + key).classList.remove('bg-basalt');
+      document.getElementById('btn-' + key).classList.add('bg-sandstone');
+    }
+
+    // Mobile Drawer Toggle
+    const mobileBtn = document.getElementById('mobile-toggle');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    mobileBtn.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('hidden');
+      mobileDrawer.classList.toggle('flex');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.add('hidden');
+        mobileDrawer.classList.remove('flex');
+      });
+    });
+
+    // Form Demo Feedback
+    function handleForm(e) {
+      e.preventDefault();
+      alert('Thank you. In production, this brief will immediately notify the studio principals to schedule an on-site feasibility meeting.');
+    }
+  </script>
 </body>
 </html>
