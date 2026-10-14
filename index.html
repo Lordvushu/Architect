@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDIO LUMEN | Contemporary Architecture Practice</title>
+    
+    <!-- Google Fonts: Elegant Serif + Precise Mono & Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lumen: {
+                            white: '#F9F8F6',      // Warm architectural white
+                            black: '#121212',      // Deep charcoal/black
+                            dark: '#0A0A0A',       // Pure dark
+                            accent: '#A95C45',     // Sophisticated Terracotta / Rust
+                            gray: '#E6E3DB',       // Muted stone/mineral
+                            text: '#5A5955',       // Legible body text
+                            meta: '#84837E'        // Small technical text
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    transitionDuration: {
+                        '700': '700ms',
+                        '1000': '1000ms',
+                        '1500': '1500ms',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* =========================================
+           CUSTOM CSS & CINEMATIC EFFECTS
+           ========================================= */
+        body {
+            background-color: #F9F8F6;
+            color: #121212;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        ::selection {
+            background-color: #A95C45;
+            color: #ffffff;
+        }
+
+        /* Architectural Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+        ::-webkit-scrollbar-thumb:hover { background: #A95C45; }
+
+        /* Cinematic Scroll Reveals */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 150ms; }
+        .reveal-delay-2 { transition-delay: 300ms; }
+        .reveal-delay-3 { transition-delay: 450ms; }
+
+        /* Ambient Image Pan for Hero (Cinematic Movement) */
+        @keyframes ambient-pan {
+            0% { transform: scale(1.05) translate(0, 0); }
+            50% { transform: scale(1.1) translate(-1%, 1%); }
+            100% { transform: scale(1.05) translate(0, 0); }
+        }
+        .animate-ambient {
+            animation: ambient-pan 40s ease-in-out infinite;
+        }
+
+        /* Pulse Ring for Technical Hotspots */
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        .animate-ping-slow {
+            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* Fade/Scale Utility for Interactivity */
+        .fade-in-scale {
+            animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Image Parallax Container */
+        .parallax-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        .parallax-img {
+            height: 120%;
+            width: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: -10%;
+            left: 0;
+            will-change: transform;
+        }
+
+        .writing-vertical-rl {
+            writing-mode: vertical-rl;
+        }
+
+        /* Lock scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Smooth Image Masking Hover */
+        .img-mask-hover {
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s ease;
+        }
+        .group:hover .img-mask-hover {
+            clip-path: inset(3% 3% 3% 3%);
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="font-sans selection:bg-lumen-accent selection:text-white relative">
+
+    <!-- =========================================
+         GLOBAL NAVIGATION
+         ========================================= -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 bg-gradient-to-b from-black/80 via-black/30 to-transparent py-6 text-white border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+            
+            <!-- Logo / Wordmark -->
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="group flex flex-col items-start text-left focus:outline-none">
+                <span class="font-serif text-2xl md:text-3xl tracking-[0.2em] font-light uppercase transition-transform duration-500 group-hover:translate-x-1">
+                    STUDIO LUMEN
+                </span>
+                <span id="header-subtitle" class="text-[9px] uppercase tracking-[0.3em] font-mono text-white/70 transition-colors duration-500 mt-1">
+                    Architecture & Environment
+                </span>
+            </button>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center space-x-10 text-[10px] tracking-[0.25em] uppercase font-mono">
+                <a href="#works" class="hover:text-lumen-accent transition-colors duration-300">Selected Work</a>
+                <a href="#anatomy" class="hover:text-lumen-accent transition-colors duration-300">The Anatomy</a>
+                <a href="#philosophy" class="hover:text-lumen-accent transition-colors duration-300">Practice</a>
+                <a href="#materials" class="hover:text-lumen-accent transition-colors duration-300">Materiality</a>
+            </nav>
+
+            <!-- Desktop CTA -->
+            <div class="hidden sm:flex items-center">
+                <a href="#contact" id="header-cta" class="text-[10px] uppercase tracking-[0.25em] font-mono px-6 py-3 transition-all duration-500 border border-white/50 text-white hover:bg-white hover:text-lumen-black">
+                    Initiate Project ↗
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2 focus:outline-none z-50">
+                <div class="w-7 h-5 flex flex-col justify-between relative">
+                    <span class="block h-[1px] w-full bg-current transition-all duration-500 origin-left" id="bar1"></span>
+                    <span class="block h-[1px] w-full bg-current transition-all duration-500" id="bar2"></span>
+                    <span class="block h-[1px] w-full bg-current transition-all duration-500 origin-left" id="bar3"></span>
+                </div>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-lumen-dark text-lumen-white flex flex-col justify-between p-8 pt-32 hidden opacity-0 transition-opacity duration-700">
+        <div class="space-y-6 flex flex-col font-serif text-3xl tracking-wide font-light">
+            <a href="#works" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Selected Work</a>
+            <a href="#anatomy" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">The Anatomy of Space</a>
+            <a href="#philosophy" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Design Philosophy</a>
+            <a href="#materials" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Material Study</a>
+            <a href="#services" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Studio Expertise</a>
+            <a href="#contact" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Initiate Project</a>
+        </div>
+        <div class="font-mono text-[9px] tracking-[0.3em] text-lumen-meta uppercase">
+            STUDIO LUMEN / TEMPLATE DESIGN
+        </div>
+    </div>
+
+    <!-- =========================================
+         HERO SECTION (CINEMATIC)
+         ========================================= -->
+    <section class="relative h-screen w-full flex items-end overflow-hidden bg-lumen-dark">
+        <!-- Cinematic Background with Ambient Pan -->
+        <div class="absolute inset-0 transition-transform duration-[10s]">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=85" alt="Contemporary Architecture" class="w-full h-full object-cover animate-ambient filter contrast-[1.1] brightness-[0.85]">
+            <div class="absolute inset-0 bg-gradient-to-t from-lumen-dark via-black/40 to-black/20"></div>
+        </div>
+
+        <!-- Technical Metadata -->
+        <div class="absolute top-32 left-6 md:left-12 right-6 md:right-12 flex justify-between items-start text-white/70 font-mono text-[9px] uppercase tracking-[0.3em] pointer-events-none z-10 reveal">
+            <div class="flex items-center space-x-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-lumen-accent inline-block animate-pulse"></span>
+                <span>VOLUMETRIC STUDY / 01</span>
+            </div>
+            <div class="hidden md:block">
+                <span>LAT 47°22'N // LNG 8°32'E // LUMEN ARCHIVES</span>
+            </div>
+        </div>
+
+        <!-- Hero Typography -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pb-16 md:pb-24 w-full">
+            <div class="max-w-4xl space-y-8">
+                <div class="space-y-5">
+                    <span class="inline-block font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent reveal">Contemporary Practice</span>
+                    <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] text-white font-light tracking-tight leading-[1.05] reveal reveal-delay-1">
+                        Architecture for the way we want to live.
+                    </h1>
+                </div>
+                <p class="text-white/80 text-lg md:text-2xl font-light max-w-2xl leading-relaxed reveal reveal-delay-2">
+                    We shape enduring places around people, landscape, and the profound possibilities of space.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-6 pt-6 reveal reveal-delay-3">
+                    <a href="#works" class="group inline-flex items-center space-x-4 px-8 py-4 bg-lumen-white text-lumen-black text-[10px] font-mono uppercase tracking-[0.25em] transition-all duration-500 hover:bg-lumen-accent hover:text-white">
+                        <span>Explore our work</span>
+                        <span class="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute right-6 md:right-12 bottom-16 md:bottom-24 hidden sm:flex flex-col items-center space-y-4 text-white/50 font-mono text-[9px] tracking-[0.4em] uppercase reveal reveal-delay-3">
+                <span class="writing-vertical-rl">Scroll to explore</span>
+                <div class="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+                    <div class="w-full h-1/2 bg-white absolute top-0 animate-[bounce_2s_infinite]"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 1: DESIGN PHILOSOPHY
+         ========================================= -->
+    <section id="philosophy" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray relative z-20">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+                <!-- Text Content -->
+                <div class="lg:col-span-7 space-y-10 reveal">
+                    <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta flex items-center space-x-4">
+                        <span class="w-8 h-[1px] bg-lumen-meta"></span>
+                        <span>01 / Architectural Thesis</span>
+                    </div>
+                    <blockquote class="font-serif text-4xl sm:text-5xl md:text-[4rem] text-lumen-black font-light leading-[1.1] tracking-tight">
+                        “Good architecture doesn't compete with its surroundings. It gives them meaning.”
+                    </blockquote>
+                    <div class="space-y-6 text-lumen-text text-base md:text-lg font-light leading-relaxed max-w-xl">
+                        <p>At STUDIO LUMEN, we avoid decorative bravado. We view architecture as an instrument of spatial restraint—a careful, deliberate dialogue between tectonic weight and delicate natural illumination.</p>
+                        <p>Every volume is calibrated around how light enters in the morning, how air moves through courtyard axes in the afternoon, and how natural materials weather gracefully with the decades.</p>
+                    </div>
+                    <div class="pt-8 border-t border-lumen-gray grid grid-cols-3 gap-6 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
+                        <div><span class="block text-lumen-black text-base font-sans mb-1">0.00m</span>Flush Horizon Datum</div>
+                        <div><span class="block text-lumen-black text-base font-sans mb-1">100%</span>Natural Materiality</div>
+                        <div><span class="block text-lumen-black text-base font-sans mb-1">50+ Yrs</span>Lifecycle Design</div>
+                    </div>
+                </div>
+                
+                <!-- Asymmetrical Parallax Image -->
+                <div class="lg:col-span-5 relative reveal reveal-delay-1">
+                    <div class="relative aspect-[3/4] parallax-wrapper bg-lumen-gray">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" alt="Light and shadow" class="parallax-img js-parallax" data-speed="0.1" loading="lazy">
+                    </div>
+                    <div class="absolute -bottom-6 -left-10 bg-lumen-white p-4 hidden md:block">
+                        <div class="border border-lumen-gray p-4 font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta text-center">
+                            FIG 01.3 <br> DIURNAL SHADOW STUDY
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 2: INTERACTIVE ANATOMY (BLUEPRINT)
+         ========================================= -->
+    <section id="anatomy" class="py-32 md:py-40 bg-lumen-dark text-lumen-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 reveal">
+                <div class="space-y-4">
+                    <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent">Interactive Blueprint</span>
+                    <h2 class="font-serif text-4xl sm:text-6xl font-light tracking-tight text-white">The anatomy of space.</h2>
+                </div>
+                <p class="text-white/60 text-sm md:text-base max-w-md font-light leading-relaxed">
+                    Explore the tectonic decisions, daylight strategies, and structural relationships embedded within contemporary living architecture. Select an annotation below to examine its rationale.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal reveal-delay-1">
+                <!-- Interactive Blueprint Image -->
+                <div class="lg:col-span-8 relative aspect-[16/10] bg-[#111] border border-white/10 overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80" alt="Architectural section" class="w-full h-full object-cover opacity-50 filter contrast-[1.2] grayscale-[70%] mix-blend-luminosity transition-all duration-1000 group-hover:scale-[1.02]">
+                    
+                    <!-- Tech Overlays -->
+                    <div class="absolute inset-0 pointer-events-none border border-white/5">
+                        <div class="absolute inset-x-0 top-1/2 border-b border-white/10 border-dashed"></div>
+                        <div class="absolute inset-y-0 left-1/2 border-r border-white/10 border-dashed"></div>
+                        <div class="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">SECTION AA // SPATIAL STUDY / SCALE 1:50</div>
+                        <div id="anatomy-coord" class="absolute bottom-6 right-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">ZONE A-01 // ROOF VOID</div>
+                    </div>
+
+                    <!-- JS Injected Hotspots -->
+                    <div id="hotspot-container"></div>
+                </div>
+
+                <!-- Inspector Data Panel -->
+                <div class="lg:col-span-4 space-y-8 bg-[#161615] border border-white/10 p-10 flex flex-col justify-between min-h-[460px]">
+                    <div class="space-y-6 fade-in-scale" id="anatomy-content">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-5 font-mono text-[9px] tracking-[0.3em] text-lumen-accent uppercase">
+                            <span id="anatomy-category">Solar Geometry</span>
+                        </div>
+                        <h3 id="anatomy-title" class="font-serif text-3xl md:text-4xl font-light text-white leading-snug">Natural Light & Zenith Apertures</h3>
+                        <p id="anatomy-summary" class="text-white/80 text-sm font-sans font-light leading-relaxed">
+                            Sculpted ceiling scoops direct changing daylight deep into living cores.
+                        </p>
+                        <div class="pt-4 text-white/60 text-sm font-light leading-relaxed border-t border-white/5">
+                            <span class="font-mono text-[9px] uppercase tracking-[0.2em] text-white/30 block mb-2">Design Rationale:</span>
+                            <span id="anatomy-rationale">Rather than relying exclusively on perimeter glazing which can generate glare, continuous overhead lanterns harvest diffuse illumination throughout the diurnal cycle.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-8 border-t border-white/10 space-y-3">
+                        <span class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta block">Measured Performance Metric</span>
+                        <span id="anatomy-metric" class="font-mono text-xs text-white block bg-black/50 px-4 py-3 border border-white/10">
+                            380 LUX AVG AMBIENT DAYLIGHT FACTOR
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 3: SELECTED WORKS (PORTFOLIO)
+         ========================================= -->
+    <section id="works" class="py-32 md:py-48 bg-lumen-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <!-- Header -->
+            <div class="mb-24 pb-8 border-b border-lumen-gray reveal">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                    <div>
+                        <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-meta block mb-4">Portfolio Archive</span>
+                        <h2 class="font-serif text-5xl sm:text-7xl text-lumen-black font-light tracking-tight">Selected works.</h2>
+                    </div>
+                    <p class="text-lumen-text text-lg font-light max-w-md">
+                        Different places. Different lives. One uncompromising architectural approach.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Projects Grid (Injected by JS) -->
+            <div id="projects-container" class="space-y-32 md:space-y-48"></div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 4: SCROLL-DRIVEN PROCESS
+         ========================================= -->
+    <section class="py-32 md:py-40 bg-[#F4F2EC] border-y border-lumen-gray">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="max-w-3xl mb-20 space-y-5 reveal">
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">02 / Architectural Method</span>
+                <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">From idea to place.</h2>
+                <p class="text-lumen-text text-lg font-light leading-relaxed">
+                    Architecture is not an instantaneous gesture. It is a slow, methodical unfolding from early acoustic studies to tectonic material realization.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center reveal reveal-delay-1">
+                <!-- Process Steps Interactive List -->
+                <div class="lg:col-span-5 space-y-4" id="process-steps-container"></div>
+                
+                <!-- Process Visual Container -->
+                <div class="lg:col-span-7 space-y-5">
+                    <div class="relative aspect-[16/11] parallax-wrapper bg-lumen-gray border border-lumen-gray">
+                        <img id="process-image" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" alt="Process Phase" class="parallax-img fade-in-scale">
+                        <div id="process-phase-badge" class="absolute top-6 left-6 bg-lumen-black/90 text-white font-mono text-[9px] uppercase tracking-[0.3em] px-4 py-2 backdrop-blur-md border border-white/10">
+                            PHASE 01 ARTIFACT
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta px-2">
+                        <span>Studio Deliverable:</span>
+                        <span id="process-deliverable" class="text-lumen-black">Topographic Sun & Wind Acoustic Mapping</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 5: MATERIAL STUDY
+         ========================================= -->
+    <section id="materials" class="py-32 md:py-40 bg-lumen-dark text-lumen-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 pb-8 border-b border-white/10 gap-8 reveal">
+                <div class="space-y-4">
+                    <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent">Tactile Investigation</span>
+                    <h2 class="font-serif text-4xl sm:text-6xl font-light tracking-tight text-white">Material study.</h2>
+                </div>
+                <p class="text-white/60 text-sm md:text-base max-w-md font-light leading-relaxed">
+                    We select natural substances that age with honesty. Choose a material below to inspect its thermal mass, tactile surface qualities, and architectural application.
+                </p>
+            </div>
+
+            <!-- Material Tabs (Injected via JS) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 reveal reveal-delay-1" id="material-tabs"></div>
+
+            <!-- Material Display Panel -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center bg-[#141414] border border-white/10 p-8 md:p-16 reveal reveal-delay-2" id="material-display">
+                
+                <div class="lg:col-span-6 relative aspect-square overflow-hidden bg-black/60 border border-white/10 group">
+                    <img id="mat-image" src="" alt="Material Specimen" class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-[1.08] fade-in-scale">
+                    <div class="absolute bottom-6 left-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/80 bg-black/80 px-4 py-2 backdrop-blur-md border border-white/10">
+                        SPECIMEN STUDY // 1:1 MACRO CROP
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-6 space-y-8 fade-in-scale">
+                    <div class="space-y-3">
+                        <span class="font-mono text-[9px] uppercase tracking-[0.4em] text-lumen-accent">Material Specification</span>
+                        <h3 id="mat-name" class="font-serif text-4xl md:text-5xl font-light text-white tracking-tight"></h3>
+                        <p id="mat-tagline" class="font-serif text-xl text-white/70 italic font-light"></p>
+                    </div>
+                    
+                    <p id="mat-desc" class="text-white/70 text-base font-light leading-relaxed"></p>
+                    
+                    <div class="space-y-5 pt-6 border-t border-white/10 font-mono text-xs">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4 border-b border-white/5">
+                            <span class="text-lumen-meta text-[9px] uppercase tracking-[0.2em]">Tactile Surface:</span>
+                            <span id="mat-tactile" class="text-white/90 md:col-span-2 text-[11px] tracking-wide"></span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4 border-b border-white/5">
+                            <span class="text-lumen-meta text-[9px] uppercase tracking-[0.2em]">Thermal Behavior:</span>
+                            <span id="mat-thermal" class="text-white/90 md:col-span-2 text-[11px] tracking-wide"></span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <span class="text-lumen-meta text-[9px] uppercase tracking-[0.2em]">Protective Finish:</span>
+                            <span id="mat-finish" class="text-white/90 md:col-span-2 text-[11px] tracking-wide"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 6: ARCHITECTURE IN DETAIL
+         ========================================= -->
+    <section class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="mb-20 space-y-5 reveal">
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">03 / Tectonic Craft</span>
+                <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">Architecture in detail.</h2>
+                <p class="text-lumen-text text-lg font-light max-w-2xl leading-relaxed">
+                    A building is only as convincing as the way its materials meet. We design junctions with obsessive restraint to reveal quiet, enduring beauty.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 reveal reveal-delay-1">
+                <!-- Detail 1 -->
+                <div class="space-y-6 group cursor-pointer">
+                    <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
+                        <img src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80" alt="Stair detail" class="w-full h-full object-cover img-mask-hover" loading="lazy">
+                    </div>
+                    <div>
+                        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 01 // CANTILEVER</div>
+                        <h4 class="font-serif text-2xl text-lumen-black">Floating Treads</h4>
+                    </div>
+                </div>
+                <!-- Detail 2 -->
+                <div class="space-y-6 group cursor-pointer md:mt-12">
+                    <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
+                        <img src="https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=800&q=80" alt="Timber detail" class="w-full h-full object-cover img-mask-hover" loading="lazy">
+                    </div>
+                    <div>
+                        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 02 // REVEAL</div>
+                        <h4 class="font-serif text-2xl text-lumen-black">Continuous Shadow Gaps</h4>
+                    </div>
+                </div>
+                <!-- Detail 3 -->
+                <div class="space-y-6 group cursor-pointer">
+                    <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
+                        <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80" alt="Steel detail" class="w-full h-full object-cover img-mask-hover" loading="lazy">
+                    </div>
+                    <div>
+                        <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 03 // GLAZING</div>
+                        <h4 class="font-serif text-2xl text-lumen-black">Submerged Steel Frames</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 7: SERVICES (ACCORDION)
+         ========================================= -->
+    <section id="services" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="max-w-3xl mb-20 space-y-4 reveal">
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">04 / Studio Expertise</span>
+                <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">Four realms of practice.</h2>
+            </div>
+            
+            <div class="space-y-4 reveal reveal-delay-1" id="services-accordion">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 8: STUDIO PROFILE
+         ========================================= -->
+    <section class="py-32 md:py-48 bg-[#F4F2EC] border-b border-lumen-gray">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                <div class="lg:col-span-5 relative reveal">
+                    <div class="aspect-[3/4] parallax-wrapper bg-lumen-gray">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Studio workspace" class="parallax-img js-parallax" data-speed="0.08">
+                    </div>
+                    <div class="absolute -bottom-8 -right-8 hidden md:block p-8 bg-lumen-dark text-lumen-white font-mono text-[10px] uppercase tracking-[0.3em] max-w-[240px] leading-relaxed border border-white/10 shadow-2xl">
+                        DISCIPLINE OVER TREND. LONGEVITY OVER NOVELTY.
+                    </div>
+                </div>
+                <div class="lg:col-span-7 space-y-10 lg:pl-10 reveal reveal-delay-1">
+                    <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">05 / Studio Profile</div>
+                    <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black leading-tight tracking-tight">A studio with a definitive point of view.</h2>
+                    <div class="space-y-6 text-lumen-text text-lg font-light leading-relaxed">
+                        <p>STUDIO LUMEN was founded on the conviction that contemporary living calls for greater visual quiet. We resist the temptation of fleeting architectural trends, focusing instead on structural permanence, uncompromising detailing, and environmental resonance.</p>
+                        <p>We undertake a strictly limited number of commissions each year, guaranteeing direct principal involvement from initial sketches through to final handover, ensuring every project receives the rigorous attention it demands.</p>
+                    </div>
+                    <div class="pt-8 border-t border-lumen-gray grid grid-cols-2 gap-8 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
+                        <div><span class="block text-lumen-black text-sm font-sans mb-1">GLOBAL REACH</span>International Commissions</div>
+                        <div><span class="block text-lumen-black text-sm font-sans mb-1">CAPACITY</span>Limited Intake</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SECTION 9: CONTACT / ENQUIRY
+         ========================================= -->
+    <section id="contact" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 reveal">
+                
+                <div class="lg:col-span-5 space-y-8">
+                    <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-accent">Initiate Dialogue</span>
+                    <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight leading-tight">Every remarkable space begins with a conversation.</h2>
+                    <p class="text-lumen-text text-lg font-light leading-relaxed">Tell us what you're imagining. We'll help you explore what it could become.</p>
+                    
+                    <div class="pt-8 space-y-6 font-mono text-[11px] text-lumen-meta border-t border-lumen-gray">
+                        <div>
+                            <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Studio Inquiries</span>
+                            inquiries@studiolumen.com
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Studio Telephone</span>
+                            +1 (555) 019 8273
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-[#F4F2EC] p-8 md:p-14 border border-lumen-gray shadow-sm" id="form-container">
+                    <form id="contact-form" class="space-y-8 fade-in-scale">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div class="space-y-3">
+                                <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Full Name *</label>
+                                <input type="text" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="e.g. Henrik Lindqvist">
+                            </div>
+                            <div class="space-y-3">
+                                <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Email Address *</label>
+                                <input type="email" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="h.lindqvist@example.com">
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Describe Your Architectural Vision</label>
+                            <textarea rows="5" class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="Tell us about the site conditions, lifestyle objectives, or spatial aspirations..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-5 bg-lumen-black text-lumen-white font-mono text-[10px] uppercase tracking-[0.3em] flex items-center justify-center space-x-3 transition-all hover:bg-lumen-accent">
+                            <span>Discuss your project</span><span>↗</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Success State -->
+                    <div id="form-success" class="hidden space-y-8 py-16 text-center fade-in-scale">
+                        <div class="w-16 h-16 bg-lumen-accent text-white rounded-full flex items-center justify-center mx-auto text-2xl font-mono shadow-lg">✓</div>
+                        <h3 class="font-serif text-4xl text-lumen-black font-light">Enquiry Received</h3>
+                        <p class="text-lumen-text text-base max-w-md mx-auto font-light leading-relaxed">Thank you. The studio principals have been notified and will reach out shortly to arrange an initial feasibility consultation.</p>
+                        <button id="reset-form" class="mt-6 px-8 py-3 border border-lumen-black text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-lumen-black hover:text-lumen-white transition-colors">Submit Another Query</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+    <footer class="bg-lumen-dark text-lumen-meta py-24 font-mono text-xs border-t border-black">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="space-y-6 max-w-sm reveal">
+                <span class="font-serif text-3xl text-white font-light tracking-[0.2em] block uppercase">STUDIO LUMEN</span>
+                <p class="text-white/60 text-[11px] font-sans font-light leading-relaxed">
+                    Architecture, spatial research, and landscape integration. Shaping enduring places around people and the profound possibilities of space.
+                </p>
+            </div>
+            <div class="space-y-4 reveal reveal-delay-1">
+                <span class="text-[9px] uppercase tracking-[0.3em] text-white block mb-4">Template Information</span>
+                <p class="text-[11px] leading-relaxed text-white/50 font-sans max-w-xs">
+                    This is a premium template designed for high-end architectural practices. All project data and images are placeholders demonstrating layout capabilities.
+                </p>
+                <div class="pt-4 text-[9px] text-lumen-accent tracking-[0.2em] uppercase">© 2026 Studio Lumen — Designed for Excellence</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================
+         PROJECT DOSSIER (FULL SCREEN MODAL)
+         ========================================= -->
+    <div id="project-modal" class="fixed inset-0 z-[60] bg-lumen-dark/95 backdrop-blur-lg hidden overflow-y-auto flex items-start justify-center p-0 md:p-6 opacity-0 transition-opacity duration-500">
+        <div class="relative w-full max-w-6xl bg-lumen-white text-lumen-black shadow-2xl md:border border-lumen-gray min-h-screen md:min-h-0 md:my-auto scale-[0.98] transition-transform duration-500" id="modal-content-panel">
+            
+            <!-- Modal Header -->
+            <div class="sticky top-0 z-30 bg-lumen-white/95 backdrop-blur-md border-b border-lumen-gray px-6 md:px-10 py-5 flex items-center justify-between shadow-sm">
+                <div class="flex items-center space-x-4 font-mono text-[10px] uppercase tracking-[0.3em]">
+                    <span class="text-lumen-accent font-bold" id="modal-dossier">DOSSIER #01</span>
+                    <span class="hidden sm:inline text-lumen-gray">|</span>
+                    <span class="font-serif text-sm font-semibold hidden sm:inline" id="modal-header-title">Title</span>
+                </div>
+                <button id="close-modal" class="w-10 h-10 rounded-full border border-lumen-black/20 flex items-center justify-center text-sm font-mono hover:bg-lumen-black hover:text-white transition-all group">
+                    <span class="group-hover:rotate-90 transition-transform duration-300">✕</span>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 md:p-12 lg:p-16 space-y-16">
+                
+                <!-- Hero Image inside Modal -->
+                <div class="aspect-[16/7] w-full overflow-hidden bg-lumen-gray relative">
+                    <img id="modal-hero" src="" alt="Hero" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Narrative & Stats -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="lg:col-span-8 space-y-6">
+                        <div id="modal-meta" class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta"></div>
+                        <h2 id="modal-title" class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight"></h2>
+                        <p id="modal-tagline" class="text-lumen-black text-xl font-serif italic font-light"></p>
+                        <p id="modal-narrative" class="text-lumen-text text-base md:text-lg font-light leading-relaxed"></p>
+                    </div>
+                    
+                    <div class="lg:col-span-4 bg-[#F4F2EC] p-8 border border-lumen-gray space-y-5 font-mono text-[10px]">
+                        <span class="text-[9px] uppercase tracking-[0.3em] text-lumen-accent block border-b border-lumen-gray pb-3">Project Metadata</span>
+                        <div class="space-y-4 pt-2">
+                            <div>
+                                <span class="text-lumen-meta text-[9px] uppercase tracking-wider block mb-1">Gross Footprint:</span>
+                                <span id="modal-area" class="text-lumen-black text-sm"></span>
+                            </div>
+                            <div>
+                                <span class="text-lumen-meta text-[9px] uppercase tracking-wider block mb-1">Structural System:</span>
+                                <span id="modal-structure" class="text-lumen-black text-xs leading-relaxed block"></span>
+                            </div>
+                            <div>
+                                <span class="text-lumen-meta text-[9px] uppercase tracking-wider block mb-1">Climate Context:</span>
+                                <span id="modal-climate" class="text-lumen-black text-xs block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery -->
+                <div class="space-y-8 pt-10 border-t border-lumen-gray">
+                    <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">Architectural Perspectives</div>
+                    <div id="modal-gallery" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================
+         VANILLA JAVASCRIPT ENGINE
+         ========================================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- DATA MODELS ---
+
+            const PROJECTS = [
+                {
+                    id: 'still-house', number: '01', title: 'The Still House', typology: 'Luxury Residence', location: 'Kyoto Outskirts',
+                    heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80',
+                    tagline: 'A cloistered sanctuary balanced between monolithic concrete and moss gardens.',
+                    narrative: 'Arranged around a protected central courtyard, the residence uses low eaves and board-formed walls to frame disciplined views of raked gravel and evergreen cedar, shutting out peripheral noise while welcoming changing sunlight.',
+                    stats: { area: '680 m²', structure: 'Fair-faced reinforced concrete core', climate: 'Humid subtropical' },
+                    gallery: [
+                        { url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80', type: 'Exterior', caption: 'Concrete cantilevers over reflective basin.' },
+                        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', type: 'Interior', caption: 'Clerestory daylight grazing lime plaster walls.' },
+                        { url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', type: 'Material', caption: 'Untreated timber and board-formed cement.' }
+                    ]
+                },
+                {
+                    id: 'ridge-retreat', number: '02', title: 'The Ridge Retreat', typology: 'Alpine Residence', location: 'Engadin Valley',
+                    heroImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1800&q=80',
+                    tagline: 'Terraced volumes stepped into alpine topography with panoramic valley apertures.',
+                    narrative: 'Embedded directly into a 32-degree granite hillside, The Ridge Retreat functions as an inhabitable contour line. The building steps down the slope, anchoring bedrooms into the earth for profound thermal mass.',
+                    stats: { area: '520 m²', structure: 'Local gneiss masonry & mass timber', climate: 'Subarctic alpine' },
+                    gallery: [
+                        { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', type: 'Site', caption: 'Weathered larch siding blending into natural scrub.' },
+                        { url: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80', type: 'Hearth', caption: 'Sunken hearth room with split-face stone.' },
+                        { url: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Thermally isolated blackened steel mullions.' }
+                    ]
+                },
+                {
+                    id: 'house-of-light', number: '03', title: 'House of Light', typology: 'Urban Renovation', location: 'Copenhagen',
+                    heroImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80',
+                    tagline: 'Surgical volumetric carving transforming a 19th-century brick envelope.',
+                    narrative: 'A continuous three-story lightwell introduces diffuse Nordic daylight deep into subterranean living spaces, utilizing pale Dinesen fir, honed terrazzo, and frameless micro-apertures to reflect illumination.',
+                    stats: { area: '390 m²', structure: 'Preserved masonry + steel armature', climate: 'Temperate oceanic' },
+                    gallery: [
+                        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', type: 'Atrium', caption: 'Morning daylight filtering through three levels.' },
+                        { url: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80', type: 'Stair', caption: 'Continuous cantilevered limestone stair.' },
+                        { url: 'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=800&q=80', type: 'Joinery', caption: 'Custom joinery with precise shadow gaps.' }
+                    ]
+                },
+                {
+                    id: 'gathering-place', number: '04', title: 'The Gathering Place', typology: 'Hospitality', location: 'Alentejo',
+                    heroImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=80',
+                    tagline: 'Low-slung rammed earth pavilions unified by olive groves and water bodies.',
+                    narrative: 'Designed as a quiet boutique escape, The Gathering Place weaves communal dining, secluded guest suites, and thermal baths into an arid landscape. Thick stabilized walls temper intense daytime heat.',
+                    stats: { area: '1,420 m²', structure: 'Stabilized site-soil rammed earth', climate: 'Mediterranean' },
+                    gallery: [
+                        { url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', type: 'Pavilion', caption: 'Earth walls mirrored in reflective water.' },
+                        { url: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80', type: 'Colonnade', caption: 'Filtered shade patterns across terracotta.' },
+                        { url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', type: 'Tectonic', caption: 'Sediment lines in compressed regional earth.' }
+                    ]
+                }
+            ];
+
+            const HOTSPOTS = [
+                { id: 'light', top: 24, left: 52, label: 'ZONE A-01', category: 'Solar Geometry', title: 'Natural Light & Zenith', summary: 'Sculpted ceiling scoops direct changing daylight.', rationale: 'Overhead lanterns harvest diffuse illumination without perimeter glare, stabilizing internal light levels.', metric: '380 LUX AVG AMBIENT' },
+                { id: 'mass', top: 62, left: 32, label: 'ZONE B-04', category: 'Tactile Enclosure', title: 'Material Tectonics', summary: 'Board-formed concrete meets warm timber joinery.', rationale: 'Raw structural elements contrast with hand-oiled white oak interior screens via 15mm shadow reveals.', metric: '420mm HYDRATED MASS' },
+                { id: 'flow', top: 78, left: 68, label: 'ZONE C-02', category: 'Circulation', title: 'Spatial Continuity', summary: 'Acoustic pocket doors dissolve boundaries.', rationale: 'The floor finish runs seamlessly from interior zones directly into rain-washed exterior courtyards.', metric: '0mm FLUSH SILL' },
+                { id: 'site', top: 82, left: 18, label: 'ZONE D-07', category: 'Site Integration', title: 'Topographic Grounding', summary: 'The building anchors into subterranean bedrock.', rationale: 'By lifting the wing on blades, 85% of existing ground water runoff and root ecosystems remain undisturbed.', metric: '12m CANTILEVER' }
+            ];
+
+            const PROCESS = [
+                { num: '01', title: 'Listen', sub: 'The terrain, the light, the silence.', tag: 'SITE STUDY', deliv: 'Topographic Sun & Wind Mapping', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80' },
+                { num: '02', title: 'Imagine', sub: 'Volumetric carving and sequence.', tag: 'CHOREOGRAPHY', deliv: '1:50 Spatial Section Models', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80' },
+                { num: '03', title: 'Develop', sub: 'Material junctions and precision.', tag: 'TECTONIC RIGOR', deliv: '1:5 Full-Scale Prototype', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80' },
+                { num: '04', title: 'Realise', sub: 'Master craftspeople and built form.', tag: 'BUILT MASTERY', deliv: 'On-Site Direction & Artisan Craft', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80' }
+            ];
+
+            const MATERIALS = [
+                { id: 'concrete', name: 'Board-Formed Concrete', tag: 'Monolithic mass, tactile grain.', desc: 'Poured against rough-sawn Douglas fir boards, this concrete retains organic grain while delivering monolithic thermal stability and stillness.', tact: 'Matte, textured relief', therm: 'High thermal mass / Passive lag', fin: 'Breathable silane-siloxane', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80' },
+                { id: 'timber', name: 'Charred & Natural Timber', tag: 'Acoustic warmth, carbon storage.', desc: 'We combine exterior Yakisugi (charred timber) for fire and rot resistance with internal quartersawn pale oak that softly absorbs ambient sound.', tact: 'Silky wire-brushed grain', therm: 'Natural thermal break', fin: 'Zero-VOC plant-oil burnish', img: 'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=1200&q=80' },
+                { id: 'limestone', name: 'Split-Face Limestone', tag: 'Mineral permanence with warmth.', desc: 'Quarried in shallow regional strata, split-face limestone bridges the envelope and geological terrain. Laid with razor-thin dry-joint appearances.', tact: 'Fractured mineral facets', therm: 'Acoustic dampening', fin: 'Washed with natural soaps', img: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=1200&q=80' },
+                { id: 'steel', name: 'Patinated Dark Steel', tag: 'Surgical structural precision.', desc: 'Hot-rolled mild steel treated with natural chemical patinas to produce deep charcoal, oil-rubbed bronze undertones. Utilized for crisp margins.', tact: 'Cold-rolled smoothness', therm: 'Aerogel thermal-break core', fin: 'Blackened gunmetal etch', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1200&q=80' }
+            ];
+
+            const SERVICES = [
+                { id: '01', name: 'Residential Architecture', sum: 'Bespoke homes designed around their inhabitants, site, and climate.', det: 'Complete private residential commissions, from coastal estates to quiet urban townhouses. We handle initial site analysis, schematic architecture, interior detailing, and site execution.' },
+                { id: '02', name: 'Hospitality & Retreats', sum: 'Distinctive guesthouses, boutique hotels, and lodge environments.', det: 'Spaces designed for decompression. We synthesize masterplanning, guest circulation, and localized atmospheres that forge unforgettable sensory connections to place.' },
+                { id: '03', name: 'Commercial & Workplace', sum: 'Purposeful environments for visionary businesses and their teams.', det: 'Workplace architecture rooted in daylight and quiet concentration. Replacing generic corporate layouts with tactile materials, acoustic separation, and biophilic courtyards.' },
+                { id: '04', name: 'Renovation & Transformation', sum: 'Reimagining existing buildings through thoughtful contemporary design.', det: 'Surgical architectural interventions within heritage structures. We celebrate historic character while carving dramatic modern volumes and upgrading thermal envelopes.' }
+            ];
+
+            // --- HEADER SCROLL EFFECT ---
+            const header = document.getElementById('main-header');
+            const cta = document.getElementById('header-cta');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 80) {
+                    header.classList.remove('bg-gradient-to-b', 'from-black/80', 'via-black/30', 'text-white');
+                    header.classList.add('bg-lumen-white/95', 'backdrop-blur-md', 'text-lumen-black', 'border-lumen-gray');
+                    
+                    cta.classList.remove('border-white/50', 'text-white', 'hover:bg-white', 'hover:text-lumen-black');
+                    cta.classList.add('border-lumen-black', 'text-lumen-black', 'hover:bg-lumen-black', 'hover:text-lumen-white');
+                } else {
+                    header.classList.add('bg-gradient-to-b', 'from-black/80', 'via-black/30', 'text-white');
+                    header.classList.remove('bg-lumen-white/95', 'backdrop-blur-md', 'text-lumen-black', 'border-lumen-gray');
+                    
+                    cta.classList.add('border-white/50', 'text-white', 'hover:bg-white', 'hover:text-lumen-black');
+                    cta.classList.remove('border-lumen-black', 'text-lumen-black', 'hover:bg-lumen-black', 'hover:text-lumen-white');
+                }
+            });
+
+            // --- MOBILE MENU ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3')];
+            let menuOpen = false;
+
+            menuBtn.addEventListener('click', () => {
+                menuOpen = !menuOpen;
+                if(menuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    setTimeout(() => mobileMenu.classList.remove('opacity-0'), 10);
+                    bars[0].classList.add('rotate-45', 'translate-y-2');
+                    bars[1].classList.add('opacity-0');
+                    bars[2].classList.add('-rotate-45', '-translate-y-2');
+                    document.body.classList.add('modal-open');
+                } else {
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => mobileMenu.classList.add('hidden'), 700);
+                    bars[0].classList.remove('rotate-45', 'translate-y-2');
+                    bars[1].classList.remove('opacity-0');
+                    bars[2].classList.remove('-rotate-45', '-translate-y-2');
+                    document.body.classList.remove('modal-open');
+                }
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => menuBtn.click());
+            });
+
+            // --- PORTFOLIO RENDERING ---
+            const projContainer = document.getElementById('projects-container');
+            PROJECTS.forEach((proj, idx) => {
+                const isEven = idx % 2 === 0;
+                projContainer.innerHTML += `
+                    <article class="group cursor-pointer reveal proj-card" data-id="${proj.id}">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${isEven ? '' : 'lg:flex-row-reverse'}">
+                            <div class="lg:col-span-8 ${isEven ? '' : 'lg:order-2'} relative aspect-[16/10] overflow-hidden bg-lumen-gray">
+                                <img src="${proj.heroImage}" alt="${proj.title}" class="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105" loading="lazy">
+                                <div class="absolute inset-0 bg-black/10 transition-opacity duration-700 group-hover:opacity-0"></div>
+                                <div class="absolute top-6 left-6 bg-lumen-dark/90 text-white font-mono text-[9px] uppercase tracking-[0.3em] px-4 py-2 backdrop-blur-md">
+                                    PROJECT #${proj.number}
+                                </div>
+                                <div class="absolute bottom-6 right-6 bg-lumen-white text-lumen-black font-mono text-[9px] uppercase tracking-[0.3em] px-5 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-2 group-hover:translate-y-0">
+                                    View Dossier ↗
+                                </div>
+                            </div>
+                            <div class="lg:col-span-4 space-y-8 ${isEven ? '' : 'lg:order-1'}">
+                                <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta flex items-center space-x-3">
+                                    <span class="text-lumen-accent">${proj.typology}</span>
+                                </div>
+                                <h3 class="font-serif text-4xl sm:text-5xl text-lumen-black font-light leading-snug group-hover:text-lumen-accent transition-colors duration-500">${proj.title}</h3>
+                                <p class="text-lumen-text text-base font-light leading-relaxed">${proj.tagline}</p>
+                                <div class="pt-6 border-t border-lumen-gray space-y-3 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
+                                    <div class="flex justify-between"><span>Location:</span><span class="text-lumen-black">${proj.location}</span></div>
+                                    <div class="flex justify-between"><span>Scale:</span><span class="text-lumen-black">${proj.stats.area}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            });
+
+            // --- PROJECT DOSSIER MODAL ---
+            const modal = document.getElementById('project-modal');
+            const modalContentPanel = document.getElementById('modal-content-panel');
+            const closeModalBtn = document.getElementById('close-modal');
+
+            document.querySelectorAll('.proj-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const proj = PROJECTS.find(p => p.id === card.dataset.id);
+                    if(proj) {
+                        document.getElementById('modal-dossier').textContent = `DOSSIER #${proj.number}`;
+                        document.getElementById('modal-header-title').textContent = proj.title;
+                        document.getElementById('modal-hero').src = proj.heroImage;
+                        document.getElementById('modal-meta').textContent = `${proj.typology} // ${proj.location}`;
+                        document.getElementById('modal-title').textContent = proj.title;
+                        document.getElementById('modal-tagline').textContent = proj.tagline;
+                        document.getElementById('modal-narrative').textContent = proj.narrative;
+                        document.getElementById('modal-area').textContent = proj.stats.area;
+                        document.getElementById('modal-structure').textContent = proj.stats.structure;
+                        document.getElementById('modal-climate').textContent = proj.stats.climate;
+                        
+                        const galleryHtml = proj.gallery.map(img => `
+                            <div class="space-y-4 group">
+                                <div class="aspect-[4/3] overflow-hidden bg-lumen-gray relative">
+                                    <img src="${img.url}" class="w-full h-full object-cover img-mask-hover">
+                                </div>
+                                <div>
+                                    <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-accent mb-1">${img.type}</div>
+                                    <p class="text-lumen-text text-xs font-light">${img.caption}</p>
+                                </div>
+                            </div>
+                        `).join('');
+                        document.getElementById('modal-gallery').innerHTML = galleryHtml;
+
+                        modal.classList.remove('hidden');
+                        document.body.classList.add('modal-open');
+                        
+                        // Force reflow for transition
+                        void modal.offsetWidth; 
+                        
+                        modal.classList.remove('opacity-0');
+                        modalContentPanel.classList.remove('scale-[0.98]');
+                        modalContentPanel.classList.add('scale-100');
+                    }
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.add('opacity-0');
+                modalContentPanel.classList.remove('scale-100');
+                modalContentPanel.classList.add('scale-[0.98]');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('modal-open');
+                }, 500);
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+            document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+            // --- ANATOMY INTERACTIVE ---
+            const hotspotContainer = document.getElementById('hotspot-container');
+            const aTitle = document.getElementById('anatomy-title');
+            const aCat = document.getElementById('anatomy-category');
+            const aSum = document.getElementById('anatomy-summary');
+            const aRat = document.getElementById('anatomy-rationale');
+            const aMet = document.getElementById('anatomy-metric');
+            const aCoord = document.getElementById('anatomy-coord');
+            const aContent = document.getElementById('anatomy-content');
+
+            let activeHotspotId = HOTSPOTS[0].id;
+
+            const renderHotspots = () => {
+                hotspotContainer.innerHTML = HOTSPOTS.map(h => {
+                    const isActive = h.id === activeHotspotId;
+                    return `
+                        <button class="hotspot-btn absolute -translate-x-1/2 -translate-y-1/2 z-20 focus:outline-none" style="top: ${h.top}%; left: ${h.left}%;" data-id="${h.id}">
+                            <div class="relative flex items-center justify-center group/btn">
+                                ${isActive ? '<span class="absolute w-10 h-10 rounded-full border border-lumen-accent animate-ping-slow"></span>' : ''}
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] transition-all duration-500 ${isActive ? 'bg-lumen-accent text-white scale-125 shadow-lg shadow-lumen-accent/50' : 'bg-black/90 text-white/80 border border-white/40 group-hover/btn:scale-125 group-hover/btn:border-white'}">
+                                    +
+                                </div>
+                            </div>
+                        </button>
+                    `;
+                }).join('');
+
+                document.querySelectorAll('.hotspot-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if(activeHotspotId === btn.dataset.id) return;
+                        activeHotspotId = btn.dataset.id;
+                        renderHotspots();
+                        
+                        const data = HOTSPOTS.find(h => h.id === activeHotspotId);
+                        
+                        aContent.classList.remove('fade-in-scale');
+                        void aContent.offsetWidth; 
+                        aContent.classList.add('fade-in-scale');
+
+                        aTitle.textContent = data.title;
+                        aCat.textContent = data.category;
+                        aSum.textContent = data.summary;
+                        aRat.textContent = data.rationale;
+                        aMet.textContent = data.metric;
+                        aCoord.textContent = data.label;
+                    });
+                });
+            };
+            renderHotspots();
+
+            // --- PROCESS SEQUENCE ---
+            const processContainer = document.getElementById('process-steps-container');
+            const processImg = document.getElementById('process-image');
+            const processBadge = document.getElementById('process-phase-badge');
+            const processDeliv = document.getElementById('process-deliverable');
+            let activeProcess = 0;
+
+            const renderProcess = () => {
+                processContainer.innerHTML = PROCESS.map((p, i) => {
+                    const isActive = i === activeProcess;
+                    return `
+                        <button class="process-btn w-full text-left p-6 lg:p-8 transition-all duration-500 border flex flex-col space-y-3 ${isActive ? 'bg-lumen-white border-lumen-black shadow-sm scale-[1.02]' : 'border-lumen-gray hover:border-lumen-meta bg-transparent scale-100'}" data-idx="${i}">
+                            <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] w-full">
+                                <span class="${isActive ? 'text-lumen-accent font-bold' : 'text-lumen-meta'}">${p.num} / ${p.title}</span>
+                                <span class="text-[9px] text-lumen-meta hidden sm:inline">${p.tag}</span>
+                            </div>
+                            <div class="font-serif text-xl sm:text-2xl text-lumen-black font-light transition-colors ${isActive ? '' : 'text-lumen-text'}">${p.sub}</div>
+                        </button>
+                    `;
+                }).join('');
+
+                document.querySelectorAll('.process-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const newIdx = parseInt(btn.dataset.idx);
+                        if(activeProcess === newIdx) return;
+                        activeProcess = newIdx;
+                        renderProcess();
+                        
+                        const data = PROCESS[activeProcess];
+                        processImg.classList.remove('fade-in-scale');
+                        void processImg.offsetWidth;
+                        processImg.classList.add('fade-in-scale');
+                        
+                        processImg.src = data.img;
+                        processBadge.textContent = `PHASE ${data.num} ARTIFACT`;
+                        processDeliv.textContent = data.deliv;
+                    });
+                });
+            };
+            renderProcess();
+
+            // --- MATERIAL STUDY ---
+            const matTabs = document.getElementById('material-tabs');
+            const mImg = document.getElementById('mat-image');
+            const mName = document.getElementById('mat-name');
+            const mTag = document.getElementById('mat-tagline');
+            const mDesc = document.getElementById('mat-desc');
+            const mTact = document.getElementById('mat-tactile');
+            const mTherm = document.getElementById('mat-thermal');
+            const mFin = document.getElementById('mat-finish');
+            const mDisplay = document.getElementById('material-display');
+            let activeMatId = MATERIALS[0].id;
+
+            const renderMaterials = () => {
+                matTabs.innerHTML = MATERIALS.map((m, i) => {
+                    const isActive = m.id === activeMatId;
+                    return `
+                        <button class="mat-btn p-5 lg:p-6 text-left border transition-all duration-500 font-mono text-[10px] tracking-[0.2em] uppercase flex flex-col justify-between h-32 ${isActive ? 'border-lumen-accent bg-white/10 text-white' : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white'}" data-id="${m.id}">
+                            <span class="text-[9px] text-lumen-accent">MAT 0${i+1}</span>
+                            <span class="font-serif text-lg md:text-xl normal-case tracking-normal text-white mt-auto">${m.name}</span>
+                        </button>
+                    `;
+                }).join('');
+
+                document.querySelectorAll('.mat-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if(activeMatId === btn.dataset.id) return;
+                        activeMatId = btn.dataset.id;
+                        renderMaterials();
+                        
+                        const data = MATERIALS.find(m => m.id === activeMatId);
+                        
+                        // Retrigger animations
+                        mImg.classList.remove('fade-in-scale');
+                        const textElements = [mName, mTag, mDesc, mTact, mTherm, mFin];
+                        textElements.forEach(el => el.style.opacity = '0');
+                        
+                        void mDisplay.offsetWidth;
+                        
+                        mImg.classList.add('fade-in-scale');
+                        mImg.src = data.img;
+                        
+                        setTimeout(() => {
+                            mName.textContent = data.name;
+                            mTag.textContent = data.tag;
+                            mDesc.textContent = data.desc;
+                            mTact.textContent = data.tact;
+                            mTherm.textContent = data.therm;
+                            mFin.textContent = data.fin;
+                            textElements.forEach(el => {
+                                el.style.transition = 'opacity 0.6s ease';
+                                el.style.opacity = '1';
+                            });
+                        }, 100);
+                    });
+                });
+            };
+            
+            // Init Mat
+            const initMat = MATERIALS[0];
+            mImg.src = initMat.img;
+            mName.textContent = initMat.name;
+            mTag.textContent = initMat.tag;
+            mDesc.textContent = initMat.desc;
+            mTact.textContent = initMat.tact;
+            mTherm.textContent = initMat.therm;
+            mFin.textContent = initMat.fin;
+            renderMaterials();
+
+            // --- SERVICES ACCORDION ---
+            const accContainer = document.getElementById('services-accordion');
+            let activeAcc = '01';
+
+            const renderAccordion = () => {
+                accContainer.innerHTML = SERVICES.map(s => {
+                    const isActive = s.id === activeAcc;
+                    return `
+                        <div class="border transition-all duration-500 overflow-hidden ${isActive ? 'border-lumen-black bg-[#F4F2EC]' : 'border-lumen-gray bg-transparent hover:border-lumen-meta'}">
+                            <button class="acc-btn w-full p-8 lg:p-10 text-left flex items-center justify-between focus:outline-none group" data-id="${s.id}">
+                                <div class="space-y-3 max-w-2xl">
+                                    <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-accent transition-colors">AREA ${s.id}</div>
+                                    <h3 class="font-serif text-3xl sm:text-4xl text-lumen-black font-light">${s.name}</h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-full border border-lumen-black/20 flex items-center justify-center font-mono text-sm transition-transform duration-500 ${isActive ? 'rotate-180 bg-lumen-black text-white' : 'group-hover:bg-lumen-gray'}">
+                                    ${isActive ? '—' : '+'}
+                                </div>
+                            </button>
+                            <div class="transition-all duration-700 ease-in-out ${isActive ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}">
+                                <div class="px-8 lg:px-10 pb-10 pt-0">
+                                    <div class="pt-6 border-t border-lumen-gray text-lumen-text text-base leading-relaxed font-light">
+                                        <p class="mb-4 text-lumen-black font-medium">${s.sum}</p>
+                                        <p>${s.det}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                document.querySelectorAll('.acc-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.dataset.id;
+                        activeAcc = activeAcc === id ? null : id;
+                        renderAccordion();
+                    });
+                });
+            };
+            renderAccordion();
+
+            // --- FORM SIMULATION ---
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('form-success');
+            const resetBtn = document.getElementById('reset-form');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button');
+                btn.innerHTML = '<span class="animate-pulse">Transmitting Protocol...</span>';
+                
+                setTimeout(() => {
+                    form.classList.add('hidden');
+                    successMsg.classList.remove('hidden');
+                    btn.innerHTML = '<span>Discuss your project</span><span>↗</span>';
+                    form.reset();
+                }, 1500);
+            });
+
+            resetBtn.addEventListener('click', () => {
+                successMsg.classList.add('hidden');
+                form.classList.remove('hidden');
+            });
+
+            // --- INTERSECTION OBSERVER FOR REVEALS ---
+            const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Reveal only once for cinematic feel
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // --- SUBTLE JS PARALLAX ---
+            const parallaxElements = document.querySelectorAll('.js-parallax');
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                parallaxElements.forEach(el => {
+                    const speed = el.dataset.speed || 0.1;
+                    // Simple parallax calc based on scroll position
+                    el.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            }, { passive: true });
+
+        });
+    </script>
+</body>
+</html>
