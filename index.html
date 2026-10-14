@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STUDIO LUMEN | Contemporary Architecture Practice</title>
+    <title>STUDIO LUMEN | Contemporary Architecture | Maseru, Lesotho</title>
     
     <!-- Google Fonts: Elegant Serif + Precise Mono & Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,13 +18,13 @@
                 extend: {
                     colors: {
                         lumen: {
-                            white: '#F9F8F6',      // Warm architectural white
-                            black: '#121212',      // Deep charcoal/black
-                            dark: '#0A0A0A',       // Pure dark
-                            accent: '#A95C45',     // Sophisticated Terracotta / Rust
-                            gray: '#E6E3DB',       // Muted stone/mineral
-                            text: '#5A5955',       // Legible body text
-                            meta: '#84837E'        // Small technical text
+                            white: '#F4F4F0',      // Mountain mist white
+                            black: '#1A1A1A',      // Deep basalt
+                            dark: '#111111',       // Pure dark variant
+                            accent: '#B85D3F',     // Sandstone/copper
+                            gray: '#D5D0C5',       // Muted mineral
+                            text: '#5E5A54',       // Legible body text
+                            meta: '#8A8476'        // Small technical text
                         }
                     },
                     fontFamily: {
@@ -47,22 +47,22 @@
            CUSTOM CSS & CINEMATIC EFFECTS
            ========================================= */
         body {
-            background-color: #F9F8F6;
-            color: #121212;
+            background-color: #F4F4F0;
+            color: #1A1A1A;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
         
         ::selection {
-            background-color: #A95C45;
+            background-color: #B85D3F;
             color: #ffffff;
         }
 
         /* Architectural Scrollbar */
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-track { background: #111111; }
         ::-webkit-scrollbar-thumb { background: #333; }
-        ::-webkit-scrollbar-thumb:hover { background: #A95C45; }
+        ::-webkit-scrollbar-thumb:hover { background: #B85D3F; }
 
         /* Cinematic Scroll Reveals */
         .reveal {
@@ -148,7 +148,7 @@
     <!-- =========================================
          GLOBAL NAVIGATION
          ========================================= -->
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 bg-gradient-to-b from-black/80 via-black/30 to-transparent py-6 text-white border-b border-transparent">
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 bg-gradient-to-b from-lumen-black/90 via-lumen-black/50 to-transparent py-6 text-white border-b border-transparent">
         <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
             
             <!-- Logo / Wordmark -->
@@ -156,8 +156,8 @@
                 <span class="font-serif text-2xl md:text-3xl tracking-[0.2em] font-light uppercase transition-transform duration-500 group-hover:translate-x-1">
                     STUDIO LUMEN
                 </span>
-                <span id="header-subtitle" class="text-[9px] uppercase tracking-[0.3em] font-mono text-white/70 transition-colors duration-500 mt-1">
-                    Architecture & Environment
+                <span id="header-subtitle" class="text-[9px] uppercase tracking-[0.3em] font-mono text-white/80 transition-colors duration-500 mt-1">
+                    Maseru, Lesotho
                 </span>
             </button>
 
@@ -198,58 +198,64 @@
             <a href="#contact" class="mobile-link text-left py-3 border-b border-white/10 hover:text-lumen-accent transition-colors">Initiate Project</a>
         </div>
         <div class="font-mono text-[9px] tracking-[0.3em] text-lumen-meta uppercase">
-            STUDIO LUMEN / TEMPLATE DESIGN
+            STUDIO LUMEN / MASERU, LESOTHO
         </div>
     </div>
 
     <!-- =========================================
-         HERO SECTION (CINEMATIC)
+         HERO SECTION (FLEXBOX FIXED SPACING)
          ========================================= -->
-    <section class="relative h-screen w-full flex items-end overflow-hidden bg-lumen-dark">
-        <!-- Cinematic Background with Ambient Pan -->
-        <div class="absolute inset-0 transition-transform duration-[10s]">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=85" alt="Contemporary Architecture" class="w-full h-full object-cover animate-ambient filter contrast-[1.1] brightness-[0.85]">
-            <div class="absolute inset-0 bg-gradient-to-t from-lumen-dark via-black/40 to-black/20"></div>
+    <section class="relative min-h-screen w-full flex flex-col justify-end bg-lumen-dark pt-48 pb-20 md:pb-28 overflow-hidden">
+        <!-- Cinematic Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1613490908677-4976a47a1c9c?auto=format&fit=crop&w=2200&q=80" alt="Mountain Architecture" class="w-full h-full object-cover animate-ambient filter brightness-[0.75]">
+            <!-- Gradients for contrast -->
+            <div class="absolute inset-0 bg-gradient-to-t from-lumen-dark via-lumen-dark/60 to-transparent mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-black/30"></div>
         </div>
 
-        <!-- Technical Metadata -->
-        <div class="absolute top-32 left-6 md:left-12 right-6 md:right-12 flex justify-between items-start text-white/70 font-mono text-[9px] uppercase tracking-[0.3em] pointer-events-none z-10 reveal">
-            <div class="flex items-center space-x-3">
-                <span class="w-1.5 h-1.5 rounded-full bg-lumen-accent inline-block animate-pulse"></span>
-                <span>VOLUMETRIC STUDY / 01</span>
+        <!-- Hero Content Container (Using Flex-Col and Gap for pristine layout) -->
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col gap-12 md:gap-16">
+            
+            <!-- Technical Metadata Top Block -->
+            <div class="flex justify-between items-start text-white/90 font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] reveal w-full">
+                <div class="flex items-center space-x-3">
+                    <span class="w-2 h-2 rounded-full bg-lumen-accent inline-block animate-pulse shadow-[0_0_8px_rgba(184,93,63,0.8)]"></span>
+                    <span class="font-semibold text-white drop-shadow-md">DESIGN CONCEPT / 01</span>
+                </div>
+                <div class="hidden md:block text-white/80 drop-shadow-md">
+                    <span>LAT 29°19'S // LNG 27°29'E // MASERU</span>
+                </div>
             </div>
-            <div class="hidden md:block">
-                <span>LAT 47°22'N // LNG 8°32'E // LUMEN ARCHIVES</span>
-            </div>
-        </div>
 
-        <!-- Hero Typography -->
-        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pb-16 md:pb-24 w-full">
-            <div class="max-w-4xl space-y-8">
-                <div class="space-y-5">
-                    <span class="inline-block font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent reveal">Contemporary Practice</span>
-                    <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] text-white font-light tracking-tight leading-[1.05] reveal reveal-delay-1">
+            <!-- Hero Main Typography -->
+            <div class="max-w-4xl flex flex-col gap-6 md:gap-8 reveal reveal-delay-1">
+                <div class="flex flex-col gap-4">
+                    <span class="inline-block font-mono text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-lumen-accent drop-shadow-md">
+                        Contemporary Architecture in the Mountain Kingdom
+                    </span>
+                    <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] text-white font-light tracking-tight leading-[1.05] drop-shadow-lg">
                         Architecture for the way we want to live.
                     </h1>
                 </div>
-                <p class="text-white/80 text-lg md:text-2xl font-light max-w-2xl leading-relaxed reveal reveal-delay-2">
-                    We shape enduring places around people, landscape, and the profound possibilities of space.
+                <p class="text-white/90 text-lg md:text-2xl font-light max-w-2xl leading-relaxed drop-shadow-md">
+                    We create enduring homes and spaces inspired by people, the landscape, and the beauty of the African context.
                 </p>
                 
-                <div class="flex flex-wrap items-center gap-6 pt-6 reveal reveal-delay-3">
-                    <a href="#works" class="group inline-flex items-center space-x-4 px-8 py-4 bg-lumen-white text-lumen-black text-[10px] font-mono uppercase tracking-[0.25em] transition-all duration-500 hover:bg-lumen-accent hover:text-white">
+                <div class="pt-4 flex flex-wrap gap-6 reveal reveal-delay-2">
+                    <a href="#works" class="group inline-flex items-center space-x-4 px-8 py-4 bg-lumen-white text-lumen-black text-[10px] md:text-xs font-mono font-semibold uppercase tracking-[0.25em] transition-all duration-500 hover:bg-lumen-accent hover:text-white shadow-xl">
                         <span>Explore our work</span>
                         <span class="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                     </a>
                 </div>
             </div>
+        </div>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute right-6 md:right-12 bottom-16 md:bottom-24 hidden sm:flex flex-col items-center space-y-4 text-white/50 font-mono text-[9px] tracking-[0.4em] uppercase reveal reveal-delay-3">
-                <span class="writing-vertical-rl">Scroll to explore</span>
-                <div class="w-[1px] h-12 bg-white/20 relative overflow-hidden">
-                    <div class="w-full h-1/2 bg-white absolute top-0 animate-[bounce_2s_infinite]"></div>
-                </div>
+        <!-- Scroll Indicator (Absolute relative to the section) -->
+        <div class="absolute right-6 md:right-12 bottom-12 hidden sm:flex flex-col items-center space-y-4 text-white/70 font-mono text-[10px] tracking-[0.4em] uppercase reveal reveal-delay-3 drop-shadow-md z-10">
+            <span class="writing-vertical-rl">Scroll to explore</span>
+            <div class="w-[1px] h-12 bg-white/30 relative overflow-hidden">
+                <div class="w-full h-1/2 bg-white absolute top-0 animate-[bounce_2s_infinite]"></div>
             </div>
         </div>
     </section>
@@ -264,30 +270,30 @@
                 <div class="lg:col-span-7 space-y-10 reveal">
                     <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta flex items-center space-x-4">
                         <span class="w-8 h-[1px] bg-lumen-meta"></span>
-                        <span>01 / Architectural Thesis</span>
+                        <span>01 / Our Philosophy</span>
                     </div>
                     <blockquote class="font-serif text-4xl sm:text-5xl md:text-[4rem] text-lumen-black font-light leading-[1.1] tracking-tight">
                         “Good architecture doesn't compete with its surroundings. It gives them meaning.”
                     </blockquote>
                     <div class="space-y-6 text-lumen-text text-base md:text-lg font-light leading-relaxed max-w-xl">
-                        <p>At STUDIO LUMEN, we avoid decorative bravado. We view architecture as an instrument of spatial restraint—a careful, deliberate dialogue between tectonic weight and delicate natural illumination.</p>
-                        <p>Every volume is calibrated around how light enters in the morning, how air moves through courtyard axes in the afternoon, and how natural materials weather gracefully with the decades.</p>
+                        <p>At STUDIO LUMEN, we believe in thoughtful, understated design. We create buildings that feel naturally rooted in their environment, carefully balancing strong local materials with the rugged landscape of the Mountain Kingdom.</p>
+                        <p>Every space is designed around how the morning sun warms the rooms, how fresh air flows through open courtyards in the afternoon, and how natural materials age gracefully over the decades.</p>
                     </div>
                     <div class="pt-8 border-t border-lumen-gray grid grid-cols-3 gap-6 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
-                        <div><span class="block text-lumen-black text-base font-sans mb-1">0.00m</span>Flush Horizon Datum</div>
-                        <div><span class="block text-lumen-black text-base font-sans mb-1">100%</span>Natural Materiality</div>
-                        <div><span class="block text-lumen-black text-base font-sans mb-1">50+ Yrs</span>Lifecycle Design</div>
+                        <div><span class="block text-lumen-black text-base font-sans mb-1">1,600m</span>Elevation</div>
+                        <div><span class="block text-lumen-black text-base font-sans mb-1">100%</span>Local Materiality</div>
+                        <div><span class="block text-lumen-black text-base font-sans mb-1">50+ Yrs</span>Built to Last</div>
                     </div>
                 </div>
                 
                 <!-- Asymmetrical Parallax Image -->
                 <div class="lg:col-span-5 relative reveal reveal-delay-1">
                     <div class="relative aspect-[3/4] parallax-wrapper bg-lumen-gray">
-                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" alt="Light and shadow" class="parallax-img js-parallax" data-speed="0.1" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1200&q=80" alt="Design Context" class="parallax-img js-parallax" data-speed="0.1" loading="lazy">
                     </div>
-                    <div class="absolute -bottom-6 -left-10 bg-lumen-white p-4 hidden md:block">
+                    <div class="absolute -bottom-6 -left-10 bg-lumen-white p-4 hidden md:block shadow-lg">
                         <div class="border border-lumen-gray p-4 font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta text-center">
-                            FIG 01.3 <br> DIURNAL SHADOW STUDY
+                            FIG 01.3 <br> BUILDING FORM
                         </div>
                     </div>
                 </div>
@@ -307,20 +313,20 @@
                     <h2 class="font-serif text-4xl sm:text-6xl font-light tracking-tight text-white">The anatomy of space.</h2>
                 </div>
                 <p class="text-white/60 text-sm md:text-base max-w-md font-light leading-relaxed">
-                    Explore the tectonic decisions, daylight strategies, and structural relationships embedded within contemporary living architecture. Select an annotation below to examine its rationale.
+                    Explore the thoughtful design choices, natural lighting strategies, and local materials that bring our Lesotho highland projects to life. Select an annotation below to learn more.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal reveal-delay-1">
                 <!-- Interactive Blueprint Image -->
                 <div class="lg:col-span-8 relative aspect-[16/10] bg-[#111] border border-white/10 overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80" alt="Architectural section" class="w-full h-full object-cover opacity-50 filter contrast-[1.2] grayscale-[70%] mix-blend-luminosity transition-all duration-1000 group-hover:scale-[1.02]">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80" alt="Architectural section" class="w-full h-full object-cover opacity-50 filter contrast-[1.2] grayscale-[70%] mix-blend-luminosity transition-all duration-1000 group-hover:scale-[1.02]">
                     
                     <!-- Tech Overlays -->
                     <div class="absolute inset-0 pointer-events-none border border-white/5">
                         <div class="absolute inset-x-0 top-1/2 border-b border-white/10 border-dashed"></div>
                         <div class="absolute inset-y-0 left-1/2 border-r border-white/10 border-dashed"></div>
-                        <div class="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">SECTION AA // SPATIAL STUDY / SCALE 1:50</div>
+                        <div class="absolute top-6 left-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">SECTION AA // HIGHLAND STUDY / SCALE 1:50</div>
                         <div id="anatomy-coord" class="absolute bottom-6 right-6 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">ZONE A-01 // ROOF VOID</div>
                     </div>
 
@@ -358,7 +364,7 @@
     <!-- =========================================
          SECTION 3: SELECTED WORKS (PORTFOLIO)
          ========================================= -->
-    <section id="works" class="py-32 md:py-48 bg-lumen-white">
+    <section id="works" class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <!-- Header -->
             <div class="mb-24 pb-8 border-b border-lumen-gray reveal">
@@ -368,7 +374,7 @@
                         <h2 class="font-serif text-5xl sm:text-7xl text-lumen-black font-light tracking-tight">Selected works.</h2>
                     </div>
                     <p class="text-lumen-text text-lg font-light max-w-md">
-                        Different places. Different lives. One uncompromising architectural approach.
+                        Different places. Different lives. One thoughtful approach to building in the African landscape.
                     </p>
                 </div>
             </div>
@@ -381,13 +387,13 @@
     <!-- =========================================
          SECTION 4: SCROLL-DRIVEN PROCESS
          ========================================= -->
-    <section class="py-32 md:py-40 bg-[#F4F2EC] border-y border-lumen-gray">
+    <section class="py-32 md:py-40 bg-[#E8E7E1] border-b border-lumen-gray">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="max-w-3xl mb-20 space-y-5 reveal">
-                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">02 / Architectural Method</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">02 / Our Process</span>
                 <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">From idea to place.</h2>
                 <p class="text-lumen-text text-lg font-light leading-relaxed">
-                    Architecture is not an instantaneous gesture. It is a slow, methodical unfolding from early acoustic studies to tectonic material realization.
+                    Great design takes time. It is a careful journey from understanding the wind and sun of the site, to building with beautiful, lasting materials in challenging landscapes.
                 </p>
             </div>
 
@@ -419,11 +425,11 @@
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 pb-8 border-b border-white/10 gap-8 reveal">
                 <div class="space-y-4">
-                    <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent">Tactile Investigation</span>
+                    <span class="font-mono text-[10px] uppercase tracking-[0.4em] text-lumen-accent">Material Study</span>
                     <h2 class="font-serif text-4xl sm:text-6xl font-light tracking-tight text-white">Material study.</h2>
                 </div>
                 <p class="text-white/60 text-sm md:text-base max-w-md font-light leading-relaxed">
-                    We select natural substances that age with honesty. Choose a material below to inspect its thermal mass, tactile surface qualities, and architectural application.
+                    We choose natural materials that age beautifully in the harsh Lesotho climate. Select a material below to learn about its texture, how it insulates, and how we use it.
                 </p>
             </div>
 
@@ -474,10 +480,10 @@
     <section class="py-32 md:py-48 bg-lumen-white border-b border-lumen-gray">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="mb-20 space-y-5 reveal">
-                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">03 / Tectonic Craft</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">03 / The Details</span>
                 <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black tracking-tight">Architecture in detail.</h2>
                 <p class="text-lumen-text text-lg font-light max-w-2xl leading-relaxed">
-                    A building is only as convincing as the way its materials meet. We design junctions with obsessive restraint to reveal quiet, enduring beauty.
+                    A building's true quality shows in the fine details. We design every corner and connection with great care to create a quiet, lasting beauty rooted in the African context.
                 </p>
             </div>
             
@@ -485,7 +491,7 @@
                 <!-- Detail 1 -->
                 <div class="space-y-6 group cursor-pointer">
                     <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
-                        <img src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80" alt="Stair detail" class="w-full h-full object-cover img-mask-hover" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&w=800&q=80" alt="Detail 1" class="w-full h-full object-cover img-mask-hover" loading="lazy">
                     </div>
                     <div>
                         <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 01 // CANTILEVER</div>
@@ -495,7 +501,7 @@
                 <!-- Detail 2 -->
                 <div class="space-y-6 group cursor-pointer md:mt-12">
                     <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
-                        <img src="https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=800&q=80" alt="Timber detail" class="w-full h-full object-cover img-mask-hover" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Detail 2" class="w-full h-full object-cover img-mask-hover" loading="lazy">
                     </div>
                     <div>
                         <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 02 // REVEAL</div>
@@ -505,7 +511,7 @@
                 <!-- Detail 3 -->
                 <div class="space-y-6 group cursor-pointer">
                     <div class="aspect-[4/5] overflow-hidden bg-lumen-gray relative">
-                        <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80" alt="Steel detail" class="w-full h-full object-cover img-mask-hover" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Detail 3" class="w-full h-full object-cover img-mask-hover" loading="lazy">
                     </div>
                     <div>
                         <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-meta mb-2">JUNCTION 03 // GLAZING</div>
@@ -535,12 +541,12 @@
     <!-- =========================================
          SECTION 8: STUDIO PROFILE
          ========================================= -->
-    <section class="py-32 md:py-48 bg-[#F4F2EC] border-b border-lumen-gray">
+    <section class="py-32 md:py-48 bg-[#E8E7E1] border-b border-lumen-gray">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                 <div class="lg:col-span-5 relative reveal">
                     <div class="aspect-[3/4] parallax-wrapper bg-lumen-gray">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt="Studio workspace" class="parallax-img js-parallax" data-speed="0.08">
+                        <img src="https://images.unsplash.com/photo-1497215848147-ff2b618bd3bd?auto=format&fit=crop&w=1200&q=80" alt="Studio profile view" class="parallax-img js-parallax" data-speed="0.08">
                     </div>
                     <div class="absolute -bottom-8 -right-8 hidden md:block p-8 bg-lumen-dark text-lumen-white font-mono text-[10px] uppercase tracking-[0.3em] max-w-[240px] leading-relaxed border border-white/10 shadow-2xl">
                         DISCIPLINE OVER TREND. LONGEVITY OVER NOVELTY.
@@ -550,11 +556,11 @@
                     <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-lumen-meta">05 / Studio Profile</div>
                     <h2 class="font-serif text-4xl sm:text-6xl font-light text-lumen-black leading-tight tracking-tight">A studio with a definitive point of view.</h2>
                     <div class="space-y-6 text-lumen-text text-lg font-light leading-relaxed">
-                        <p>STUDIO LUMEN was founded on the conviction that contemporary living calls for greater visual quiet. We resist the temptation of fleeting architectural trends, focusing instead on structural permanence, uncompromising detailing, and environmental resonance.</p>
+                        <p>STUDIO LUMEN was founded in Maseru on the conviction that modern living needs spaces of quiet and calm. We avoid short-lived design trends, focusing instead on buildings that last, beautiful craftsmanship, and a deep respect for the Lesotho environment.</p>
                         <p>We undertake a strictly limited number of commissions each year, guaranteeing direct principal involvement from initial sketches through to final handover, ensuring every project receives the rigorous attention it demands.</p>
                     </div>
                     <div class="pt-8 border-t border-lumen-gray grid grid-cols-2 gap-8 font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-meta">
-                        <div><span class="block text-lumen-black text-sm font-sans mb-1">GLOBAL REACH</span>International Commissions</div>
+                        <div><span class="block text-lumen-black text-sm font-sans mb-1">LOCAL EXPERTISE</span>Lesotho & SADC</div>
                         <div><span class="block text-lumen-black text-sm font-sans mb-1">CAPACITY</span>Limited Intake</div>
                     </div>
                 </div>
@@ -577,30 +583,34 @@
                     <div class="pt-8 space-y-6 font-mono text-[11px] text-lumen-meta border-t border-lumen-gray">
                         <div>
                             <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Studio Inquiries</span>
-                            inquiries@studiolumen.com
+                            studio@studiolumen.co.ls
                         </div>
                         <div>
                             <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Studio Telephone</span>
-                            +1 (555) 019 8273
+                            +266 2231 4599
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase tracking-[0.3em] block text-lumen-black mb-2">Location</span>
+                            120 Kingsway Road, Maseru 100, Lesotho
                         </div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-7 bg-[#F4F2EC] p-8 md:p-14 border border-lumen-gray shadow-sm" id="form-container">
+                <div class="lg:col-span-7 bg-[#E8E7E1] p-8 md:p-14 border border-lumen-gray shadow-sm" id="form-container">
                     <form id="contact-form" class="space-y-8 fade-in-scale">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             <div class="space-y-3">
                                 <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Full Name *</label>
-                                <input type="text" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="e.g. Henrik Lindqvist">
+                                <input type="text" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="e.g. Neo Leteka">
                             </div>
                             <div class="space-y-3">
                                 <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Email Address *</label>
-                                <input type="email" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="h.lindqvist@example.com">
+                                <input type="email" required class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="neo@example.com">
                             </div>
                         </div>
                         <div class="space-y-3">
                             <label class="font-mono text-[9px] uppercase tracking-[0.25em] text-lumen-black block">Describe Your Architectural Vision</label>
-                            <textarea rows="5" class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="Tell us about the site conditions, lifestyle objectives, or spatial aspirations..."></textarea>
+                            <textarea rows="5" class="w-full bg-lumen-white border border-lumen-gray p-4 text-sm focus:outline-none focus:border-lumen-black text-lumen-black transition-colors" placeholder="Tell us about the site conditions, lifestyle objectives, or spatial aspirations in Lesotho..."></textarea>
                         </div>
                         <button type="submit" class="w-full py-5 bg-lumen-black text-lumen-white font-mono text-[10px] uppercase tracking-[0.3em] flex items-center justify-center space-x-3 transition-all hover:bg-lumen-accent">
                             <span>Discuss your project</span><span>↗</span>
@@ -611,7 +621,7 @@
                     <div id="form-success" class="hidden space-y-8 py-16 text-center fade-in-scale">
                         <div class="w-16 h-16 bg-lumen-accent text-white rounded-full flex items-center justify-center mx-auto text-2xl font-mono shadow-lg">✓</div>
                         <h3 class="font-serif text-4xl text-lumen-black font-light">Enquiry Received</h3>
-                        <p class="text-lumen-text text-base max-w-md mx-auto font-light leading-relaxed">Thank you. The studio principals have been notified and will reach out shortly to arrange an initial feasibility consultation.</p>
+                        <p class="text-lumen-text text-base max-w-md mx-auto font-light leading-relaxed">Thank you. The studio principals in Maseru have been notified and will reach out shortly to arrange an initial feasibility consultation.</p>
                         <button id="reset-form" class="mt-6 px-8 py-3 border border-lumen-black text-[10px] font-mono uppercase tracking-[0.3em] hover:bg-lumen-black hover:text-lumen-white transition-colors">Submit Another Query</button>
                     </div>
                 </div>
@@ -627,15 +637,16 @@
             <div class="space-y-6 max-w-sm reveal">
                 <span class="font-serif text-3xl text-white font-light tracking-[0.2em] block uppercase">STUDIO LUMEN</span>
                 <p class="text-white/60 text-[11px] font-sans font-light leading-relaxed">
-                    Architecture, spatial research, and landscape integration. Shaping enduring places around people and the profound possibilities of space.
+                    Architecture, spatial research, and landscape integration in the Mountain Kingdom. Shaping enduring places around people and the profound possibilities of space.
                 </p>
             </div>
             <div class="space-y-4 reveal reveal-delay-1">
-                <span class="text-[9px] uppercase tracking-[0.3em] text-white block mb-4">Template Information</span>
+                <span class="text-[9px] uppercase tracking-[0.3em] text-white block mb-4">Location & Legal</span>
                 <p class="text-[11px] leading-relaxed text-white/50 font-sans max-w-xs">
-                    This is a premium template designed for high-end architectural practices. All project data and images are placeholders demonstrating layout capabilities.
+                    Maseru, Lesotho<br>
+                    All project data and images represent architectural capabilities.
                 </p>
-                <div class="pt-4 text-[9px] text-lumen-accent tracking-[0.2em] uppercase">© 2026 Studio Lumen — Designed for Excellence</div>
+                <div class="pt-4 text-[9px] text-lumen-accent tracking-[0.2em] uppercase">© 2026 Studio Lumen — Maseru, Lesotho</div>
             </div>
         </div>
     </footer>
@@ -675,7 +686,7 @@
                         <p id="modal-narrative" class="text-lumen-text text-base md:text-lg font-light leading-relaxed"></p>
                     </div>
                     
-                    <div class="lg:col-span-4 bg-[#F4F2EC] p-8 border border-lumen-gray space-y-5 font-mono text-[10px]">
+                    <div class="lg:col-span-4 bg-[#E8E7E1] p-8 border border-lumen-gray space-y-5 font-mono text-[10px]">
                         <span class="text-[9px] uppercase tracking-[0.3em] text-lumen-accent block border-b border-lumen-gray pb-3">Project Metadata</span>
                         <div class="space-y-4 pt-2">
                             <div>
@@ -711,85 +722,86 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- DATA MODELS ---
+            // --- DATA MODELS (LESOTHO SPECIFIC) ---
+            // ALL IMAGE URLs ARE STRICTLY BOUND TO THE PROVIDED WORKING URLS
 
             const PROJECTS = [
                 {
-                    id: 'still-house', number: '01', title: 'The Still House', typology: 'Luxury Residence', location: 'Kyoto Outskirts',
-                    heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80',
-                    tagline: 'A cloistered sanctuary balanced between monolithic concrete and moss gardens.',
-                    narrative: 'Arranged around a protected central courtyard, the residence uses low eaves and board-formed walls to frame disciplined views of raked gravel and evergreen cedar, shutting out peripheral noise while welcoming changing sunlight.',
-                    stats: { area: '680 m²', structure: 'Fair-faced reinforced concrete core', climate: 'Humid subtropical' },
+                    id: 'maluti-pavilion', number: '01', title: 'Maluti Convention Centre', typology: 'Public Building', location: 'Maluti Mountains',
+                    heroImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+                    tagline: 'A welcoming public space built naturally into the ancient basalt rock.',
+                    narrative: 'Situated at 2,800 meters above sea level, this convention centre is designed to withstand harsh alpine winters while capturing the stark, expansive beauty of the Lesotho highlands. The building uses local stone and large, open meeting halls with wide roofs for shelter.',
+                    stats: { area: '4,500 m²', structure: 'Local Basalt & Solid Timber', climate: 'Highland Alpine' },
                     gallery: [
-                        { url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80', type: 'Exterior', caption: 'Concrete cantilevers over reflective basin.' },
-                        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', type: 'Interior', caption: 'Clerestory daylight grazing lime plaster walls.' },
-                        { url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', type: 'Material', caption: 'Untreated timber and board-formed cement.' }
+                        { url: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Floating basalt steps blended into the landscape.' },
+                        { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', type: 'Interior', caption: 'High windows bring sunlight into the vast convention interior.' },
+                        { url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', type: 'Material', caption: 'Warm earth walls framing the main hall.' }
                     ]
                 },
                 {
-                    id: 'ridge-retreat', number: '02', title: 'The Ridge Retreat', typology: 'Alpine Residence', location: 'Engadin Valley',
-                    heroImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1800&q=80',
-                    tagline: 'Terraced volumes stepped into alpine topography with panoramic valley apertures.',
-                    narrative: 'Embedded directly into a 32-degree granite hillside, The Ridge Retreat functions as an inhabitable contour line. The building steps down the slope, anchoring bedrooms into the earth for profound thermal mass.',
-                    stats: { area: '520 m²', structure: 'Local gneiss masonry & mass timber', climate: 'Subarctic alpine' },
+                    id: 'thaba-bosiu', number: '02', title: 'Thaba Bosiu Retreat', typology: 'Luxury Retreat', location: 'Roma Valley',
+                    heroImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
+                    tagline: 'Layered spaces that step gently down the historic hillside.',
+                    narrative: 'Embedded directly into a hillside near the historic Thaba Bosiu stronghold, this retreat follows the natural shape of the land. The building steps down the slope, using the earth itself to shelter the rooms and keep them warm against the valley winds.',
+                    stats: { area: '820 m²', structure: 'Local Sandstone Masonry', climate: 'Temperate Sub-alpine' },
                     gallery: [
-                        { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', type: 'Site', caption: 'Weathered larch siding blending into natural scrub.' },
-                        { url: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80', type: 'Hearth', caption: 'Sunken hearth room with split-face stone.' },
-                        { url: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Thermally isolated blackened steel mullions.' }
+                        { url: 'https://images.unsplash.com/photo-1558098329-a11cff621064?auto=format&fit=crop&w=800&q=80', type: 'Woodwork', caption: 'Beautiful timber framing against raw stone walls.' },
+                        { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', type: 'Hall', caption: 'Communal gathering areas with large, framed views.' },
+                        { url: 'https://images.unsplash.com/photo-1620288820465-9856f6ea317c?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Dark steel window frames built for the climate.' }
                     ]
                 },
                 {
-                    id: 'house-of-light', number: '03', title: 'House of Light', typology: 'Urban Renovation', location: 'Copenhagen',
-                    heroImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80',
-                    tagline: 'Surgical volumetric carving transforming a 19th-century brick envelope.',
-                    narrative: 'A continuous three-story lightwell introduces diffuse Nordic daylight deep into subterranean living spaces, utilizing pale Dinesen fir, honed terrazzo, and frameless micro-apertures to reflect illumination.',
-                    stats: { area: '390 m²', structure: 'Preserved masonry + steel armature', climate: 'Temperate oceanic' },
+                    id: 'maseru-heights', number: '03', title: 'Maseru Heights Residence', typology: 'Private Residence', location: 'Maseru',
+                    heroImage: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+                    tagline: 'A clever use of space that transforms city living.',
+                    narrative: 'An open, flowing home that brings soft daylight deep into the living spaces, using local timber, smooth floors, and large clear windows to frame the vast Maseru horizon.',
+                    stats: { area: '650 m²', structure: 'Concrete Frame & Basalt Stone', climate: 'Urban Temperate' },
                     gallery: [
-                        { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80', type: 'Atrium', caption: 'Morning daylight filtering through three levels.' },
-                        { url: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=800&q=80', type: 'Stair', caption: 'Continuous cantilevered limestone stair.' },
-                        { url: 'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=800&q=80', type: 'Joinery', caption: 'Custom joinery with precise shadow gaps.' }
+                        { url: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=800&q=80', type: 'Layout', caption: 'Open levels around the bright central lightwell.' },
+                        { url: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&w=800&q=80', type: 'Stair', caption: 'A beautiful, seamless stone staircase.' },
+                        { url: 'https://images.unsplash.com/photo-1558098329-a11cff621064?auto=format&fit=crop&w=800&q=80', type: 'Cabinets', caption: 'Custom woodwork with clean, precise details.' }
                     ]
                 },
                 {
-                    id: 'gathering-place', number: '04', title: 'The Gathering Place', typology: 'Hospitality', location: 'Alentejo',
-                    heroImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=80',
-                    tagline: 'Low-slung rammed earth pavilions unified by olive groves and water bodies.',
-                    narrative: 'Designed as a quiet boutique escape, The Gathering Place weaves communal dining, secluded guest suites, and thermal baths into an arid landscape. Thick stabilized walls temper intense daytime heat.',
-                    stats: { area: '1,420 m²', structure: 'Stabilized site-soil rammed earth', climate: 'Mediterranean' },
+                    id: 'katse-lodge', number: '04', title: 'Katse Dam Eco-Lodge', typology: 'Eco-Tourism', location: 'Katse Dam',
+                    heroImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80',
+                    tagline: 'Low earth buildings resting peacefully along the water\'s edge.',
+                    narrative: 'Designed as a quiet eco-retreat overlooking the immense Katse Dam, the lodge carefully places private suites and viewing decks along the steep banks. Thick earth walls keep the rooms cool during hot days and warm during cold mountain nights.',
+                    stats: { area: '1,420 m²', structure: 'Natural rammed earth from the site', climate: 'Alpine' },
                     gallery: [
-                        { url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', type: 'Pavilion', caption: 'Earth walls mirrored in reflective water.' },
-                        { url: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80', type: 'Colonnade', caption: 'Filtered shade patterns across terracotta.' },
-                        { url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', type: 'Tectonic', caption: 'Sediment lines in compressed regional earth.' }
+                        { url: 'https://images.unsplash.com/photo-1596489370773-10d48f725357?auto=format&fit=crop&w=800&q=80', type: 'Materials', caption: 'Beautiful natural layers in the thick earth walls.' },
+                        { url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80', type: 'Exterior', caption: 'Guest rooms stepping naturally down towards the water.' },
+                        { url: 'https://images.unsplash.com/photo-1620288820465-9856f6ea317c?auto=format&fit=crop&w=800&q=80', type: 'Detail', caption: 'Weathered steel details inspired by the dam infrastructure.' }
                     ]
                 }
             ];
 
             const HOTSPOTS = [
-                { id: 'light', top: 24, left: 52, label: 'ZONE A-01', category: 'Solar Geometry', title: 'Natural Light & Zenith', summary: 'Sculpted ceiling scoops direct changing daylight.', rationale: 'Overhead lanterns harvest diffuse illumination without perimeter glare, stabilizing internal light levels.', metric: '380 LUX AVG AMBIENT' },
-                { id: 'mass', top: 62, left: 32, label: 'ZONE B-04', category: 'Tactile Enclosure', title: 'Material Tectonics', summary: 'Board-formed concrete meets warm timber joinery.', rationale: 'Raw structural elements contrast with hand-oiled white oak interior screens via 15mm shadow reveals.', metric: '420mm HYDRATED MASS' },
-                { id: 'flow', top: 78, left: 68, label: 'ZONE C-02', category: 'Circulation', title: 'Spatial Continuity', summary: 'Acoustic pocket doors dissolve boundaries.', rationale: 'The floor finish runs seamlessly from interior zones directly into rain-washed exterior courtyards.', metric: '0mm FLUSH SILL' },
-                { id: 'site', top: 82, left: 18, label: 'ZONE D-07', category: 'Site Integration', title: 'Topographic Grounding', summary: 'The building anchors into subterranean bedrock.', rationale: 'By lifting the wing on blades, 85% of existing ground water runoff and root ecosystems remain undisturbed.', metric: '12m CANTILEVER' }
+                { id: 'light', top: 24, left: 52, label: 'ZONE A-01', category: 'Natural Light', title: 'Bringing Light Indoors', summary: 'Carefully angled ceilings bring soft, natural light deep into the home.', rationale: 'Skylights capture gentle overhead light, avoiding the harsh glare of the bright African sun and keeping indoor spaces comfortable.', metric: 'CONSISTENT DAYLIGHT' },
+                { id: 'mass', top: 62, left: 32, label: 'ZONE B-04', category: 'Crafting with Material', title: 'Textured Walls & Warm Wood', summary: 'Textured concrete walls meet warm, carefully crafted woodwork.', rationale: 'Strong, exposed building materials are balanced by smooth, hand-finished wooden screens and clean shadow lines.', metric: 'THICK THERMAL WALLS' },
+                { id: 'flow', top: 78, left: 68, label: 'ZONE C-02', category: 'Indoor-Outdoor Flow', title: 'Opening Up The Space', summary: 'Sliding glass doors disappear into the walls to open up the room.', rationale: 'The flooring continues smoothly from the inside rooms straight out to the courtyard, blurring the line between indoors and outdoors.', metric: 'SEAMLESS THRESHOLD' },
+                { id: 'site', top: 82, left: 18, label: 'ZONE D-07', category: 'Building on the Land', title: 'Resting on the Rock', summary: 'The building rests firmly on the natural rock below.', rationale: 'By gently lifting the structure, we allow natural water runoff to continue and protect the fragile mountain ecosystem beneath it.', metric: 'MINIMAL LAND IMPACT' }
             ];
 
             const PROCESS = [
-                { num: '01', title: 'Listen', sub: 'The terrain, the light, the silence.', tag: 'SITE STUDY', deliv: 'Topographic Sun & Wind Mapping', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80' },
-                { num: '02', title: 'Imagine', sub: 'Volumetric carving and sequence.', tag: 'CHOREOGRAPHY', deliv: '1:50 Spatial Section Models', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80' },
-                { num: '03', title: 'Develop', sub: 'Material junctions and precision.', tag: 'TECTONIC RIGOR', deliv: '1:5 Full-Scale Prototype', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80' },
-                { num: '04', title: 'Realise', sub: 'Master craftspeople and built form.', tag: 'BUILT MASTERY', deliv: 'On-Site Direction & Artisan Craft', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80' }
+                { num: '01', title: 'Listen', sub: 'The terrain, the light, the silence.', tag: 'SITE STUDY', deliv: 'Understanding Sun, Wind & Sound', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80' },
+                { num: '02', title: 'Imagine', sub: 'Shaping the space and experience.', tag: 'CONCEPT DESIGN', deliv: 'Detailed Scale Models', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80' },
+                { num: '03', title: 'Develop', sub: 'Refining details and materials.', tag: 'CAREFUL DETAILING', deliv: 'Material Testing & Planning', img: 'https://images.unsplash.com/photo-1504307651254-35680f356f58?auto=format&fit=crop&w=1200&q=80' },
+                { num: '04', title: 'Realise', sub: 'Working with master craftspeople.', tag: 'EXPERT CONSTRUCTION', deliv: 'Hands-on Site Management', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80' }
             ];
 
             const MATERIALS = [
-                { id: 'concrete', name: 'Board-Formed Concrete', tag: 'Monolithic mass, tactile grain.', desc: 'Poured against rough-sawn Douglas fir boards, this concrete retains organic grain while delivering monolithic thermal stability and stillness.', tact: 'Matte, textured relief', therm: 'High thermal mass / Passive lag', fin: 'Breathable silane-siloxane', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80' },
-                { id: 'timber', name: 'Charred & Natural Timber', tag: 'Acoustic warmth, carbon storage.', desc: 'We combine exterior Yakisugi (charred timber) for fire and rot resistance with internal quartersawn pale oak that softly absorbs ambient sound.', tact: 'Silky wire-brushed grain', therm: 'Natural thermal break', fin: 'Zero-VOC plant-oil burnish', img: 'https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=1200&q=80' },
-                { id: 'limestone', name: 'Split-Face Limestone', tag: 'Mineral permanence with warmth.', desc: 'Quarried in shallow regional strata, split-face limestone bridges the envelope and geological terrain. Laid with razor-thin dry-joint appearances.', tact: 'Fractured mineral facets', therm: 'Acoustic dampening', fin: 'Washed with natural soaps', img: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?auto=format&fit=crop&w=1200&q=80' },
-                { id: 'steel', name: 'Patinated Dark Steel', tag: 'Surgical structural precision.', desc: 'Hot-rolled mild steel treated with natural chemical patinas to produce deep charcoal, oil-rubbed bronze undertones. Utilized for crisp margins.', tact: 'Cold-rolled smoothness', therm: 'Aerogel thermal-break core', fin: 'Blackened gunmetal etch', img: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1200&q=80' }
+                { id: 'basalt', name: 'Maluti Basalt', tag: 'Solid strength, rich texture.', desc: 'Quarried directly from the Lesotho highlands, this dark volcanic rock adds beautiful natural texture while helping to keep indoor temperatures comfortable all year round.', tact: 'Matte, rough texture', therm: 'Excellent natural insulation', fin: 'Protective natural sealant', img: 'https://images.unsplash.com/photo-1522049293475-6e9a6659c23b?auto=format&fit=crop&w=1200&q=80' },
+                { id: 'timber', name: 'Crafted Timber', tag: 'Warmth, quiet, and sustainability.', desc: 'We combine strong exterior wood for weather resistance with warm interior woods that make spaces feel cozy and absorb sound.', tact: 'Smooth, natural wood grain', therm: 'Natural temperature barrier', fin: 'Eco-friendly natural oils', img: 'https://images.unsplash.com/photo-1558098329-a11cff621064?auto=format&fit=crop&w=1200&q=80' },
+                { id: 'sandstone', name: 'Lesotho Sandstone', tag: 'Natural warmth and local character.', desc: 'Hand-cut local sandstone used in our masonry work. It brings a warm, earthy tone that blends perfectly with the surrounding landscapes.', tact: 'Rough, earthy and layered', therm: 'Great thermal mass', fin: 'Natural breathable seal', img: 'https://images.unsplash.com/photo-1596489370773-10d48f725357?auto=format&fit=crop&w=1200&q=80' },
+                { id: 'steel', name: 'Weathered Steel', tag: 'Sharp, clean details.', desc: 'Steel that naturally changes color with the harsh highland weather, blending beautifully with the earthy tones of the Lesotho landscape.', tact: 'Textured, rusted finish', therm: 'Highly insulated core', fin: 'Beautiful weathered finish', img: 'https://images.unsplash.com/photo-1620288820465-9856f6ea317c?auto=format&fit=crop&w=1200&q=80' }
             ];
 
             const SERVICES = [
-                { id: '01', name: 'Residential Architecture', sum: 'Bespoke homes designed around their inhabitants, site, and climate.', det: 'Complete private residential commissions, from coastal estates to quiet urban townhouses. We handle initial site analysis, schematic architecture, interior detailing, and site execution.' },
-                { id: '02', name: 'Hospitality & Retreats', sum: 'Distinctive guesthouses, boutique hotels, and lodge environments.', det: 'Spaces designed for decompression. We synthesize masterplanning, guest circulation, and localized atmospheres that forge unforgettable sensory connections to place.' },
-                { id: '03', name: 'Commercial & Workplace', sum: 'Purposeful environments for visionary businesses and their teams.', det: 'Workplace architecture rooted in daylight and quiet concentration. Replacing generic corporate layouts with tactile materials, acoustic separation, and biophilic courtyards.' },
-                { id: '04', name: 'Renovation & Transformation', sum: 'Reimagining existing buildings through thoughtful contemporary design.', det: 'Surgical architectural interventions within heritage structures. We celebrate historic character while carving dramatic modern volumes and upgrading thermal envelopes.' }
+                { id: '01', name: 'Residential Architecture', sum: 'Beautiful homes designed around you, your land, and the local climate.', det: 'Complete home design, from mountain retreats to quiet townhouses in Maseru. We guide you from early ideas and planning, right through to the finishing touches and final construction.' },
+                { id: '02', name: 'Hospitality & Eco-Lodges', sum: 'Welcoming guesthouses, boutique hotels, and relaxing lodge environments.', det: 'Spaces designed for rest and relaxation in the beautiful African landscape. We carefully plan the layout, guest experience, and local character to create unforgettable connections to nature.' },
+                { id: '03', name: 'Commercial & Cultural', sum: 'Inspiring spaces for modern businesses and local communities.', det: 'Workplaces designed for natural light and quiet focus. We replace generic office layouts with warm materials, comfortable workspaces, and peaceful courtyards full of plants.' },
+                { id: '04', name: 'Renovation & Updates', sum: 'Breathing new life into existing buildings with thoughtful, modern design.', det: 'Careful and creative updates to older or heritage buildings. We celebrate their original charm while opening up bright modern spaces, improving layout, and adding modern insulation.' }
             ];
 
             // --- HEADER SCROLL EFFECT ---
@@ -798,13 +810,13 @@
             
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 80) {
-                    header.classList.remove('bg-gradient-to-b', 'from-black/80', 'via-black/30', 'text-white');
+                    header.classList.remove('bg-gradient-to-b', 'from-lumen-black/90', 'via-lumen-black/50', 'text-white');
                     header.classList.add('bg-lumen-white/95', 'backdrop-blur-md', 'text-lumen-black', 'border-lumen-gray');
                     
                     cta.classList.remove('border-white/50', 'text-white', 'hover:bg-white', 'hover:text-lumen-black');
                     cta.classList.add('border-lumen-black', 'text-lumen-black', 'hover:bg-lumen-black', 'hover:text-lumen-white');
                 } else {
-                    header.classList.add('bg-gradient-to-b', 'from-black/80', 'via-black/30', 'text-white');
+                    header.classList.add('bg-gradient-to-b', 'from-lumen-black/90', 'via-lumen-black/50', 'text-white');
                     header.classList.remove('bg-lumen-white/95', 'backdrop-blur-md', 'text-lumen-black', 'border-lumen-gray');
                     
                     cta.classList.add('border-white/50', 'text-white', 'hover:bg-white', 'hover:text-lumen-black');
@@ -1101,7 +1113,7 @@
                 accContainer.innerHTML = SERVICES.map(s => {
                     const isActive = s.id === activeAcc;
                     return `
-                        <div class="border transition-all duration-500 overflow-hidden ${isActive ? 'border-lumen-black bg-[#F4F2EC]' : 'border-lumen-gray bg-transparent hover:border-lumen-meta'}">
+                        <div class="border transition-all duration-500 overflow-hidden ${isActive ? 'border-lumen-black bg-[#E8E7E1]' : 'border-lumen-gray bg-transparent hover:border-lumen-meta'}">
                             <button class="acc-btn w-full p-8 lg:p-10 text-left flex items-center justify-between focus:outline-none group" data-id="${s.id}">
                                 <div class="space-y-3 max-w-2xl">
                                     <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-lumen-accent transition-colors">AREA ${s.id}</div>
